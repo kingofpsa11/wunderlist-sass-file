@@ -1,0 +1,95 @@
+body{
+    $font-stack: "Lato","Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #262626;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: $font-stack;
+
+    a{
+        cursor: pointer;
+    }
+    .main-interface{
+        display: flex;
+        #modal{
+            position: absolute;
+            display: none;
+        }
+        .navigation{
+            width: 280px;
+            background: #fff;
+            .lists-inner{
+                display: flex;
+                flex-direction: column;
+                #search-toolbar{
+                    display: flex;
+                    background: #5b7a59;
+                    align-items: center;
+                    height: 45px;
+                    .toggle-icon,.search-icon-wrapper{
+                        fill: #fff;
+                        height: 40px;
+                        width: 40px;
+                        padding: 10px 10px;
+                        box-sizing: border-box;
+                    }
+                    .toggle-icon{
+                        a{
+                            display: block;
+                            height: 20px;
+                            width: 20px;
+                        }
+                    }
+                    .search-input-wrapper{
+                        flex: 1;
+                        input{
+                            border: none;
+                            background: none;
+                            font-size: 20px;
+                            line-height: 45px;
+                            outline: none;
+                            width: 100%;
+                            color: #fff;
+                            box-sizing: border-box;
+                        }
+                    }
+                }
+                #user-toolbar{
+                    height: 45px;
+                    padding-top: 2px;
+                    padding-bottom: 4px;
+                    display: flex;
+                    .user{
+                        display: flex;
+                        flex: 1;                        
+                        .user-avatar{
+                            .avatar.medium{
+
+                                img{
+                                    width: 100%;
+                                    height: 100%;
+                                }
+                            }
+                        }
+                        .user-name{
+
+                        }
+                        .user-arrow{
+
+                        }
+                    }
+                    .stream-counts{
+
+                    }
+                }
+            }
+        }   
+        #tasks{
+            flex: 1
+        }   
+        #detail{
+            width: 0px;
+        }     
+    }
+}
