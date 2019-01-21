@@ -6,18 +6,25 @@ body {
   font-weight: 500;
   font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
   body a {
-    cursor: pointer; }
+    cursor: pointer;
+    text-decoration: none;
+    user-select: none; }
   body .main-interface {
-    display: flex; }
+    display: flex;
+    overflow: hidden;
+    height: 100vh;
+    background: #f7f7f7; }
     body .main-interface #modal {
       position: absolute;
       display: none; }
     body .main-interface .navigation {
       width: 280px;
-      background: #fff; }
+      background: #fff;
+      overflow: hidden; }
       body .main-interface .navigation .lists-inner {
         display: flex;
-        flex-direction: column; }
+        flex-direction: column;
+        height: 100vh; }
         body .main-interface .navigation .lists-inner #search-toolbar {
           display: flex;
           background: #5b7a59;
@@ -49,15 +56,97 @@ body {
           padding-top: 2px;
           padding-bottom: 4px;
           display: flex; }
-          body .main-interface .navigation .lists-inner #user-toolbar .user {
+          body .main-interface .navigation .lists-inner #user-toolbar a.user {
             display: flex;
-            flex: 1; }
-            body .main-interface .navigation .lists-inner #user-toolbar .user .user-avatar .avatar.medium img {
-              width: 100%;
-              height: 100%; }
+            flex: 1;
+            align-items: center; }
+            body .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar {
+              padding: 0 5px; }
+              body .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar .avatar.medium {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border: none;
+                overflow: hidden; }
+                body .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar .avatar.medium img {
+                  width: 100%;
+                  height: 100%; }
+            body .main-interface .navigation .lists-inner #user-toolbar a.user .user-name {
+              font-size: 15px;
+              padding: 0 5px; }
+            body .main-interface .navigation .lists-inner #user-toolbar a.user .user-arrow {
+              width: 20px;
+              height: 20px; }
+          body .main-interface .navigation .lists-inner #user-toolbar .stream-counts {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            margin-top: 3px; }
+            body .main-interface .navigation .lists-inner #user-toolbar .stream-counts a {
+              padding: 0 10px; }
+        body .main-interface .navigation .lists-inner .lists-scroll {
+          display: flex;
+          flex-direction: column;
+          flex: 1; }
+          body .main-interface .navigation .lists-inner .lists-scroll ul {
+            margin: 0;
+            padding: 0; }
+          body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem {
+            height: 38px; }
+            body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem a {
+              display: flex;
+              color: #1c1c1c;
+              padding: 0 8px;
+              align-items: center;
+              box-sizing: border-box;
+              height: 38px; }
+              body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem a .list-icon {
+                padding: 0 3px;
+                height: 20px; }
+            body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem .title {
+              font-size: 15px;
+              flex: 1;
+              padding-left: 6px;
+              padding-right: 6px; }
+          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.inbox {
+            fill: #2b8dec; }
+          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.today {
+            fill: #5fa004; }
+          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.week {
+            fill: #e29600; }
+          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .overdue-count {
+            color: #d74e48;
+            background: rgba(215, 78, 72, 0.1);
+            padding: 2px 6px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-left: 4px;
+            margin-right: 4px; }
+          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .count {
+            font-size: 12px;
+            color: #bdbcbb;
+            padding-left: 4px;
+            padding-right: 4px; }
+          body .main-interface .navigation .lists-inner .lists-scroll .lists-collection svg {
+            fill: #b9b9b9; }
+        body .main-interface .navigation .lists-inner .sidebarActions {
+          border-top: 1px solid rgba(0, 0, 0, 0.1); }
+          body .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList {
+            height: 42px;
+            fill: #328ad6;
+            color: #328ad6;
+            align-items: center;
+            display: flex; }
+            body .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList .sidebarActions-icons {
+              padding: 0 10px; }
+            body .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList .sidebarActions-label {
+              user-select: none;
+              flex: 1; }
     body .main-interface #tasks {
       flex: 1; }
     body .main-interface #detail {
       width: 0px; }
+  body #user-popover {
+    display: none; }
 
 /*# sourceMappingURL=style.css.map */

@@ -9,9 +9,14 @@ body{
 
     a{
         cursor: pointer;
+        text-decoration: none;
+        user-select: none;
     }
     .main-interface{
         display: flex;
+        overflow: hidden;
+        height: 100vh;
+        background: #f7f7f7;
         #modal{
             position: absolute;
             display: none;
@@ -19,9 +24,11 @@ body{
         .navigation{
             width: 280px;
             background: #fff;
+            overflow: hidden;
             .lists-inner{
                 display: flex;
                 flex-direction: column;
+                height: 100vh;
                 #search-toolbar{
                     display: flex;
                     background: #5b7a59;
@@ -60,12 +67,18 @@ body{
                     padding-top: 2px;
                     padding-bottom: 4px;
                     display: flex;
-                    .user{
+                    a.user{
                         display: flex;
-                        flex: 1;                        
+                        flex: 1;
+                        align-items: center;                     
                         .user-avatar{
+                            padding: 0 5px;
                             .avatar.medium{
-
+                                width: 32px;
+                                height: 32px;
+                                border-radius: 50%;
+                                border: none;
+                                overflow: hidden;
                                 img{
                                     width: 100%;
                                     height: 100%;
@@ -73,23 +86,121 @@ body{
                             }
                         }
                         .user-name{
-
+                            font-size: 15px;
+                            padding: 0 5px;
                         }
                         .user-arrow{
-
+                            width: 20px;
+                            height: 20px;
                         }
                     }
                     .stream-counts{
-
+                        flex-shrink: 0;
+                        display: flex;
+                        align-items: center;
+                        margin-top: 3px;
+                        a{
+                            padding: 0 10px;
+                        }
+                    }
+                }
+                .lists-scroll{
+                    display: flex;
+                    flex-direction: column;
+                    flex: 1;
+                    ul{
+                        margin: 0;
+                        padding: 0;
+                    }
+                    .sidebarItem{
+                        height: 38px;
+                        a{
+                            display: flex;
+                            color: #1c1c1c;
+                            padding: 0 8px;
+                            align-items: center;
+                            box-sizing: border-box;
+                            height: 38px;
+                            .list-icon{
+                                padding: 0 3px;
+                                height: 20px;
+                            }
+                        }
+                        .title{
+                            font-size: 15px;
+                            flex: 1;
+                            padding-left: 6px;
+                            padding-right: 6px;  
+                        }
+                    }                 
+                    .filter-collection{
+                        .sidebarItem{                            
+                            a{
+                                .list-icon{
+                                    svg.inbox{
+                                        fill: #2b8dec;
+                                    }
+                                    svg.today{
+                                        fill: #5fa004;
+                                    }
+                                    svg.week{
+                                        fill: #e29600;
+                                    }
+                                }
+                                .overdue-count{
+                                    color: #d74e48;
+                                    background: rgba(215,78,72,0.1);
+                                    padding: 2px 6px;
+                                    border-radius: 12px;
+                                    font-size: 12px;
+                                    margin-left: 4px;
+                                    margin-right: 4px;
+                                }
+                                .count{
+                                    font-size: 12px;
+                                    color: #bdbcbb;
+                                    padding-left: 4px;
+                                    padding-right: 4px;
+                                }
+                            }
+                        }
+                    }
+                    .lists-collection{
+                        svg{
+                            fill: #b9b9b9;
+                        }
+                    }
+                }
+                .sidebarActions{
+                    border-top: 1px solid rgba(0,0,0,0.1);                    
+                    .sidebarActions-addList{
+                        height: 42px;
+                        fill: #328ad6;
+                        color: #328ad6;
+                        
+                        
+                        align-items: center;
+                        display: flex;
+                        .sidebarActions-icons{
+                            padding: 0 10px;
+                        }
+                        .sidebarActions-label{
+                            user-select: none;
+                            flex: 1;
+                        }
                     }
                 }
             }
         }   
         #tasks{
-            flex: 1
+            flex: 1;
         }   
         #detail{
             width: 0px;
-        }     
+            
+        }
+    }
+    #user-popover{
+        display: none;
     }
 }
