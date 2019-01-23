@@ -89,7 +89,8 @@ body {
         body .main-interface .navigation .lists-inner .lists-scroll {
           display: flex;
           flex-direction: column;
-          flex: 1; }
+          flex: 1;
+          overflow: auto; }
           body .main-interface .navigation .lists-inner .lists-scroll ul {
             margin: 0;
             padding: 0; }
@@ -160,7 +161,64 @@ body {
           display: none; }
         body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom {
           height: 45px;
-          display: flex; }
+          font-size: 0; }
+          body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a {
+            display: inline-block;
+            text-align: center;
+            fill: #fff;
+            padding: 6px;
+            min-width: 40px; }
+            body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a .tab-text {
+              display: block;
+              text-align: center;
+              color: #fff;
+              font-size: 10px; }
+          body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a.disabled {
+            pointer-events: none;
+            opacity: 0.5; }
+      body .main-interface #tasks .task-scroll {
+        margin: 0 7px;
+        padding: 0 7px; }
+        body .main-interface #tasks .task-scroll .addTask {
+          margin: 14px 0;
+          padding: 0 12px;
+          background: rgba(102, 137, 100, 0.75);
+          position: relative; }
+          body .main-interface #tasks .task-scroll .addTask a.plus-wrapper {
+            position: absolute;
+            left: 10px;
+            top: 14px; }
+            body .main-interface #tasks .task-scroll .addTask a.plus-wrapper svg {
+              fill: #fff; }
+          body .main-interface #tasks .task-scroll .addTask .addTask-input {
+            position: relative;
+            background: none;
+            outline: none;
+            border: none;
+            font-size: 16px;
+            line-height: 20px;
+            padding: 13px 60px 14px 28px;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            color: #fff; }
+          body .main-interface #tasks .task-scroll .addTask .addTask-input::placeholder {
+            color: rgba(255, 255, 255, 0.6); }
+        body .main-interface #tasks .task-scroll .task-list h2 {
+          margin-top: 20px;
+          position: relative;
+          font-size: 11px; }
+          body .main-interface #tasks .task-scroll .task-list h2 a.groupHeader {
+            background: #5b7a59;
+            display: inline-block;
+            padding: 3px 10px;
+            vertical-align: middle;
+            color: #fff;
+            line-height: 16px;
+            letter-spacing: 1px;
+            font-weight: 400;
+            text-transform: uppercase;
+            border-radius: 3px; }
     body .main-interface #detail {
       width: 0px; }
   body #user-popover {

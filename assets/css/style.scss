@@ -69,6 +69,7 @@ body{
                     padding-top: 2px;
                     padding-bottom: 4px;
                     display: flex;
+                    
                     a.user{
                         display: flex;
                         flex: 1;
@@ -110,6 +111,7 @@ body{
                     display: flex;
                     flex-direction: column;
                     flex: 1;
+                    overflow: auto;
                     ul{
                         margin: 0;
                         padding: 0;
@@ -214,7 +216,81 @@ body{
                     }
                     .actionBar-bottom{
                         height: 45px;
-                        display: flex;
+                        font-size: 0;                                   
+                        a{
+                            display: inline-block;
+                            text-align: center;
+                            fill: #fff;                        
+                            padding: 6px;
+                            min-width: 40px;                            
+                            .tab-text{
+                                display: block;
+                                text-align: center;
+                                color: #fff;
+                                font-size: 10px;
+                            }
+                        }
+                        a.disabled{
+                            pointer-events: none;
+                            opacity: 0.5;
+                        }
+                    }
+                }
+            }
+            .task-scroll{
+                margin: 0 7px;
+                padding: 0 7px;
+                .addTask{
+                    margin: 14px 0;
+                    padding: 0 12px;
+                    background: rgba(102, 137, 100, 0.75);
+                    position: relative;
+                    a.plus-wrapper{
+                        position: absolute;
+                        left: 10px;
+                        top: 14px;
+                        svg{
+                            fill: #fff;
+                        }
+                    }
+                    .addTask-input{
+                        position: relative;
+                        background: none;
+                        outline: none;
+                        border: none;
+                        font-size: 16px;
+                        line-height: 20px;
+                        padding: 13px 60px 14px 28px;
+                        width: 100%;
+                        box-sizing: border-box;
+                        font-family: $font-stack;
+                        color: #fff;
+                    }
+                    .addTask-input::placeholder{
+                        color: rgba(255,255,255,0.6);
+                    }
+
+                }
+                .task-list{
+                    h2{
+                        margin-top: 20px;
+                        position: relative;
+                        font-size: 11px;
+                        a.groupHeader{
+                            background: #5b7a59;
+                            display: inline-block;
+                            padding: 3px 10px;
+                            vertical-align: middle;
+                            color: #fff;
+                            
+                            line-height: 16px;
+                            letter-spacing: 1px;
+                            font-weight: 400;
+                            text-transform: uppercase;
+                            border-radius: 3px;
+                            
+
+                        }
                     }
                 }
             }
