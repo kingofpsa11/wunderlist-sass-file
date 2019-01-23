@@ -1,6 +1,8 @@
-body {
+* {
   margin: 0;
-  padding: 0;
+  padding: 0; }
+
+body {
   color: #262626;
   font-size: 14px;
   font-weight: 500;
@@ -144,6 +146,21 @@ body {
               flex: 1; }
     body .main-interface #tasks {
       flex: 1; }
+      body .main-interface #tasks #list-toolbar {
+        height: 45px;
+        background: #668964;
+        display: flex; }
+        body .main-interface #tasks #list-toolbar .title {
+          flex: 1;
+          font-size: 20px;
+          color: #fff;
+          font-weight: 200;
+          padding: 10px 14px; }
+        body .main-interface #tasks #list-toolbar .actionBar .actionBar-top {
+          display: none; }
+        body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom {
+          height: 45px;
+          display: flex; }
     body .main-interface #detail {
       width: 0px; }
   body #user-popover {

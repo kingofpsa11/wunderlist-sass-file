@@ -1,7 +1,9 @@
-body{
-    $font-stack: "Lato","Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
+*{
     margin: 0;
     padding: 0;
+}
+body{
+    $font-stack: "Lato","Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
     color: #262626;
     font-size: 14px;
     font-weight: 500;
@@ -194,6 +196,28 @@ body{
         }   
         #tasks{
             flex: 1;
+            #list-toolbar{
+                height: 45px;
+                background: #668964;
+                display: flex;
+                
+                .title{
+                    flex: 1;
+                    font-size: 20px;
+                    color: #fff;
+                    font-weight: 200;
+                    padding: 10px 14px;
+                }
+                .actionBar{
+                    .actionBar-top{
+                        display: none;
+                    }
+                    .actionBar-bottom{
+                        height: 45px;
+                        display: flex;
+                    }
+                }
+            }
         }   
         #detail{
             width: 0px;
