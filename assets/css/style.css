@@ -1,50 +1,71 @@
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  user-select: none; }
 
-body {
+.background-06 {
   color: #262626;
   font-size: 14px;
   font-weight: 500;
-  font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif; }
-  body a {
+  font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  overflow: hidden; }
+  .background-06:before {
+    content: '';
+    background-size: cover;
+    background-position: center top;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -100; }
+    @media all and (min-width: 1025px) {
+      .background-06:before {
+        background-image: url("https://static.wunderlist.com/e1a9ddc47beb988e8bc86d09a7d2780a9868097d/images/backgrounds/2048/06.jpg") !important; } }
+    @media all and (max-width: 1024px) {
+      .background-06:before {
+        background-image: url("https://static.wunderlist.com/7301e219acb02266587ce610bd91f33ed6d31607/images/backgrounds/1024/06.jpg") !important; } }
+  .background-06:vertical {
+    background-color: rgba(102, 137, 100, 0.75); }
+  .background-06 a {
     cursor: pointer;
     text-decoration: none;
     user-select: none; }
-  body .main-interface {
+  .background-06 .disabled {
+    pointer-events: none; }
+  .background-06 .main-interface {
     display: flex;
     overflow: hidden;
-    height: 100vh;
-    background: #f7f7f7; }
-    body .main-interface #modal {
+    height: 100vh; }
+    .background-06 .main-interface #modal {
       position: absolute;
       display: none; }
-    body .main-interface .navigation {
+    .background-06 .main-interface .navigation {
       width: 280px;
-      background: #fff;
+      background: #f7f7f7;
       overflow: hidden; }
-      body .main-interface .navigation .lists-inner {
+      .background-06 .main-interface .navigation .lists-inner {
         display: flex;
         flex-direction: column;
         height: 100vh; }
-        body .main-interface .navigation .lists-inner #search-toolbar {
+        .background-06 .main-interface .navigation .lists-inner #search-toolbar {
           display: flex;
           background: #5b7a59;
           align-items: center;
           height: 45px; }
-          body .main-interface .navigation .lists-inner #search-toolbar .toggle-icon, body .main-interface .navigation .lists-inner #search-toolbar .search-icon-wrapper {
+          .background-06 .main-interface .navigation .lists-inner #search-toolbar .toggle-icon, .background-06 .main-interface .navigation .lists-inner #search-toolbar .search-icon-wrapper {
             fill: #fff;
             height: 40px;
             width: 40px;
             padding: 10px 10px;
             box-sizing: border-box; }
-          body .main-interface .navigation .lists-inner #search-toolbar .toggle-icon a {
+          .background-06 .main-interface .navigation .lists-inner #search-toolbar .toggle-icon a {
             display: block;
             height: 20px;
             width: 20px; }
-          body .main-interface .navigation .lists-inner #search-toolbar .search-input-wrapper {
+          .background-06 .main-interface .navigation .lists-inner #search-toolbar .search-input-wrapper {
             flex: 1; }
-            body .main-interface .navigation .lists-inner #search-toolbar .search-input-wrapper input {
+            .background-06 .main-interface .navigation .lists-inner #search-toolbar .search-input-wrapper input {
               border: none;
               background: none;
               font-size: 20px;
@@ -53,71 +74,71 @@ body {
               width: 100%;
               color: #fff;
               box-sizing: border-box; }
-        body .main-interface .navigation .lists-inner #user-toolbar {
+        .background-06 .main-interface .navigation .lists-inner #user-toolbar {
           height: 45px;
           padding-top: 2px;
           padding-bottom: 4px;
           display: flex; }
-          body .main-interface .navigation .lists-inner #user-toolbar a.user {
+          .background-06 .main-interface .navigation .lists-inner #user-toolbar a.user {
             display: flex;
             flex: 1;
             align-items: center; }
-            body .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar {
+            .background-06 .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar {
               padding: 0 5px; }
-              body .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar .avatar.medium {
+              .background-06 .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar .avatar.medium {
                 width: 32px;
                 height: 32px;
                 border-radius: 50%;
                 border: none;
                 overflow: hidden; }
-                body .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar .avatar.medium img {
+                .background-06 .main-interface .navigation .lists-inner #user-toolbar a.user .user-avatar .avatar.medium img {
                   width: 100%;
                   height: 100%; }
-            body .main-interface .navigation .lists-inner #user-toolbar a.user .user-name {
+            .background-06 .main-interface .navigation .lists-inner #user-toolbar a.user .user-name {
               font-size: 15px;
               padding: 0 5px; }
-            body .main-interface .navigation .lists-inner #user-toolbar a.user .user-arrow {
+            .background-06 .main-interface .navigation .lists-inner #user-toolbar a.user .user-arrow {
               width: 20px;
               height: 20px; }
-          body .main-interface .navigation .lists-inner #user-toolbar .stream-counts {
+          .background-06 .main-interface .navigation .lists-inner #user-toolbar .stream-counts {
             flex-shrink: 0;
             display: flex;
             align-items: center;
             margin-top: 3px; }
-            body .main-interface .navigation .lists-inner #user-toolbar .stream-counts a {
+            .background-06 .main-interface .navigation .lists-inner #user-toolbar .stream-counts a {
               padding: 0 10px; }
-        body .main-interface .navigation .lists-inner .lists-scroll {
+        .background-06 .main-interface .navigation .lists-inner .lists-scroll {
           display: flex;
           flex-direction: column;
           flex: 1;
           overflow: auto; }
-          body .main-interface .navigation .lists-inner .lists-scroll ul {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll ul {
             margin: 0;
             padding: 0; }
-          body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .sidebarItem {
             height: 38px; }
-            body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem a {
+            .background-06 .main-interface .navigation .lists-inner .lists-scroll .sidebarItem a {
               display: flex;
               color: #1c1c1c;
               padding: 0 8px;
               align-items: center;
               box-sizing: border-box;
               height: 38px; }
-              body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem a .list-icon {
+              .background-06 .main-interface .navigation .lists-inner .lists-scroll .sidebarItem a .list-icon {
                 padding: 0 3px;
                 height: 20px; }
-            body .main-interface .navigation .lists-inner .lists-scroll .sidebarItem .title {
+            .background-06 .main-interface .navigation .lists-inner .lists-scroll .sidebarItem .title {
               font-size: 15px;
               flex: 1;
               padding-left: 6px;
               padding-right: 6px; }
-          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.inbox {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.inbox {
             fill: #2b8dec; }
-          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.today {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.today {
             fill: #5fa004; }
-          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.week {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .list-icon svg.week {
             fill: #e29600; }
-          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .overdue-count {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .overdue-count {
             color: #d74e48;
             background: rgba(215, 78, 72, 0.1);
             padding: 2px 6px;
@@ -125,72 +146,90 @@ body {
             font-size: 12px;
             margin-left: 4px;
             margin-right: 4px; }
-          body .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .count {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem a .count {
             font-size: 12px;
             color: #bdbcbb;
             padding-left: 4px;
             padding-right: 4px; }
-          body .main-interface .navigation .lists-inner .lists-scroll .lists-collection svg {
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .lists-collection svg {
             fill: #b9b9b9; }
-        body .main-interface .navigation .lists-inner .sidebarActions {
+        .background-06 .main-interface .navigation .lists-inner .sidebarActions {
           border-top: 1px solid rgba(0, 0, 0, 0.1); }
-          body .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList {
+          .background-06 .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList {
             height: 42px;
             fill: #328ad6;
             color: #328ad6;
             align-items: center;
             display: flex; }
-            body .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList .sidebarActions-icons {
+            .background-06 .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList .sidebarActions-icons {
               padding: 0 10px; }
-            body .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList .sidebarActions-label {
+            .background-06 .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList .sidebarActions-label {
               user-select: none;
               flex: 1; }
-    body .main-interface #tasks {
+    .background-06 .main-interface #tasks {
       flex: 1; }
-      body .main-interface #tasks #list-toolbar {
+      .background-06 .main-interface #tasks #list-toolbar {
         height: 45px;
         background: #668964;
         display: flex; }
-        body .main-interface #tasks #list-toolbar .title {
+        .background-06 .main-interface #tasks #list-toolbar .title {
           flex: 1;
           font-size: 20px;
           color: #fff;
           font-weight: 200;
           padding: 10px 14px; }
-        body .main-interface #tasks #list-toolbar .actionBar .actionBar-top {
-          display: none; }
-        body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom {
+        .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top {
+          background: #668964;
+          position: absolute;
+          top: 45px;
+          right: 0px;
+          height: 250px; }
+          .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul {
+            list-style: none; }
+            .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li {
+              padding: 1px 2px 2px 2px;
+              position: relative; }
+              .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li a {
+                display: block;
+                padding: 7px 7px 7px 34px;
+                color: #fff;
+                fill: #fff; }
+                .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li a svg {
+                  position: absolute;
+                  left: 8px;
+                  top: 7px; }
+        .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom {
           height: 45px;
           font-size: 0; }
-          body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a {
+          .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a {
             display: inline-block;
             text-align: center;
             fill: #fff;
             padding: 6px;
             min-width: 40px; }
-            body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a .tab-text {
+            .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a .tab-text {
               display: block;
               text-align: center;
               color: #fff;
               font-size: 10px; }
-          body .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a.disabled {
+          .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom a.disabled {
             pointer-events: none;
             opacity: 0.5; }
-      body .main-interface #tasks .task-scroll {
+      .background-06 .main-interface #tasks .task-scroll {
         margin: 0 7px;
         padding: 0 7px; }
-        body .main-interface #tasks .task-scroll .addTask {
+        .background-06 .main-interface #tasks .task-scroll .addTask {
           margin: 14px 0;
           padding: 0 12px;
           background: rgba(102, 137, 100, 0.75);
           position: relative; }
-          body .main-interface #tasks .task-scroll .addTask a.plus-wrapper {
+          .background-06 .main-interface #tasks .task-scroll .addTask a.plus-wrapper {
             position: absolute;
             left: 10px;
             top: 14px; }
-            body .main-interface #tasks .task-scroll .addTask a.plus-wrapper svg {
+            .background-06 .main-interface #tasks .task-scroll .addTask a.plus-wrapper svg {
               fill: #fff; }
-          body .main-interface #tasks .task-scroll .addTask .addTask-input {
+          .background-06 .main-interface #tasks .task-scroll .addTask .addTask-input {
             position: relative;
             background: none;
             outline: none;
@@ -202,13 +241,14 @@ body {
             box-sizing: border-box;
             font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
             color: #fff; }
-          body .main-interface #tasks .task-scroll .addTask .addTask-input::placeholder {
-            color: rgba(255, 255, 255, 0.6); }
-        body .main-interface #tasks .task-scroll .task-list h2 {
+            .background-06 .main-interface #tasks .task-scroll .addTask .addTask-input::placeholder {
+              color: rgba(255, 255, 255, 0.6); }
+        .background-06 .main-interface #tasks .task-scroll .task-list h2 {
+          display: none;
           margin-top: 20px;
           position: relative;
           font-size: 11px; }
-          body .main-interface #tasks .task-scroll .task-list h2 a.groupHeader {
+          .background-06 .main-interface #tasks .task-scroll .task-list h2 a.groupHeader {
             background: #5b7a59;
             display: inline-block;
             padding: 3px 10px;
@@ -219,9 +259,204 @@ body {
             font-weight: 400;
             text-transform: uppercase;
             border-radius: 3px; }
-    body .main-interface #detail {
+        .background-06 .main-interface #tasks .task-scroll .task-list .tasks {
+          list-style: none; }
+          .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem {
+            height: 47px; }
+            .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body {
+              display: flex;
+              height: 46px;
+              border-radius: 3px;
+              background: #fff;
+              align-items: center;
+              padding: 0 4px; }
+              .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body a {
+                fill: #b9b9b9; }
+              .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-checkboxWrapper {
+                padding: 0 8px; }
+                .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-checkboxWrapper svg {
+                  height: 20px;
+                  width: 20px; }
+              .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-titleWrapper {
+                flex: 1;
+                font-size: 15px;
+                line-height: 15px; }
+              .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-duedate {
+                font-size: 12px;
+                color: #328ad6;
+                padding: 0 4px; }
+                .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-duedate.overdue {
+                  color: #b3312d; }
+              .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-star {
+                padding: 0 6px; }
+    .background-06 .main-interface #detail {
       width: 0px; }
-  body #user-popover {
-    display: none; }
+      .background-06 .main-interface #detail .inner {
+        background: #fff;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden; }
+        .background-06 .main-interface #detail .inner .top a {
+          fill: rgba(0, 0, 0, 0.3); }
+          .background-06 .main-interface #detail .inner .top a.detail-checkbox {
+            position: absolute;
+            top: 18px;
+            left: 18px; }
+          .background-06 .main-interface #detail .inner .top a.detail-star .star-wrapper {
+            position: absolute;
+            height: 49px;
+            width: 22px;
+            box-sizing: border-box;
+            right: 15px;
+            top: -4px;
+            z-index: 5; }
+          .background-06 .main-interface #detail .inner .top a.detail-star .starred-wrapper {
+            display: none; }
+        .background-06 .main-interface #detail .inner .top .title-container {
+          position: relative; }
+          .background-06 .main-interface #detail .inner .top .title-container .title {
+            padding: 16px 50px 14px;
+            border-bottom: 1px solid #ebebeb;
+            font-size: 16px;
+            line-height: 24px; }
+            .background-06 .main-interface #detail .inner .top .title-container .title .title-text .content-fakable .display-view {
+              font-size: 16px;
+              font-weight: bold; }
+            .background-06 .main-interface #detail .inner .top .title-container .title .title-text .content-fakable .edit-view.hidden {
+              display: none; }
+        .background-06 .main-interface #detail .inner .body {
+          flex: 1;
+          flex-direction: column;
+          overflow: auto;
+          padding-bottom: 16px; }
+          .background-06 .main-interface #detail .inner .body .section {
+            padding: 8px 0; }
+          .background-06 .main-interface #detail .inner .body .section-item {
+            display: flex;
+            align-items: center;
+            color: #262626;
+            padding-left: 10px;
+            padding-right: 10px; }
+            .background-06 .main-interface #detail .inner .body .section-item svg {
+              margin: 6px; }
+            .background-06 .main-interface #detail .inner .body .section-item .section-icon {
+              fill: #b9b9b9;
+              height: 32px;
+              min-width: 32px;
+              flex-shrink: 0; }
+            .background-06 .main-interface #detail .inner .body .section-item .section-content {
+              flex: 1;
+              margin-left: 8px;
+              margin-right: 8px; }
+            .background-06 .main-interface #detail .inner .body .section-item .section-title {
+              font-size: 15px;
+              line-height: 20px;
+              color: #9fa2a6; }
+            .background-06 .main-interface #detail .inner .body .section-item .section-delete {
+              display: none; }
+            .background-06 .main-interface #detail .inner .body .section-item .section-description {
+              font-size: 11px; }
+            .background-06 .main-interface #detail .inner .body .section-item .section-attachments {
+              display: flex; }
+            .background-06 .main-interface #detail .inner .body .section-item .section-attachments svg {
+              fill: #737272; }
+          .background-06 .main-interface #detail .inner .body .overdue .section-icon {
+            fill: #b3312d; }
+          .background-06 .main-interface #detail .inner .body .overdue .section-title {
+            color: #b3312d; }
+        .background-06 .main-interface #detail .inner .bottom {
+          position: relative; }
+          .background-06 .main-interface #detail .inner .bottom .detail-close {
+            position: absolute;
+            bottom: 8px;
+            opacity: 0.6;
+            left: 8px; }
+          .background-06 .main-interface #detail .inner .bottom .detail-trash {
+            position: absolute;
+            bottom: 8px;
+            opacity: 0.6;
+            right: 6px; }
+          .background-06 .main-interface #detail .inner .bottom textarea {
+            resize: none;
+            color: #262626;
+            font-weight: 500;
+            user-select: text;
+            font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+            padding: 0;
+            margin: 0;
+            background: transparent;
+            border: none;
+            text-shadow: none;
+            overflow: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box; }
+          .background-06 .main-interface #detail .inner .bottom .comments-bottom {
+            z-index: 9003;
+            border-top: 1px solid #ebebeb;
+            background: #fff; }
+            .background-06 .main-interface #detail .inner .bottom .comments-bottom .comments-add {
+              padding: 10px 10px 0 10px; }
+              .background-06 .main-interface #detail .inner .bottom .comments-bottom .comments-add .input-fake {
+                min-height: 32px;
+                padding: 7px;
+                box-sizing: border-box;
+                border: none;
+                font-size: 15px;
+                font-weight: 500;
+                color: #262626;
+                box-shadow: inset 0 0 0 1px #d6d6d6;
+                border-radius: 3px; }
+                .background-06 .main-interface #detail .inner .bottom .comments-bottom .comments-add .input-fake .expandingArea {
+                  position: relative; }
+                  .background-06 .main-interface #detail .inner .bottom .comments-bottom .comments-add .input-fake .expandingArea pre {
+                    display: block;
+                    visibility: hidden;
+                    padding: 0;
+                    margin: 0;
+                    border: none; }
+          .background-06 .main-interface #detail .inner .bottom .detail-info {
+            font-size: 11px;
+            text-align: center;
+            padding: 14px 35px;
+            color: #a3a3a2; }
+  .background-06 #user-popover {
+    display: none;
+    z-index: 1500;
+    position: absolute;
+    background: #f7f7f7;
+    top: 90px;
+    left: 5px;
+    border-radius: 3px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); }
+    .background-06 #user-popover .inner {
+      width: 200px;
+      border: 1px solid #f9f9f9;
+      padding: 12px;
+      font-size: 13px; }
+      .background-06 #user-popover .inner .list-menu {
+        margin: -12px;
+        list-style: none; }
+        .background-06 #user-popover .inner .list-menu li {
+          margin-bottom: -5px; }
+          .background-06 #user-popover .inner .list-menu li.separator {
+            margin-bottom: 1px;
+            padding-bottom: 1px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05); }
+          .background-06 #user-popover .inner .list-menu li a {
+            display: block;
+            padding: 10px 12px;
+            color: #262626; }
+        .background-06 #user-popover .inner .list-menu li.disabled {
+          padding: 12px;
+          color: #aaa; }
+    .background-06 #user-popover.show {
+      display: block; }
 
 /*# sourceMappingURL=style.css.map */
