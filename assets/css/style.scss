@@ -38,6 +38,9 @@ $overdue: #b3312d;
     .disabled{
         pointer-events: none;
     }
+    .hidden{
+        display: none!important;
+    }
     .main-interface{
         display: flex;
         overflow: hidden;
@@ -225,7 +228,6 @@ $overdue: #b3312d;
                 height: 45px;
                 background: #668964;
                 display: flex;
-                
                 .title{
                     flex: 1;
                     font-size: 20px;
@@ -239,12 +241,27 @@ $overdue: #b3312d;
                         position: absolute;
                         top: 45px;
                         right: 0px;
-                        height: 250px;
+                        width: 250px;
+                        z-index: 5;
+                        overflow: hidden;
+                        height: 0px;
+                        transition: 120ms height linear;
+                        &.show{
+                            height: 244px;
+                        }
                         ul{
                             list-style: none;
+                            position: absolute;
+                            top: 0;
+                            right: 0;
+                            left: 0;
                             li{
                                 padding: 1px 2px 2px 2px;
                                 position: relative;
+                                &.disabled{
+                                    opacity: 0.4 !important;
+                                    filter: none;
+                                }
                                 a{
                                     display: block;
                                     padding: 7px 7px 7px 34px;
@@ -254,6 +271,9 @@ $overdue: #b3312d;
                                         position: absolute;
                                         left: 8px;
                                         top: 7px;
+                                    }
+                                    &.disabled{
+                                        opacity: 0.4 !important;
                                     }
                                 }
                             }

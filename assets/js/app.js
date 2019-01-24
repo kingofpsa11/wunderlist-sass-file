@@ -39,12 +39,7 @@ window.onload = function () {
     moreBtn.addEventListener('click', moreList)
     function moreList () {
       var actionBar = document.getElementsByClassName('actionBar-top')[0]
-      console.log(actionBar.style.height)
-      if (actionBar.style.height === '244px') {
-        actionBar.style === '0px'
-      } else {
-        actionBar.style === '244px'
-      }
+      console.log(actionBar.classList.toggle('show'))
     }
   
     // Task Item Double click
