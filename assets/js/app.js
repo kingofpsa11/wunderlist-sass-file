@@ -39,28 +39,31 @@ window.onload = function () {
     moreBtn.addEventListener('click', moreList)
     function moreList () {
       var actionBar = document.getElementsByClassName('actionBar-top')[0]
-      console.log(actionBar.classList.toggle('show'))
+      actionBar.classList.toggle('show')
     }
   
+    // Task Item click change color
+    let listTask = document.getElementsByClassName('taskItem')
+    for(let index = 0; index < listTask.length; index++) {
+      const el = listTask[index]
+      el.addEventListener('click', blueTask)
+      function blueTask() {
+        const selectedItem = document.querySelector('.taskItem.selected')
+        if(typeof selectedItem != 'undefined' && selectedItem !== null) {
+          if (selectedItem !== this) {
+            selectedItem.classList.remove('selected')
+            this.classList.add('selected')
+          }
+        } else {
+          this.classList.add('selected')
+        }        
+      }
+      el.addEventListener('dblclick', displayTask)
+    }
+
     // Task Item Double click
-    document.getElementsByClassName('tasks')[0].addEventListener('dblclick', displayTask)
-    function displayTask (e) {
-      var taskitems = document.getElementsByClassName('taskItem')
-      // console.log(taskitems);
-      for (let index = 0; index < taskitems.length; index++) {
-        const element = taskitems[index]
-        if (element.classList.contains('selected')) {
-          element.classList.remove('selected')
-        }
-      }
-  
-      if (e.target.parentNode.classList.contains('taskItem')) {
-        e.target.parentNode.classList.add('selected')
-        document.getElementById('detail').style.width = '367px'
-      } else {
-        e.target.parentNode.parentNode.classList.add('selected')
-        document.getElementById('detail').style.width = '367px'
-      }
+    function displayTask () {
+      document.getElementById('detail').style.width = '367px'
     }
   
     window.addEventListener('click', hiddenDetail)

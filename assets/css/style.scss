@@ -1,4 +1,4 @@
-$overdue: #b3312d;
+$overdue-color: #b3312d;
 *{
     margin: 0;
     padding: 0;
@@ -35,6 +35,9 @@ $overdue: #b3312d;
         text-decoration: none;
         user-select: none;
     }
+    ul{
+        list-style: none;
+    }
     .disabled{
         pointer-events: none;
     }
@@ -46,8 +49,63 @@ $overdue: #b3312d;
         overflow: hidden;
         height: 100vh;
         #modal{
-            position: absolute;
-            display: none;
+            .dialog-wrapper{
+                position: absolute;
+                display: block;
+                z-index: 1000;
+                top: 0;
+                left: 0;
+                padding-top: 80px;
+                padding-bottom: 80px;
+                height: 100vh;
+                width: 100vw;
+                box-sizing: border-box;
+                background: rgba(0,0,0,0.4);
+                #settings{
+                    margin: auto;
+                    width: 700px;
+                    display: flex;
+                    flex-direction: column;
+                    background: #fff;
+                    .content{
+                        display: flex;
+                        .tabs{
+                            width: 150px;
+                            ul{
+                                li{
+                                    a{
+                                        padding: 0 10px;
+                                        display: flex;
+                                        align-items: center;
+                                        font-size: 12px;
+                                        font-weight: bold;
+                                        text-shadow: 0 1px 0 #fff;
+                                        .icon{
+                                            width: 40px;
+                                            height: 40px;
+                                        }
+                                        .tabl-label{
+                                            padding: 0 10px;
+                                            
+                                        }
+                                    }
+                                    &.active{
+                                        background: rgba(0,0,0,0.08);
+                                    }
+                                }
+                            }
+                        }
+                        .settings-content-inner-wrapper{
+                            flex: 1;
+                            padding: 0 14px;
+                            overflow: auto;
+                        }
+                    }
+                    .content-footer{
+                        padding: 12px;
+                    }
+                }
+            }
         }
         .navigation{
             width: 280px;
@@ -237,12 +295,13 @@ $overdue: #b3312d;
                 }
                 .actionBar{
                     .actionBar-top{
-                        background: #668964;
+                        opacity: 1;
+                        background: rgb(102, 137, 100);
                         position: absolute;
                         top: 45px;
                         right: 0px;
                         width: 250px;
-                        z-index: 5;
+                        z-index: 2;
                         overflow: hidden;
                         height: 0px;
                         transition: 120ms height linear;
@@ -255,9 +314,11 @@ $overdue: #b3312d;
                             top: 0;
                             right: 0;
                             left: 0;
+                            z-index: 1;
                             li{
                                 padding: 1px 2px 2px 2px;
                                 position: relative;
+                                transition: opacity 100ms ease;
                                 &.disabled{
                                     opacity: 0.4 !important;
                                     filter: none;
@@ -266,14 +327,17 @@ $overdue: #b3312d;
                                     display: block;
                                     padding: 7px 7px 7px 34px;
                                     color: #fff;
-                                    fill: #fff;
                                     svg{
                                         position: absolute;
                                         left: 8px;
                                         top: 7px;
+                                        fill: #fff;
                                     }
                                     &.disabled{
-                                        opacity: 0.4 !important;
+                                        color: rgba(255,255,255,0.4);                                        
+                                        svg{
+                                            fill: rgba(255,255,255,0.4);
+                                        }
                                     }
                                 }
                             }
@@ -394,6 +458,9 @@ $overdue: #b3312d;
                                     padding: 0 6px;
                                 }
                             }
+                            &.selected .taskItem-body{
+                                background: #e1f2fe;
+                            }
                         }
                     }
                 }
@@ -500,10 +567,10 @@ $overdue: #b3312d;
                     }
                     .overdue{
                         .section-icon{
-                            fill: $overdue;
+                            fill: $overdue-color;
                         }
                         .section-title{
-                            color: $overdue;
+                            color: $overdue-color;
                         }
                     }
                 }

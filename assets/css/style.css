@@ -31,6 +31,8 @@
     cursor: pointer;
     text-decoration: none;
     user-select: none; }
+  .background-06 ul {
+    list-style: none; }
   .background-06 .disabled {
     pointer-events: none; }
   .background-06 .hidden {
@@ -39,9 +41,48 @@
     display: flex;
     overflow: hidden;
     height: 100vh; }
-    .background-06 .main-interface #modal {
+    .background-06 .main-interface #modal .dialog-wrapper {
       position: absolute;
-      display: none; }
+      display: block;
+      z-index: 1000;
+      top: 0;
+      left: 0;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      height: 100vh;
+      width: 100vw;
+      box-sizing: border-box;
+      background: rgba(0, 0, 0, 0.4); }
+      .background-06 .main-interface #modal .dialog-wrapper #settings {
+        margin: auto;
+        width: 700px;
+        display: flex;
+        flex-direction: column;
+        background: #fff; }
+        .background-06 .main-interface #modal .dialog-wrapper #settings .content {
+          display: flex; }
+          .background-06 .main-interface #modal .dialog-wrapper #settings .content .tabs {
+            width: 150px; }
+            .background-06 .main-interface #modal .dialog-wrapper #settings .content .tabs ul li a {
+              padding: 0 10px;
+              display: flex;
+              align-items: center;
+              font-size: 12px;
+              font-weight: bold;
+              text-shadow: 0 1px 0 #fff; }
+              .background-06 .main-interface #modal .dialog-wrapper #settings .content .tabs ul li a .icon {
+                width: 40px;
+                height: 40px; }
+              .background-06 .main-interface #modal .dialog-wrapper #settings .content .tabs ul li a .tabl-label {
+                padding: 0 10px; }
+            .background-06 .main-interface #modal .dialog-wrapper #settings .content .tabs ul li.active {
+              background: rgba(0, 0, 0, 0.08); }
+          .background-06 .main-interface #modal .dialog-wrapper #settings .content .settings-content-inner-wrapper {
+            flex: 1;
+            padding: 0 14px;
+            overflow: auto; }
+        .background-06 .main-interface #modal .dialog-wrapper #settings .content-footer {
+          padding: 12px; }
     .background-06 .main-interface .navigation {
       width: 280px;
       background: #f7f7f7;
@@ -181,12 +222,13 @@
           font-weight: 200;
           padding: 10px 14px; }
         .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top {
+          opacity: 1;
           background: #668964;
           position: absolute;
           top: 45px;
           right: 0px;
           width: 250px;
-          z-index: 5;
+          z-index: 2;
           overflow: hidden;
           height: 0px;
           transition: 120ms height linear; }
@@ -197,24 +239,28 @@
             position: absolute;
             top: 0;
             right: 0;
-            left: 0; }
+            left: 0;
+            z-index: 1; }
             .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li {
               padding: 1px 2px 2px 2px;
-              position: relative; }
+              position: relative;
+              transition: opacity 100ms ease; }
               .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li.disabled {
                 opacity: 0.4 !important;
                 filter: none; }
               .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li a {
                 display: block;
                 padding: 7px 7px 7px 34px;
-                color: #fff;
-                fill: #fff; }
+                color: #fff; }
                 .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li a svg {
                   position: absolute;
                   left: 8px;
-                  top: 7px; }
+                  top: 7px;
+                  fill: #fff; }
                 .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li a.disabled {
-                  opacity: 0.4 !important; }
+                  color: rgba(255, 255, 255, 0.4); }
+                  .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-top ul li a.disabled svg {
+                    fill: rgba(255, 255, 255, 0.4); }
         .background-06 .main-interface #tasks #list-toolbar .actionBar .actionBar-bottom {
           height: 45px;
           font-size: 0; }
@@ -306,6 +352,8 @@
                   color: #b3312d; }
               .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-star {
                 padding: 0 6px; }
+            .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem.selected .taskItem-body {
+              background: #e1f2fe; }
     .background-06 .main-interface #detail {
       width: 0px; }
       .background-06 .main-interface #detail .inner {
