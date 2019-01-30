@@ -57,20 +57,26 @@ $overdue-color: #b3312d;
                 left: 0;
                 padding-top: 80px;
                 padding-bottom: 80px;
-                height: 100vh;
-                width: 100vw;
+                width: 100%;
+                height: 100%;
                 box-sizing: border-box;
                 background: rgba(0,0,0,0.4);
                 #settings{
-                    margin: auto;
+                    margin: 0 auto;
                     width: 700px;
                     display: flex;
                     flex-direction: column;
-                    background: #fff;
+                    background: #fafafa;
+                    overflow: hidden;
+                    border-radius: 3px;
+                    max-height: 100%;
+                    position: relative;
                     .content{
                         display: flex;
                         .tabs{
-                            width: 150px;
+                            overflow-y: auto;
+                            border-left: 1px solid #ebebeb;
+                            border-right: 1px solid #ebebeb;
                             ul{
                                 li{
                                     a{
@@ -83,10 +89,33 @@ $overdue-color: #b3312d;
                                         .icon{
                                             width: 40px;
                                             height: 40px;
+                                            margin: 0 -10px;
+                                            flex-shrink: 0;
+                                            transform: scale(0.6);
+                                            background-image: url(//static.wunderlist.com/7d9072fa85c079a4fbd4911016b563ae2e7e758b/images/sprites/app.png);
+                                            &.settings-general{
+                                                background-position: -157px 0;
+                                            }
+                                            &.settings-account{
+                                                background-position: 0 -153px;
+                                            }
+                                            &.settings-shortcuts{
+                                                background-position: -80px -153px;
+                                            }
+                                            &.settings-smart-lists{
+                                                background-position: -157px -40px;
+                                            }
+                                            &.settings-notification{
+                                                background-position: -60px -93px;
+                                            }
+                                            &.settings-about{
+                                                background-position: -40px -153px;
+                                            }
                                         }
-                                        .tabl-label{
+                                        .tab-label{
                                             padding: 0 10px;
-                                            
+                                            flex: 1;
+                                            text-align: left;
                                         }
                                     }
                                     &.active{
@@ -96,13 +125,93 @@ $overdue-color: #b3312d;
                             }
                         }
                         .settings-content-inner-wrapper{
-                            flex: 1;
                             padding: 0 14px;
-                            overflow: auto;
+                            flex: 1;
+                            overflow-y: auto;
+                            .settings-content-inner-general{                                
+                                .separator{
+                                    margin: 14px 0px;
+                                    border-bottom: 1px solid #aaa;
+                                    .cols{
+                                        margin-bottom: 14px;                                        
+                                        margin-left: -7px;
+                                        margin-right: -7px;
+                                        font-size: 0;
+                                        > div{
+                                            display: inline-block;
+                                            box-sizing: border-box;
+                                            font-size: 13px;
+                                            vertical-align: middle;
+                                            padding: 0 7px;
+                                        }
+                                        .col-60{                                            
+                                            width: 60%;                                            
+                                            &.text-right{
+                                                text-align: right;
+                                            }
+                                        }
+                                        .col-40{
+                                            width: 40%;
+                                            .select{
+                                                max-width: 100%;
+                                                background: #fff;
+                                                box-shadow: inset 0 0 0 1px #d6d6d6;
+                                                display: inline-block;
+                                                select{
+                                                    width: 100%;
+                                                    padding: 8px 26px 8px 8px;
+                                                    border: none;
+                                                    background: none;
+                                                    border-radius: 3px;
+                                                    color: #262626;
+                                                    font-size: 13px;
+                                                    line-height: 17px;
+                                                }
+                                            }
+                                            .checkbox{                                                
+                                                input[type=checkbox]{
+                                                    background: #fff;
+                                                    height: 16px;
+                                                    width: 16px;
+                                                    -webkit-appearance: none;
+                                                    border-radius: 3px;
+                                                    box-shadow: inset 0 0 0 1px #d6d6d6;
+                                                    position: relative;
+                                                    vertical-align: bottom;
+                                                }
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                     .content-footer{
+                        border-top: 1px solid #e0e0df;
                         padding: 12px;
+                        flex-shrink: 0;
+                        .cols{
+                            font-size: 0;
+                            .col-40{
+                                width: 40%;
+                                display: inline-block;
+                            }
+                            .col-20{
+                                width: 20%;
+                                display: inline-block;
+                                text-align: center;
+                                button{
+                                    background: #2b8dec;
+                                    color: #fff;
+                                    padding: 6px 10px;
+                                    border-radius: 4px;
+                                    border: none;
+                                    width: 100%;
+                                }
+                            }
+
+                        }
                     }
                 }
             }
