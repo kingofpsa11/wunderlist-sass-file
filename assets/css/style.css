@@ -27,6 +27,11 @@
         background-image: url("https://static.wunderlist.com/7301e219acb02266587ce610bd91f33ed6d31607/images/backgrounds/1024/06.jpg") !important; } }
   .background-06:vertical {
     background-color: rgba(102, 137, 100, 0.75); }
+  .background-06 ::-webkit-scrollbar {
+    width: 6px; }
+  .background-06 ::-webkit-scrollbar-thumb {
+    background: #a3a3a2;
+    border-radius: 3px; }
   .background-06 a {
     cursor: pointer;
     text-decoration: none;
@@ -43,7 +48,7 @@
     height: 100vh; }
     .background-06 .main-interface #modal .dialog-wrapper {
       position: absolute;
-      display: block;
+      display: none;
       z-index: 1000;
       top: 0;
       left: 0;
@@ -392,12 +397,13 @@
             .background-06 .main-interface #tasks .task-scroll .addTask .addTask-input::placeholder {
               color: rgba(255, 255, 255, 0.6); }
         .background-06 .main-interface #tasks .task-scroll .task-list h2 {
-          display: none;
+          display: block;
           margin-top: 20px;
+          margin-bottom: 10px;
           position: relative;
           font-size: 11px; }
           .background-06 .main-interface #tasks .task-scroll .task-list h2 a.groupHeader {
-            background: #5b7a59;
+            background: #709172;
             display: inline-block;
             padding: 3px 10px;
             vertical-align: middle;
@@ -439,6 +445,8 @@
                 padding: 0 6px; }
             .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem.selected .taskItem-body {
               background: #e1f2fe; }
+            .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem.done {
+              opacity: 0.6; }
     .background-06 .main-interface #detail {
       width: 0px; }
       .background-06 .main-interface #detail .inner {

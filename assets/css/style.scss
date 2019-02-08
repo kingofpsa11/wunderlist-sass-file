@@ -29,7 +29,13 @@ $overdue-color: #b3312d;
         }
     }
     &:vertical{background-color:rgba(102,137,100,0.75)}
-
+    ::-webkit-scrollbar{
+        width: 6px;
+    }
+    ::-webkit-scrollbar-thumb{
+        background: #a3a3a2;
+        border-radius: 3px;
+    }
     a{
         cursor: pointer;
         text-decoration: none;
@@ -51,7 +57,7 @@ $overdue-color: #b3312d;
         #modal{
             .dialog-wrapper{
                 position: absolute;
-                display: block;
+                display: none;
                 z-index: 1000;
                 top: 0;
                 left: 0;
@@ -512,12 +518,13 @@ $overdue-color: #b3312d;
                 }
                 .task-list{
                     h2{
-                        display: none;
+                        display: block;
                         margin-top: 20px;
+                        margin-bottom: 10px;
                         position: relative;
-                        font-size: 11px;
+                        font-size: 11px;                        
                         a.groupHeader{
-                            background: #5b7a59;
+                            background: #709172;
                             display: inline-block;
                             padding: 3px 10px;
                             vertical-align: middle;
@@ -569,6 +576,9 @@ $overdue-color: #b3312d;
                             }
                             &.selected .taskItem-body{
                                 background: #e1f2fe;
+                            }
+                            &.done {
+                                opacity: 0.6;
                             }
                         }
                     }

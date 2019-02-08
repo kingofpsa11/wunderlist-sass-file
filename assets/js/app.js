@@ -79,5 +79,26 @@ window.onload = function () {
     function toggleNav () {
       document.getElementById('lists').classList.toggle('collapsed')
     }
+
+    //Check task
+    const checkboxs = document.getElementsByClassName('taskItem-checkboxWrapper')
+    for (let index = 0; index < checkboxs.length; index++) {
+      const element = checkboxs[index]
+      element.addEventListener('click', function () {
+        parent = element.parentNode.parentNode
+        parent.parentNode.removeChild(parent);
+      })
+    }
+
+    //Input task
+    const inputTask = document.getElementsByClassName('addTask-input')[0]
+    const tasks = document.getElementsByClassName('tasks')
+    inputTask.addEventListener('keypress',function (e) {
+      if (e.keyCode === 13) {        
+        const child = tasks[0].firstElementChild.cloneNode(true)
+        child.getElementsByClassName('taskItem-titleWrapper')[0].innerHTML = this.value
+        child.getElementsByClassName('taskItem-duedate')[0].innerHtml = 'Today'
+        tasks[0].appendChild(child)
+      }      
+    })
   }
-  
