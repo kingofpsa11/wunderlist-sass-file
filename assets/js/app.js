@@ -77,28 +77,54 @@ window.onload = function () {
     // Collapsed Navigation
     document.getElementsByClassName('toggle-icon')[0].addEventListener('click', toggleNav)
     function toggleNav () {
+      console.log(document.getElementById('lists').classList)
       document.getElementById('lists').classList.toggle('collapsed')
-    }
-
-    //Check task
-    const checkboxs = document.getElementsByClassName('taskItem-checkboxWrapper')
-    for (let index = 0; index < checkboxs.length; index++) {
-      const element = checkboxs[index]
-      element.addEventListener('click', function () {
-        parent = element.parentNode.parentNode
-        parent.parentNode.removeChild(parent);
-      })
     }
 
     //Input task
     const inputTask = document.getElementsByClassName('addTask-input')[0]
     const tasks = document.getElementsByClassName('tasks')
-    inputTask.addEventListener('keypress',function (e) {
+    inputTask.addEventListener('keypress', function (e) {
       if (e.keyCode === 13) {        
         const child = tasks[0].firstElementChild.cloneNode(true)
         child.getElementsByClassName('taskItem-titleWrapper')[0].innerHTML = this.value
+        this.value = ''
         child.getElementsByClassName('taskItem-duedate')[0].innerHtml = 'Today'
         tasks[0].appendChild(child)
       }      
     })
+
+    //Hidden done task
+    const btnShow = document.getElementsByClassName('groupHeader')[1]
+    btnShow.addEventListener('click', function () {
+      document.querySelectorAll('.task-list ol')[1].classList.toggle('hidden')
+    })
+
+    //Check task
+    const chb = document.getElementsByClassName('taskItem-checkboxWrapper')
+    for (let i = 0; i < chb.length; i++) {
+      const element = chb[i];
+      element.addEventListener('click', function() {
+        const moveTask = this.parentNode.parentNode
+        const listTaskInbox = document.querySelectorAll('.task-list ol')[0]
+        const listTaskDone = document.querySelectorAll('.task-list ol')[1]
+        listTaskInbox.removeChild(moveTask)
+        moveTask.classList.add('done')
+        moveTask.classList.remove('selected')
+        listTaskDone.appendChild(moveTask)        
+        // var parent = moveTask.parentNode;
+        // console.log(Array.prototype.indexOf.call(parent.children, moveTask))
+        // console.log(Array.from(moveTask.parentNode.children).indexOf(moveTask))
+      })      
+    }
+    //Check task
+    // const checkboxs = document.getElementsByClassName('taskItem-checkboxWrapper')
+    // for (let index = 0; index < checkboxs.length; index++) {
+    //   const element = checkboxs[index]
+    //   element.addEventListener('click', function () {
+    //     parent = element.parentNode.parentNode
+    //     parent.parentNode.removeChild(parent);
+    //   })
+    // }
+    
   }
