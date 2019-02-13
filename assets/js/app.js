@@ -5,6 +5,7 @@ window.onload = function () {
     accountSettings.addEventListener('click', displayModal)
     function displayModal () {
       modal.style.display = 'block'
+      
     }
     var doneBtn = document.getElementsByClassName('close')[0]
   
@@ -12,7 +13,19 @@ window.onload = function () {
     function hideModal () {
       modal.style.display = 'none'
     }
-  
+    
+    // Click tabs on Modal
+    const tabs = document.querySelectorAll('.tabs ul li')    
+    for (let i = 0; i < tabs.length; i++) {
+      const el = tabs[i];
+      el.addEventListener('click', function (e) {
+        if (document.querySelector('.tabs ul li a.active')) {
+          document.querySelector('.tabs ul li a.active').classList.remove('active')
+        }
+        this.querySelector('a').classList.add('active')
+      })
+    }
+    
     // User settings
     var user = document.getElementsByClassName('user')[0]
   
@@ -77,9 +90,15 @@ window.onload = function () {
     // Collapsed Navigation
     document.getElementsByClassName('toggle-icon')[0].addEventListener('click', toggleNav)
     function toggleNav () {
-      console.log(document.getElementById('lists').classList)
       document.getElementById('lists').classList.toggle('collapsed')
     }
+    window.addEventListener('resize', function(e) {
+      if (window.innerWidth <= 1000) {
+        document.getElementById('lists').classList.add('collapsed')
+      } else{
+        document.getElementById('lists').classList.remove('collapsed')
+      }
+    })
 
     //Input task
     const inputTask = document.getElementsByClassName('addTask-input')[0]
@@ -112,19 +131,7 @@ window.onload = function () {
         moveTask.classList.add('done')
         moveTask.classList.remove('selected')
         listTaskDone.appendChild(moveTask)        
-        // var parent = moveTask.parentNode;
-        // console.log(Array.prototype.indexOf.call(parent.children, moveTask))
-        // console.log(Array.from(moveTask.parentNode.children).indexOf(moveTask))
-      })      
+        })      
     }
-    //Check task
-    // const checkboxs = document.getElementsByClassName('taskItem-checkboxWrapper')
-    // for (let index = 0; index < checkboxs.length; index++) {
-    //   const element = checkboxs[index]
-    //   element.addEventListener('click', function () {
-    //     parent = element.parentNode.parentNode
-    //     parent.parentNode.removeChild(parent);
-    //   })
-    // }
-    
+        
   }

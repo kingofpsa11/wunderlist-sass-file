@@ -10,8 +10,7 @@
     <script src="assets/js/app.js"></script>
 
 </head> 
-<body class="wlapp-parent chrome animate platform-windows application-main background-06 focus-browser">
-    
+<body class="wlapp-parent chrome animate platform-windows application-main background-06 focus-browser">    
     <div class="main-interface">
         <div id="modal">
             <!-- <ul class="reminders dialog-wrapper"></ul> -->

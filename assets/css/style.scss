@@ -4,6 +4,14 @@ $overdue-color: #b3312d;
     padding: 0;
     user-select: none;
 }
+@keyframes dialogSlideIn{
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
 .background-06{
     $font-stack: "Lato","Geneva CY","Lucida Grande","Arial Unicode MS","Helvetica Neue","Helvetica","Arial",sans-serif;
     color: #262626;
@@ -55,9 +63,10 @@ $overdue-color: #b3312d;
         overflow: hidden;
         height: 100vh;
         #modal{
+            display: none;
             .dialog-wrapper{
                 position: absolute;
-                display: none;
+                
                 z-index: 1000;
                 top: 0;
                 left: 0;
@@ -68,6 +77,7 @@ $overdue-color: #b3312d;
                 box-sizing: border-box;
                 background: rgba(0,0,0,0.4);
                 #settings{
+                    animation: dialogSlideIn 250ms cubic-bezier(.175,.885,.32,1.275);
                     margin: 0 auto;
                     width: 700px;
                     display: flex;
@@ -92,6 +102,9 @@ $overdue-color: #b3312d;
                                         font-size: 12px;
                                         font-weight: bold;
                                         text-shadow: 0 1px 0 #fff;
+                                        &.active{
+                                            background: rgba(0,0,0,0.08);
+                                        }
                                         .icon{
                                             width: 40px;
                                             height: 40px;
@@ -226,8 +239,29 @@ $overdue-color: #b3312d;
             width: 280px;
             background: #f7f7f7;
             overflow: hidden;
+            
             &.collapsed{
                 flex-basis: 42px;
+                #search-toolbar{
+                    .search-input-wrapper,.search-icon-wrapper{
+                        display: none;
+                    }
+                }
+                #user-toolbar{
+                    .user{
+                        .user-name{
+                            display: none;
+                        }
+                    }
+                    .stream-counts{
+                        display: none;
+                    }
+                }
+                .lists-scroll{
+                    .title,.overdue-count,.count{
+                        display: none;
+                    }
+                }
             }
             .lists-inner{
                 display: flex;
