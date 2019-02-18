@@ -1,3 +1,7 @@
+<?php session_start();?>
+<?php
+setcookie("test_cookie", "test", time() + 3600, '/');
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,6 +36,18 @@
       <a href=""><img src="" alt=""></a>
       <a href=""><img src="" alt=""></a>
     </main>
+    <?php
+    
+if(count($_COOKIE) > 0) {
+    echo "Cookies are enabled.";
+    echo '<pre>';
+    var_dump($_COOKIE);
+    // var_dump(isset($_COOKIE['test_cookie']));
+} else {
+    echo "Cookies are disabled.";
+}
+?>
+
   </div>
 </body>
 </html>
