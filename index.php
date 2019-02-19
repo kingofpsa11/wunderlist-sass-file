@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>This - Wunderlist</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">    
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
     <script src="assets/js/app.js"></script>
 
 </head> 
@@ -810,7 +811,7 @@
                     </li>
                     <li class="email disabled">phammanhha305@gmail.com</li>
                     <li>
-                        <a>Sign out</a>
+                        <a href="./login.php">Sign out</a>
                     </li>
                 </ul>
             </div>

@@ -1,8 +1,12 @@
 .container {
-  width: 100%;
-  height: 100vh;
   font-family: 'Lato';
-  font-size: 14px; }
+  font-size: 14px;
+  background: #fafafa; }
+  .container a {
+    text-decoration: none;
+    color: #1b7edf;
+    font-weight: bold;
+    cursor: pointer; }
   .container header {
     background: #edf2fc; }
     .container header .cookie {
@@ -10,5 +14,86 @@
       padding-bottom: 10px;
       margin: 0 auto;
       text-align: center; }
+  .container .logo {
+    margin: 40px auto 0 auto; }
+    .container .logo::before {
+      background-image: url(//d2hkcehpyog59.cloudfront.net/3115f3e4c221acb12a1cd87ad613d6011f85e805/wl_icon.png);
+      background-repeat: no-repeat;
+      background-size: 80px;
+      background-position: top right;
+      content: '';
+      display: block;
+      height: 80px;
+      width: 80px;
+      margin: auto; }
+  .container .form {
+    margin: 30px auto;
+    width: 350px; }
+    .container .form form {
+      border-radius: 3px;
+      border: 1px solid #ddd;
+      height: 230px; }
+      .container .form form .row {
+        background: #fff;
+        display: flex;
+        height: 60px;
+        align-items: center;
+        border-bottom: solid 1px #eee;
+        margin: 0; }
+        .container .form form .row .icon {
+          padding: 0px 20px; }
+        .container .form form .row input {
+          flex: 1;
+          border: none;
+          outline: none; }
+        .container .form form .row input[type=submit] {
+          padding: 11px 10px;
+          background: #2b88d9;
+          color: #fff;
+          font-weight: bold;
+          border-radius: 3px;
+          font-size: 15px;
+          margin: 18px auto;
+          display: block;
+          width: 100%; }
+      .container .form form .submit {
+        padding: 0 15px;
+        border: none;
+        align-items: normal;
+        display: block; }
+      .container .form form .forgot-password {
+        display: block;
+        font-size: 14px;
+        text-align: center; }
+    .container .form .buttons-external {
+      font-size: 0;
+      margin: 0;
+      margin-top: 20px; }
+      .container .form .buttons-external .external-auth:not(:last-child) {
+        margin-right: 15px;
+        margin-bottom: 10px; }
+      .container .form .buttons-external .external-auth {
+        width: 30%;
+        display: inline-block;
+        box-sizing: border-box; }
+        .container .form .buttons-external .external-auth .button {
+          display: block;
+          padding: 10px;
+          text-align: center;
+          border: 1px solid #ddd; }
+          .container .form .buttons-external .external-auth .button .icon {
+            width: 26px;
+            height: 26px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: -1px; }
+      .container .form .buttons-external .facebook .button {
+        background: #3b5998; }
+      .container .form .buttons-external .google .button {
+        background: #dd4b39; }
+      .container .form .buttons-external .microsoft {
+        margin-right: -10px; }
+        .container .form .buttons-external .microsoft .button {
+          background: #fff; }
 
 /*# sourceMappingURL=login.css.map */
