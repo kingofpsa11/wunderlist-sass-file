@@ -1,3 +1,8 @@
+body{
+  margin: 0;
+    padding: 0;
+    width: 100%;
+}
 .container{  
   font-family: 'Lato';
   font-size: 14px;
@@ -10,7 +15,6 @@
   }
   header{
     background: #edf2fc;
-    
     .cookie{
       padding-top: 10px;
       padding-bottom: 10px;
@@ -32,6 +36,18 @@
     }
     margin: 40px auto 0 auto;
   }
+  .errors{
+    text-align: center;
+    .message{
+      background: rgba(214,40,34,0.07);
+      border: 1px solid rgba(214,40,34,0.36);
+      color: #d62822;
+      margin: 20px auto -20px auto;
+      display: inline-block;
+      padding: 10px 30px;
+      border-radius: 4px;
+    }
+  }
   .form{
     margin: 30px auto;
     width: 350px;    
@@ -45,16 +61,17 @@
         height: 60px;
         align-items: center;
         border-bottom: solid 1px #eee;
-        margin: 0;
-        
-        .icon{
-          
+        margin: 0;        
+        .icon{          
           padding: 0px 20px;
         }
         input{
           flex: 1;
           border: none;
           outline: none;
+          font-family: 'Lato';
+          font-size: 16px;
+          padding: 21px 8px;
         }
         input[type=submit]{
           padding: 11px 10px;

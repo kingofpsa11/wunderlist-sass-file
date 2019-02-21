@@ -1,3 +1,8 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%; }
+
 .container {
   font-family: 'Lato';
   font-size: 14px;
@@ -26,6 +31,16 @@
       height: 80px;
       width: 80px;
       margin: auto; }
+  .container .errors {
+    text-align: center; }
+    .container .errors .message {
+      background: rgba(214, 40, 34, 0.07);
+      border: 1px solid rgba(214, 40, 34, 0.36);
+      color: #d62822;
+      margin: 20px auto -20px auto;
+      display: inline-block;
+      padding: 10px 30px;
+      border-radius: 4px; }
   .container .form {
     margin: 30px auto;
     width: 350px; }
@@ -45,7 +60,10 @@
         .container .form form .row input {
           flex: 1;
           border: none;
-          outline: none; }
+          outline: none;
+          font-family: 'Lato';
+          font-size: 16px;
+          padding: 21px 8px; }
         .container .form form .row input[type=submit] {
           padding: 11px 10px;
           background: #2b88d9;

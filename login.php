@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +20,11 @@
       </div>
     </header>
     <div class="logo"></div>
-
+    <?php
+      if (!empty($_SESSION["error"])) {        
+        echo("<div class='errors'><div class='message'>" . $_SESSION["error"] . "</div></div>");
+      }
+    ?>
     <div class="form">
       <form action="checklogin.php" method="POST">
         <div class="email row">
@@ -38,7 +45,7 @@
             </g>
             </svg>
           </span>
-          <input type="email" name="email" id="email" placeholder="Email">
+          <input type="email" name="email" id="email" placeholder="Email" value="<?php echo(isset($_COOKIE["email"])) ? $_COOKIE["email"] : "" ;?>">
         </div>
         <div class="password row">
           <span class="icon password">
@@ -58,7 +65,8 @@
                 </g>
             </svg>
           </span>
-          <input type="password" name="password" id="password" placeholder="Password"></div>
+          <input type="password" name="password" id="password" placeholder="Password" value="<?php echo(isset($_COOKIE["email"])) ? $_COOKIE["email"] : "" ;?>">
+        </div>
         <div class="submit row">
           <input type="submit" value="Sign In" name="submit">
         </div>
@@ -104,11 +112,6 @@
             </span>
       </div>
     </div>
-      <a href=""><img src="" alt=""></a>
-      <a href=""><img src="" alt=""></a>
-      <a href=""><img src="" alt=""></a>
-    
-
   </div>
 </body>
 </html>

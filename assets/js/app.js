@@ -75,9 +75,32 @@ $(document).ready(function () {
 
   //Change right click context
   $('.tasks').on('contextmenu', '.taskItem', function (e) {
-    e.preventDefault()
+    e.preventDefault()    
     const contextmenu = $('.context-menu')
     contextmenu.css({"left":e.clientX,"top":e.clientY})
     contextmenu.show()
   });
+  $(window).on('click', function () {    
+    const contextmenu = $('.context-menu')
+    contextmenu.hide()
+  });
+
+  //Check completed tasks
+  $('.tasks:first').on("click", '.taskItem-checkboxWrapper', function (e) {
+    e.stopPropagation()
+    const taskItem = $(this).parents('.taskItem')    
+    taskItem.appendTo($('.tasks:last'))
+    taskItem.addClass("done")
+    taskItem.find('.taskItem-checkboxWrapper').remove()
+    $('.tasks:last .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
+  });
+
+  $('.tasks:last').on("click", '.taskItem-checkboxWrapper', function (e) {
+    e.stopPropagation()
+    const taskItem = $(this).parents('.taskItem')
+    taskItem.appendTo($('.tasks:first'))
+    taskItem.removeClass("done")
+    taskItem.find('.taskItem-checkboxWrapper').remove()
+    $('.tasks:first .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
+  })
 });
