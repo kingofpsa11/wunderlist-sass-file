@@ -26,13 +26,14 @@ $(document).ready(function () {
 
   //Add more task
   $('.addTask-input.chromeless').on("keydown", function (e) {
-      if (e.keyCode == 13) {            
-          const child = $('.taskItem:first').clone()
-          child.removeClass('selected')
-          $('.tasks:first').prepend(child)
-          child.find('.taskItem-titleWrapper').text($(this).val())
-          child.find('.taskItem-duedate').text('')
-          $(this).val('')
+      if (e.keyCode == 13) {
+        const child = $('.taskItem:first').clone()
+        child.removeClass('selected')
+        $('.tasks:first').prepend(child)
+        child.find('.taskItem-titleWrapper').text($(this).val())
+        child.find('.taskItem-duedate').text('')        
+        $.post("tasks.php", {task:$(this).val()});        
+        $(this).val('')
       }
   });
 
@@ -52,6 +53,18 @@ $(document).ready(function () {
   //Double task to display detail of task
   $('.tasks').on('dblclick', '.taskItem', function (e) {
     $('#detail').show()
+    const detail = $('#detail')
+    const detail_date = detail.find('.detail-date .section-title')
+    let id = $(this).attr("rel")
+    id = parseInt(id);
+    console.log(typeof id)
+    $.get("tasks.php", {id:12},
+      function (data, textStatus, jqXHR) {
+        // detail_date.text(data)        
+        console.log(data)
+      },
+      "html"
+    );
   })
 
   //Hide detail of task
@@ -103,4 +116,5 @@ $(document).ready(function () {
     taskItem.find('.taskItem-checkboxWrapper').remove()
     $('.tasks:first .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
   })
+
 });

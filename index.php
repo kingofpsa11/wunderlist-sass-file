@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -551,7 +554,7 @@
                         <a class="groupHeader">Inbox</a>
                     </h2>
                     <ol class="tasks">
-                        <li class="taskItem">
+                        <li class="taskItem" rel="1">
                             <div class="taskItem-body">
                                 <a class="taskItem-checkboxWrapper">
                                     <span>
