@@ -1,27 +1,40 @@
 $(document).ready(function () {
+
+  //Load item in inbox
+  $.get("tasks.php", {inbox:'inbox'},
+    function (data, textStatus, jqXHR) {
+      let content = data.split("---")
+      $('.tasks:first').html(content[0])
+      $('[rel="inbox"] .overdue-count').text(content[3])
+      $('.tasks:last').html(content[2])
+      $('[rel="inbox"] .count').text(content[1])
+    },
+    "html"
+  );
+
   //Display user settings
   $('.user').click(function (e) { 
-      e.preventDefault();
-      $('#user-popover').toggle();
+    e.preventDefault();
+    $('#user-popover').toggle();
   });
 
   //Display modal
   $('#account-settings').click(function (e) { 
-      e.preventDefault();
-      $('#modal').show();
-      $('#user-popover').hide();
+    e.preventDefault();
+    $('#modal').show();
+    $('#user-popover').hide();
   });
 
   //Click button Done hide modal
   $('button.full').click(function (e) { 
-      e.preventDefault();
-      $('#modal').hide();
+    e.preventDefault();
+    $('#modal').hide();
   });
 
   //Display more tab
   $('.tab.last-tab').click(function (e) { 
-      e.preventDefault();        
-      $('.actionBar-top').toggleClass('show');
+    e.preventDefault();        
+    $('.actionBar-top').toggleClass('show');
   });
 
   //Add more task
@@ -32,7 +45,7 @@ $(document).ready(function () {
         $('.tasks:first').prepend(child)
         child.find('.taskItem-titleWrapper').text($(this).val())
         child.find('.taskItem-duedate').text('')        
-        $.post("tasks.php", {task:$(this).val()});        
+        $.post("tasks.php", {task:$(this).val()});
         $(this).val('')
       }
   });
@@ -56,14 +69,12 @@ $(document).ready(function () {
     const detail = $('#detail')
     const detail_date = detail.find('.detail-date .section-title')
     let id = $(this).attr("rel")
-    id = parseInt(id);
-    console.log(typeof id)
-    $.get("tasks.php", {id:12},
+    $.get("tasks.php", {id:id},
       function (data, textStatus, jqXHR) {
-        // detail_date.text(data)        
+        // detail_date.text(data)
         console.log(data)
       },
-      "html"
+      "text"
     );
   })
 
