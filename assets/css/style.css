@@ -290,7 +290,8 @@
             align-items: center;
             margin-top: 3px; }
             .background-06 .main-interface .navigation .lists-inner #user-toolbar .stream-counts a {
-              padding: 0 10px; }
+              padding: 0 10px;
+              fill: #737272; }
         .background-06 .main-interface .navigation .lists-inner .lists-scroll {
           display: flex;
           flex-direction: column;
@@ -580,10 +581,12 @@
               display: flex; }
             .background-06 .main-interface #detail .inner .body .section-item .section-attachments svg {
               fill: #737272; }
-          .background-06 .main-interface #detail .inner .body .overdue .section-icon {
-            fill: #b3312d; }
-          .background-06 .main-interface #detail .inner .body .overdue .section-title {
-            color: #b3312d; }
+            .background-06 .main-interface #detail .inner .body .section-item.date .section-title {
+              color: #328ad6; }
+            .background-06 .main-interface #detail .inner .body .section-item.date.overdue .section-icon {
+              fill: #b3312d; }
+            .background-06 .main-interface #detail .inner .body .section-item.date.overdue .section-title {
+              color: #b3312d; }
         .background-06 .main-interface #detail .inner .bottom {
           position: relative; }
           .background-06 .main-interface #detail .inner .bottom .detail-close {

@@ -382,6 +382,10 @@ $overdue-color: #b3312d;
                         margin-top: 3px;
                         a{
                             padding: 0 10px;
+                            fill: #737272;
+                            // svg{
+                            //     fill: #737272;
+                            // }
                         }
                     }
                 }
@@ -772,15 +776,20 @@ $overdue-color: #b3312d;
                         .section-attachments svg{
                             fill: #737272;
                         }
-                    }
-                    .overdue{
-                        .section-icon{
-                            fill: $overdue-color;
+                        &.date{
+                            .section-title{
+                                color: #328ad6;
+                            }
                         }
-                        .section-title{
-                            color: $overdue-color;
+                        &.date.overdue{
+                            .section-icon{
+                                fill: $overdue-color;
+                            }
+                            .section-title{
+                                color: $overdue-color;
+                            }
                         }
-                    }
+                    }                    
                 }
                 .bottom{
                     position: relative;

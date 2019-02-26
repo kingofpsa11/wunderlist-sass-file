@@ -5,13 +5,14 @@ $(document).ready(function () {
     function (data, textStatus, jqXHR) {
       let content = data.split("---")
       $('.tasks:first').html(content[0])
-      $('[rel="inbox"] .overdue-count').text(content[3])
       $('.tasks:last').html(content[2])
+
+      $('[rel="inbox"] .overdue-count').text(content[3])
       $('[rel="inbox"] .count').text(content[1])
     },
     "html"
   );
-
+  
   //Display user settings
   $('.user').click(function (e) { 
     e.preventDefault();
@@ -71,10 +72,37 @@ $(document).ready(function () {
     let id = $(this).attr("rel")
     $.get("tasks.php", {id:id},
       function (data, textStatus, jqXHR) {
-        // detail_date.text(data)
-        console.log(data)
+        $('#detail .display-view:first-child').text(data['title'])
+
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+        
+        let detail_date = new Date(data['detail_date'])
+        let day = days[detail_date.getDay()]
+        let month = months[detail_date.getMonth()]
+        let date = detail_date.getDate()
+        if (data['detail_date'] !== null) {
+          $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date  
+        }
+        if (detail_date.toDateString() < new Date().toDateString()) {
+          $('#detail .detail-date').addClass("overdue")
+        }
+
+        let reminder_date = new Date(data['detail_reminder_date'])
+        month = months[reminder_date.getMonth()]
+        let hour = reminder_date.getHours()
+        let minute = reminder_date.getMinutes()
+        day = days[reminder_date.getDay()]
+        date = reminder_date.getDate()
+        if (data['detail_reminder_date'] !== null) {
+          $('#detail .detail-reminder .section-title').text("Remind me at " + hour + ":" + minute)
+        $('#detail .detail-reminder .section-description').text(day + ", " + month + " "  + date)
+        }
+        if (reminder_date.getTime() < new Date().getTime()) {
+          $('#detail .detail-reminder').addClass("overdue")
+        }
       },
-      "text"
+      "json"
     );
   })
 
@@ -97,27 +125,50 @@ $(document).ready(function () {
     }
   });
 
-  //Change right click context
+  //Change right click context  
   $('.tasks').on('contextmenu', '.taskItem', function (e) {
-    e.preventDefault()    
+    e.preventDefault()
     const contextmenu = $('.context-menu')
     contextmenu.css({"left":e.clientX,"top":e.clientY})
     contextmenu.show()
+
+    //Check completed tasks
+    const taskItem = $(this)
+    contextmenu.on('click', '.context-menu-item:first',function (e) {
+      taskItem.appendTo($('.tasks:last'))
+      taskItem.addClass("done")
+      taskItem.find('.taskItem-checkboxWrapper').remove()
+      $('.tasks:last .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
+
+      let id = taskItem.attr("rel")
+      $.post("tasks.php", {rel_id_done:id})
+    });
   });
   $(window).on('click', function () {    
     const contextmenu = $('.context-menu')
     contextmenu.hide()
   });
 
+  //Click on context menu
+  $('.context-menu').on('click', '.context-menu-item:first', function (e) { 
+    e.preventDefault()
+
+  });
+
   //Check completed tasks
   $('.tasks:first').on("click", '.taskItem-checkboxWrapper', function (e) {
-    e.stopPropagation()
+    e.preventDefault()
     const taskItem = $(this).parents('.taskItem')    
     taskItem.appendTo($('.tasks:last'))
     taskItem.addClass("done")
     taskItem.find('.taskItem-checkboxWrapper').remove()
     $('.tasks:last .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
+
+    let id = taskItem.attr("rel")
+    $.post("tasks.php", {rel_id_done:id})
   });
+
+  
 
   $('.tasks:last').on("click", '.taskItem-checkboxWrapper', function (e) {
     e.stopPropagation()
@@ -126,6 +177,9 @@ $(document).ready(function () {
     taskItem.removeClass("done")
     taskItem.find('.taskItem-checkboxWrapper').remove()
     $('.tasks:first .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
+
+    let id = taskItem.attr("rel")
+    $.post("tasks.php", {rel_id_doing:id});
   })
 
 });

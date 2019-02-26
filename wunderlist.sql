@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 21, 2019 at 11:07 AM
+-- Generation Time: Feb 26, 2019 at 11:05 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -41,11 +41,11 @@ CREATE TABLE `lists` (
 
 CREATE TABLE `tasks` (
   `id` int(11) UNSIGNED NOT NULL,
-  `task` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `id_list` int(11) DEFAULT NULL,
-  `overdue` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `detail_date` date NOT NULL,
-  `detail_remider_date` date NOT NULL,
+  `status` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `detail_date` date DEFAULT NULL,
+  `detail_reminder_date` datetime DEFAULT NULL,
   `note` text COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -53,9 +53,18 @@ CREATE TABLE `tasks` (
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `task`, `id_list`, `overdue`, `detail_date`, `detail_remider_date`, `note`) VALUES
-(5, 'HÃ´m nay', NULL, 'doing', '0000-00-00', '0000-00-00', ''),
-(6, 'HÃ´m nay', NULL, 'doing', '0000-00-00', '0000-00-00', '');
+INSERT INTO `tasks` (`id`, `title`, `id_list`, `status`, `detail_date`, `detail_reminder_date`, `note`) VALUES
+(1, 'Today', NULL, 'doing', '0000-00-00', '0000-00-00 00:00:00', ''),
+(2, 'Yesterday', NULL, 'doing', '0000-00-00', '0000-00-00 00:00:00', ''),
+(3, 'Today', NULL, 'doing', '0000-00-00', '0000-00-00 00:00:00', ''),
+(4, 'Today', NULL, 'done', '0000-00-00', '0000-00-00 00:00:00', ''),
+(5, 'Today', NULL, 'done', '0000-00-00', '0000-00-00 00:00:00', ''),
+(6, 'Title', NULL, 'done', '2019-02-25', '2019-02-26 06:31:00', ''),
+(7, 'Today', NULL, 'doing', '0000-00-00', '0000-00-00 00:00:00', ''),
+(8, 'Tomorrow', NULL, 'done', '0000-00-00', '0000-00-00 00:00:00', ''),
+(9, 'Hom nay', NULL, 'done', '0000-00-00', '0000-00-00 00:00:00', ''),
+(10, 'Tasks', NULL, 'doing', '0000-00-00', '0000-00-00 00:00:00', ''),
+(11, 'Today', NULL, 'doing', NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -115,13 +124,13 @@ ALTER TABLE `lists`
 -- AUTO_INCREMENT for table `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

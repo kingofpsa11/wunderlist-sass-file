@@ -13,15 +13,26 @@ if (isset($_POST['task'])) {
 
 if (isset($_GET['id'])) {
     include('connection.php');
-    $sql = "SELECT detail_date FROM tasks WHERE id=" . $_GET['id'];
+    $sql = "SELECT * FROM tasks WHERE id=" . $_GET['id'];    
     $result = $conn->query($sql);
-    while($row = $result->fetch_assoc()) {
-        echo $row['detail_date'];
+    while($row = $result->fetch_object()) {
+        echo json_encode($row);
     };
-}
+    $conn->close();
+}    
 
 if (isset($_GET['inbox'])) {
     $tasks = new TasksClass();
     $tasks->getAllTasks();
+}
+
+if (isset($_POST['rel_id_done'])) {
+    $task = new TasksClass();
+    $task->markComplete($_POST['rel_id_done']);
+}
+
+if (isset($_POST['rel_id_doing'])) {
+    $task = new TasksClass();
+    $task->markNotComplete($_POST['rel_id_doing']);
 }
 ?>
