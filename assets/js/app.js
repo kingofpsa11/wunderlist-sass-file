@@ -1,6 +1,5 @@
 $(document).ready(function () {
-
-  //Load item in inbox
+  
   $.get("tasks.php", {inbox:'inbox'},
     function (data, textStatus, jqXHR) {
       let content = data.split("---")
@@ -64,7 +63,7 @@ $(document).ready(function () {
     }
   });
 
-  //Double task to display detail of task
+  //Double click task to display detail of task
   $('.tasks').on('dblclick', '.taskItem', function (e) {
     $('#detail').show()
     const detail = $('#detail')
@@ -72,6 +71,8 @@ $(document).ready(function () {
     let id = $(this).attr("rel")
     $.get("tasks.php", {id:id},
       function (data, textStatus, jqXHR) {
+        let detail_date_el = $('#detail .detail-date')
+
         $('#detail .display-view:first-child').text(data['title'])
 
         let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -81,13 +82,25 @@ $(document).ready(function () {
         let day = days[detail_date.getDay()]
         let month = months[detail_date.getMonth()]
         let date = detail_date.getDate()
+
         if (data['detail_date'] !== null) {
-          $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date  
-        }
-        if (detail_date.toDateString() < new Date().toDateString()) {
-          $('#detail .detail-date').addClass("overdue")
+          $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date
+          detail_date_el.addClass("date")
+        } else {
+          $('#detail .detail-date .section-title').contents().first()[0].textContent = "Set due date"
+          if (detail_date_el.hasClass("date")) {
+            detail_date_el.removeClass("date")
+            if(detail_date_el.hasClass("overdue")){
+              detail_date_el.removeClass("overdue")
+            }
+          }
         }
 
+        if (detail_date.toDateString() < new Date().toDateString()) {
+          detail_date_el.addClass("overdue")
+        }
+
+        let detail_reminder_el = $('#detail .detail-reminder')
         let reminder_date = new Date(data['detail_reminder_date'])
         month = months[reminder_date.getMonth()]
         let hour = reminder_date.getHours()
@@ -96,7 +109,17 @@ $(document).ready(function () {
         date = reminder_date.getDate()
         if (data['detail_reminder_date'] !== null) {
           $('#detail .detail-reminder .section-title').text("Remind me at " + hour + ":" + minute)
-        $('#detail .detail-reminder .section-description').text(day + ", " + month + " "  + date)
+          $('#detail .detail-reminder .section-description').text(day + ", " + month + " "  + date)
+          detail_reminder_el.addClass("date")
+        } else {
+          $('#detail .detail-reminder .section-title').text("Remind me")
+          $('#detail .detail-reminder .section-description').text('')
+          if (detail_reminder_el.hasClass("date")) {
+            detail_reminder_el.removeClass("date")
+            if(detail_reminder_el.hasClass("overdue")){
+              detail_reminder_el.removeClass("overdue")
+            }
+          }
         }
         if (reminder_date.getTime() < new Date().getTime()) {
           $('#detail .detail-reminder').addClass("overdue")
@@ -166,9 +189,7 @@ $(document).ready(function () {
 
     let id = taskItem.attr("rel")
     $.post("tasks.php", {rel_id_done:id})
-  });
-
-  
+  });  
 
   $('.tasks:last').on("click", '.taskItem-checkboxWrapper', function (e) {
     e.stopPropagation()
@@ -181,5 +202,57 @@ $(document).ready(function () {
     let id = taskItem.attr("rel")
     $.post("tasks.php", {rel_id_doing:id});
   })
+
+  //Click active sidebarItem
+  $('.lists-scroll').on('click', '.sidebarItem',function () {
+    if (!$(this).is('.sidebarItem.active')) {
+      $('.sidebarItem.active').removeClass('active')
+      $(this).addClass('active')
+    }
+  });
+
+  //Date picker detail_date
+  $('.detail-date').on('click', function () {
+    $('.detail-date-input').datepicker({
+      showButtonPanel: true,
+      onSelect: function () {
+        let detail_date = $(this).datepicker("getDate")
+        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+        
+        let detail_date_el = $('#detail .detail-date')
+        let day = days[detail_date.getDay()]
+        let month = months[detail_date.getMonth()]
+        let date = detail_date.getDate()
+        
+        $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date
+        detail_date_el.addClass("date")
+
+        let now = new Date()
+        if (detail_date.getFullYear() < now.getFullYear()) {
+          detail_date_el.addClass("overdue")
+        } else if (detail_date.getFullYear() == now.getFullYear()) {
+          if (detail_date.getMonth() < now.getMonth()) {
+            detail_date_el.addClass("overdue")
+          } else if (detail_date.getMonth() == now.getMonth()) {
+            if (detail_date.getDate() < now.getDate()) {
+              detail_date_el.addClass("overdue")
+            } else {
+              detail_date_el.removeClass("overdue")
+              if (detail_date.getDate() == now.getDate()) {
+                $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due Today"
+              }
+            }
+          } else {
+            detail_date_el.removeClass("overdue")
+          }
+        } else {
+          detail_date_el.removeClass("overdue")
+        }
+        
+       }
+    });
+    $('.detail-date-input').show().focus().hide();
+  });
 
 });

@@ -418,9 +418,9 @@ $overdue-color: #b3312d;
                             padding-left: 6px;
                             padding-right: 6px;  
                         }
-                    }                 
+                    }
                     .filter-collection{
-                        .sidebarItem{                            
+                        .sidebarItem{
                             a{
                                 .list-icon{
                                     svg.inbox{
@@ -449,11 +449,31 @@ $overdue-color: #b3312d;
                                     padding-right: 4px;
                                 }
                             }
+                            &.active{
+                                background: #e0eefa;
+                                .overdue-count{
+                                    color: #fafafa;
+                                    background: rgba(215,78,72,0.8);
+                                }
+                                .count{
+                                    color: rgba(38,38,38,0.75);
+                                }
+                            }
                         }
                     }
                     .lists-collection{
                         svg{
                             fill: #b9b9b9;
+                        }
+                        .active{
+                            background: #e0eefa;
+                            .overdue-count{
+                                color: #fafafa;
+                                background: rgba(215,78,72,0.8);
+                            }
+                            .count{
+                                color: rgba(38,38,38,0.75);
+                            }
                         }
                     }
                 }
@@ -694,6 +714,8 @@ $overdue-color: #b3312d;
                             position: absolute;
                             top: 18px;
                             left: 18px;
+                            cursor: pointer;
+                            z-index: 5;
                         }
                         &.detail-star{
                             .star-wrapper{
@@ -779,6 +801,9 @@ $overdue-color: #b3312d;
                         &.date{
                             .section-title{
                                 color: #328ad6;
+                            }
+                            .section-icon{
+                                fill: #328ad6;
                             }
                         }
                         &.date.overdue{

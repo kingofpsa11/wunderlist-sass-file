@@ -336,8 +336,22 @@
             color: #bdbcbb;
             padding-left: 4px;
             padding-right: 4px; }
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem.active {
+            background: #e0eefa; }
+            .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem.active .overdue-count {
+              color: #fafafa;
+              background: rgba(215, 78, 72, 0.8); }
+            .background-06 .main-interface .navigation .lists-inner .lists-scroll .filter-collection .sidebarItem.active .count {
+              color: rgba(38, 38, 38, 0.75); }
           .background-06 .main-interface .navigation .lists-inner .lists-scroll .lists-collection svg {
             fill: #b9b9b9; }
+          .background-06 .main-interface .navigation .lists-inner .lists-scroll .lists-collection .active {
+            background: #e0eefa; }
+            .background-06 .main-interface .navigation .lists-inner .lists-scroll .lists-collection .active .overdue-count {
+              color: #fafafa;
+              background: rgba(215, 78, 72, 0.8); }
+            .background-06 .main-interface .navigation .lists-inner .lists-scroll .lists-collection .active .count {
+              color: rgba(38, 38, 38, 0.75); }
         .background-06 .main-interface .navigation .lists-inner .sidebarActions {
           border-top: 1px solid rgba(0, 0, 0, 0.1); }
           .background-06 .main-interface .navigation .lists-inner .sidebarActions .sidebarActions-addList {
@@ -522,7 +536,9 @@
           .background-06 .main-interface #detail .inner .top a.detail-checkbox {
             position: absolute;
             top: 18px;
-            left: 18px; }
+            left: 18px;
+            cursor: pointer;
+            z-index: 5; }
           .background-06 .main-interface #detail .inner .top a.detail-star .star-wrapper {
             position: absolute;
             height: 49px;
@@ -583,6 +599,8 @@
               fill: #737272; }
             .background-06 .main-interface #detail .inner .body .section-item.date .section-title {
               color: #328ad6; }
+            .background-06 .main-interface #detail .inner .body .section-item.date .section-icon {
+              fill: #328ad6; }
             .background-06 .main-interface #detail .inner .body .section-item.date.overdue .section-icon {
               fill: #b3312d; }
             .background-06 .main-interface #detail .inner .body .section-item.date.overdue .section-title {

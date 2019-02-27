@@ -5,6 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Launch localhost",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost/wunderlist-sass/",
+            "webRoot": "${workspaceFolder}"
+        },
+        {
             "name": "Listen for XDebug",
             "type": "php",
             "request": "launch",
