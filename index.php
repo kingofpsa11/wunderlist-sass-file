@@ -1,5 +1,31 @@
 <?php
 session_start();
+$_SESSION['database']['Task1'] = [
+    'title' => 'Task1',
+    'duedate' => '2019-02-26',
+    'reminder_date' => '2019-02-26 10:10:00'
+];
+$_SESSION['database']['Task2'] = [
+    'title' => 'Task2',
+    'duedate' => '2019-02-20',
+    'reminder_date' => '2019-02-20 10:10:00'
+];
+$_SESSION['database']['Task3'] = [
+    'title' => 'Task3',
+    'duedate' => '2019-02-27',
+    'reminder_date' => '2019-02-27 10:10:00'
+];
+$_SESSION['database']['Task4'] = [
+    'title' => 'Task4',
+    'duedate' => '2019-02-28',
+    'reminder_date' => '2019-02-28 10:10:00'
+];
+$_SESSION['database']['Task5'] = [
+    'title' => 'Task5',
+    'duedate' => '2019-01-28',
+    'reminder_date' => '2019-01-28 10:10:00'
+];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -546,7 +572,9 @@ session_start();
                             </g>
                         </svg>
                     </a>
-                    <input type="text" class="addTask-input chromeless" placeholder="Add a to-do...">
+                    <form action="tasks.php" method="post" name="frmTask">
+                        <input type="text" class="addTask-input chromeless" placeholder="Add a to-do..." name="addTask">
+                    </form>
                     <div class="nlp-feedback"></div>
                     <div class="positionHelper"></div>
                     <div class="end-positionHelper-target"></div>
@@ -556,7 +584,48 @@ session_start();
                     <!-- <h2 class="heading normal">
                         <a class="groupHeader">Inbox</a>
                     </h2> -->
-                    <ol class="tasks">                        
+                    <ol class="tasks">
+                        <?php
+                        if (isset($_SESSION['database'])) {
+                            foreach ($_SESSION['database'] as $value) {
+                        ?>
+                        <li class="taskItem <?php echo $_SESSION['click']['title'] == $value['title'] ? 'selected' : '' ; ?>" rel="php">
+                            <div class="taskItem-body">
+                                <a class="taskItem-checkboxWrapper">
+                                    <span>
+                                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                        width="20px" height="20px" viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;"
+                                        xml:space="preserve">
+                                        <g stroke="none" stroke-width="1" fill-rule="evenodd"> <g>
+                                            <g>
+                                                <path d="M377.87,24.126C361.786,8.042,342.417,0,319.769,0H82.227C59.579,0,40.211,8.042,24.125,24.126
+                                                    C8.044,40.212,0.002,59.576,0.002,82.228v237.543c0,22.647,8.042,42.014,24.123,58.101c16.086,16.085,35.454,24.127,58.102,24.127
+                                                    h237.542c22.648,0,42.011-8.042,58.102-24.127c16.085-16.087,24.126-35.453,24.126-58.101V82.228
+                                                    C401.993,59.58,393.951,40.212,377.87,24.126z M365.448,319.771c0,12.559-4.47,23.314-13.415,32.264
+                                                    c-8.945,8.945-19.698,13.411-32.265,13.411H82.227c-12.563,0-23.317-4.466-32.264-13.411c-8.945-8.949-13.418-19.705-13.418-32.264
+                                                    V82.228c0-12.562,4.473-23.316,13.418-32.264c8.947-8.946,19.701-13.418,32.264-13.418h237.542
+                                                    c12.566,0,23.319,4.473,32.265,13.418c8.945,8.947,13.415,19.701,13.415,32.264V319.771L365.448,319.771z"/>
+                                            </g>
+
+                                    </svg>
+                                    </span>
+                                </a>
+                                <div class="taskItem-titleWrapper"><?php echo $value['title'] ?></div>
+                                <span class="taskItem-duedate overdue"><?php echo $value['duedate'] ?></span>
+                                <form action="tasks.php" method="post" name="<?php echo "frm" . $value['title'] ?>">
+                                    <input type="hidden" name="taskItem" value="<?php echo $value['title'] ?>">
+                                </form>
+                                <a class="taskItem-star">
+                                    <span>
+                                        <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"> <g> <path d="M3.74,18 C3.64,18 3.54,17.96 3.46,17.9 C3.28,17.76 3.2,17.54 3.28,17.34 L5.16,11.5 L0.2,7.9 C0.04,7.78 -0.04,7.56 0.02,7.34 C0.1,7.14 0.28,7 0.5,7 L6.64,7 L8.52,1.16 C8.66,0.76 9.34,0.76 9.48,1.16 L11.38,7 L17.5,7 C17.72,7 17.9,7.14 17.98,7.34 C18.04,7.56 17.96,7.78 17.8,7.9 L12.84,11.5 L14.72,17.34 C14.8,17.54 14.72,17.76 14.54,17.9 C14.38,18.02 14.14,18.02 13.96,17.9 L9,14.3 L4.04,17.9 C3.96,17.96 3.84,18 3.74,18 L3.74,18 Z M9,13.18 C9.1,13.18 9.2,13.2 9.3,13.28 L13.3,16.18 L11.78,11.46 C11.7,11.26 11.78,11.04 11.96,10.92 L15.96,8 L11,8 C10.8,8 10.6,7.86 10.54,7.66 L9,2.94 L7.46,7.66 C7.4,7.86 7.22,8 7,8 L2.04,8 L6.04,10.92 C6.22,11.04 6.3,11.26 6.22,11.46 L4.7,16.18 L8.7,13.28 C8.8,13.2 8.9,13.18 9,13.18 L9,13.18 Z"></path> </g> </svg>
+                                    </span>
+                                </a>
+                            </div>
+                        </li>
+                        <?php
+                            }
+                        }
+                        ?>
                     </ol>
                     <h2 class="heading normal">
                         <a class="groupHeader">Show completed to-dos</a>
@@ -567,7 +636,7 @@ session_start();
             </div>
         </div>
 
-        <div id="detail" class="animated">
+        <div id="detail" class="animated" style="display:<?php echo (isset($_SESSION['click']) ? 'block' : 'none') ; ?>">
             <div class="inner">
                 <div class="top">
                     <a class="detail-checkbox checkBox">
@@ -608,7 +677,7 @@ session_start();
                             <span class="title-text">
                                 <div class="content-fakable">
                                     <div class="display-view">
-                                        <span></span>
+                                        <span><?php echo $_SESSION['click']['title'] ?></span>
                                     </div>
                                     <div class="edit-view hidden">
                                         <div class="expandingArea active">
@@ -628,7 +697,7 @@ session_start();
                         </div>
                         <div class="section-content">
                             <div class="section-title">
-                                Set due date
+                            <?php echo $_SESSION['click']['duedate'] ?>
                                 <div class="section-description"></div>
                             </div>
                             <input type="text" class="detail-date-input" style="display:none;" value="">
@@ -650,7 +719,7 @@ session_start();
                         </div>
                         <div class="section-content">
                             <div class="section-title repeat">
-                                <text rel="placeholder_remind_me">Remind me</text>
+                            <?php echo $_SESSION['click']['reminder_date'] ?>
                             </div>
                             <div class="section-description repeat"></div>
                         </div>

@@ -1,6 +1,8 @@
 <?php
 include 'classTask.php';
 
+session_start();
+
 use TasksClass\TasksClass;
 
 //add Title for task
@@ -34,5 +36,19 @@ if (isset($_POST['rel_id_done'])) {
 if (isset($_POST['rel_id_doing'])) {
     $task = new TasksClass();
     $task->markNotComplete($_POST['rel_id_doing']);
+}
+
+if (isset($_POST['addTask'])) {
+    $task = new TasksClass();
+    $title = $_POST['addTask'];
+    $task->addTasks($title);
+    header("Location:index.php");
+}
+
+if (isset($_POST['taskItem'])) {
+    $task = new TasksClass();
+    $title = $_POST['taskItem'];
+    $task->detailTask($title);
+    header("Location:index.php");
 }
 ?>

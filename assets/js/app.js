@@ -1,17 +1,5 @@
 $(document).ready(function () {
-  
-  $.get("tasks.php", {inbox:'inbox'},
-    function (data, textStatus, jqXHR) {
-      let content = data.split("---")
-      $('.tasks:first').html(content[0])
-      $('.tasks:last').html(content[2])
-
-      $('[rel="inbox"] .overdue-count').text(content[3])
-      $('[rel="inbox"] .count').text(content[1])
-    },
-    "html"
-  );
-  
+    
   //Display user settings
   $('.user').click(function (e) { 
     e.preventDefault();
@@ -41,12 +29,12 @@ $(document).ready(function () {
   $('.addTask-input.chromeless').on("keydown", function (e) {
       if (e.keyCode == 13) {
         const child = $('.taskItem:first').clone()
+
         child.removeClass('selected')
         $('.tasks:first').prepend(child)
         child.find('.taskItem-titleWrapper').text($(this).val())
         child.find('.taskItem-duedate').text('')        
-        $.post("tasks.php", {task:$(this).val()});
-        $(this).val('')
+        $('form[name="frmTask"]').submit()
       }
   });
 
@@ -56,78 +44,74 @@ $(document).ready(function () {
   })
 
   //Selected task    
-  $('.tasks').on('click', '.taskItem', function () {      
+  $('.tasks').one('click', '.taskItem', function () {      
     if (!$(this).is('.taskItem.selected')) {
       $('.taskItem.selected').removeClass('selected')
       $(this).addClass('selected')
     }
+    $(this).find('form').submit()
   });
 
   //Double click task to display detail of task
-  $('.tasks').on('dblclick', '.taskItem', function (e) {
-    $('#detail').show()
-    const detail = $('#detail')
-    const detail_date = detail.find('.detail-date .section-title')
-    let id = $(this).attr("rel")
-    $.get("tasks.php", {id:id},
-      function (data, textStatus, jqXHR) {
-        let detail_date_el = $('#detail .detail-date')
+  // $('.tasks').on('dblclick', '.taskItem', function (e) {
+  //   $('#detail').show()
+    // const detail = $('#detail')
+    // const detail_date = detail.find('.detail-date .section-title')
+    
+    // let detail_date_el = $('#detail .detail-date')
 
-        $('#detail .display-view:first-child').text(data['title'])
+    // $('#detail .display-view:first-child').text()
 
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-        
-        let detail_date = new Date(data['detail_date'])
-        let day = days[detail_date.getDay()]
-        let month = months[detail_date.getMonth()]
-        let date = detail_date.getDate()
+    // let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    // let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+    
+    // let detail_date = new Date(data['detail_date'])
+    // let day = days[detail_date.getDay()]
+    // let month = months[detail_date.getMonth()]
+    // let date = detail_date.getDate()
 
-        if (data['detail_date'] !== null) {
-          $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date
-          detail_date_el.addClass("date")
-        } else {
-          $('#detail .detail-date .section-title').contents().first()[0].textContent = "Set due date"
-          if (detail_date_el.hasClass("date")) {
-            detail_date_el.removeClass("date")
-            if(detail_date_el.hasClass("overdue")){
-              detail_date_el.removeClass("overdue")
-            }
-          }
-        }
+    // if (data['detail_date'] !== null) {
+    //   $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date
+    //   detail_date_el.addClass("date")
+    // } else {
+    //   $('#detail .detail-date .section-title').contents().first()[0].textContent = "Set due date"
+    //   if (detail_date_el.hasClass("date")) {
+    //     detail_date_el.removeClass("date")
+    //     if(detail_date_el.hasClass("overdue")){
+    //       detail_date_el.removeClass("overdue")
+    //     }
+    //   }
+    // }
 
-        if (detail_date.toDateString() < new Date().toDateString()) {
-          detail_date_el.addClass("overdue")
-        }
+    // if (detail_date.toDateString() < new Date().toDateString()) {
+    //   detail_date_el.addClass("overdue")
+    // }
 
-        let detail_reminder_el = $('#detail .detail-reminder')
-        let reminder_date = new Date(data['detail_reminder_date'])
-        month = months[reminder_date.getMonth()]
-        let hour = reminder_date.getHours()
-        let minute = reminder_date.getMinutes()
-        day = days[reminder_date.getDay()]
-        date = reminder_date.getDate()
-        if (data['detail_reminder_date'] !== null) {
-          $('#detail .detail-reminder .section-title').text("Remind me at " + hour + ":" + minute)
-          $('#detail .detail-reminder .section-description').text(day + ", " + month + " "  + date)
-          detail_reminder_el.addClass("date")
-        } else {
-          $('#detail .detail-reminder .section-title').text("Remind me")
-          $('#detail .detail-reminder .section-description').text('')
-          if (detail_reminder_el.hasClass("date")) {
-            detail_reminder_el.removeClass("date")
-            if(detail_reminder_el.hasClass("overdue")){
-              detail_reminder_el.removeClass("overdue")
-            }
-          }
-        }
-        if (reminder_date.getTime() < new Date().getTime()) {
-          $('#detail .detail-reminder').addClass("overdue")
-        }
-      },
-      "json"
-    );
-  })
+    // let detail_reminder_el = $('#detail .detail-reminder')
+    // let reminder_date = new Date(data['detail_reminder_date'])
+    // month = months[reminder_date.getMonth()]
+    // let hour = reminder_date.getHours()
+    // let minute = reminder_date.getMinutes()
+    // day = days[reminder_date.getDay()]
+    // date = reminder_date.getDate()
+    // if (data['detail_reminder_date'] !== null) {
+    //   $('#detail .detail-reminder .section-title').text("Remind me at " + hour + ":" + minute)
+    //   $('#detail .detail-reminder .section-description').text(day + ", " + month + " "  + date)
+    //   detail_reminder_el.addClass("date")
+    // } else {
+    //   $('#detail .detail-reminder .section-title').text("Remind me")
+    //   $('#detail .detail-reminder .section-description').text('')
+    //   if (detail_reminder_el.hasClass("date")) {
+    //     detail_reminder_el.removeClass("date")
+    //     if(detail_reminder_el.hasClass("overdue")){
+    //       detail_reminder_el.removeClass("overdue")
+    //     }
+    //   }
+    // }
+    // if (reminder_date.getTime() < new Date().getTime()) {
+    //   $('#detail .detail-reminder').addClass("overdue")
+    // }
+  // })
 
   //Hide detail of task
   $('.detail-close').click(function (e) { 
