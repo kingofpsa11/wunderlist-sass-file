@@ -45,10 +45,10 @@ $(document).ready(function () {
 
   //Selected task    
   $('.tasks').one('click', '.taskItem', function () {      
-    if (!$(this).is('.taskItem.selected')) {
-      $('.taskItem.selected').removeClass('selected')
-      $(this).addClass('selected')
-    }
+    // if (!$(this).is('.taskItem.selected')) {
+    //   $('.taskItem.selected').removeClass('selected')
+    //   $(this).addClass('selected')
+    // }
     $(this).find('form').submit()
   });
 

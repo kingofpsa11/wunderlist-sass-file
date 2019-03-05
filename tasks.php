@@ -45,10 +45,10 @@ if (isset($_POST['addTask'])) {
     header("Location:index.php");
 }
 
-if (isset($_POST['taskItem'])) {
+if (isset($_GET['id'])) {
     $task = new TasksClass();
-    $title = $_POST['taskItem'];
+    $title = $_GET['id'];
     $task->detailTask($title);
-    header("Location:index.php");
+    header("Location:index.php?id=" . $_SESSION['click']['id']);
 }
 ?>

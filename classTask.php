@@ -23,9 +23,9 @@ class TasksClass
         $_SESSION['database'][$title] = ['title' => $title, 'duedate' => '', 'reminder_date' => ''];
     }
 
-    public function detailTask($title)
+    public function detailTask($id)
     {
-        $_SESSION['click'] = $_SESSION['database'][$title];
+        $_SESSION['click'] = $_SESSION['database'][$id];
     }
 
     public function markComplete($id)
