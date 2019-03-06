@@ -1,51 +1,25 @@
 <?php
-namespace TasksClass;
+namespace DatabaseClass;
 
-class TasksClass
-{
-    public $id;
-    public $title;
-    public $detail_date;
-    public $detail_reminder;
-    public $subtasks_id;
-    public $note;
-    public $list_id;
-
-    public function getAllTasks()
-    {
-        
-    }
-
+class DatabaseClass
+{    
     public function addTasks($title)
     {
-        
-        $_SESSION['database'][$title] = ['title' => $title, 'duedate' => '', 'reminder_date' => ''];
+        $id = count($_SESSION['database']) + 1;
+        $_SESSION['database'][$id] = ['id' => $id, 'title' => $title, 'duedate' => '', 'reminder_date' => '', 'status' => 1];
     }
     
-
     public function markComplete($id, $status)
     {   
         if ($status == '1' ) {
             $value = $_SESSION['database'][$id]['status'];
             $_SESSION['database'][$id]['status'] = 0;
-            var_dump($_SESSION);
-            $_SESSION['abc'] = 'abc';
         } else {
             $_SESSION['database'][$id]['status'] = 1;
         }
-        
     }
 
-    public function markNotComplete($id)
-    {
-        include('connection.php');
-        $sql = "UPDATE tasks 
-                SET status='doing'
-                WHERE id=" . $id;
-        $conn->query($sql);
-        $conn->close();
-    }
-
+    // Save duedate to SESSION
     public function duedate($id, $duedate)
     {
         $_SESSION['database'][$id]['duedate'] = $duedate;

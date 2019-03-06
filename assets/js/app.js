@@ -159,6 +159,23 @@ $(document).ready(function () {
   let dateString = convertDate(detail_date)  
   $('#detail .detail-date .section-title').text("Due on " + dateString)
 
+  function convertDateToVn(timestamp) {
+    timestamp = new Date(timestamp*1000)
+    let dateString
+    let date = timestamp.getDate()
+    let month = timestamp.getMonth() + 1
+    let year = timestamp.getFullYear()
+
+    dateString = ("0" + date).slice(-2)   + '.' + ("0" + month).slice(-2) + '.' + year
+    return dateString
+  }
+
+  $('.taskItem-duedate').each(function () {
+    let date = $(this).text()
+    date = convertDateToVn(date)
+    $(this).text(date)
+  })
+  
   // if (detail_date.getFullYear() < now.getFullYear()) {
   //   detail_date_el.addClass("overdue")
   // } else if (detail_date.getFullYear() == now.getFullYear()) {
@@ -183,8 +200,8 @@ $(document).ready(function () {
   
   //Click to logout
   $('.logout').on('click', function (e) {
-    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+    document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     window.location.href = "http://localhost/wunderlist-sass-file/login.php"
   })
 });
