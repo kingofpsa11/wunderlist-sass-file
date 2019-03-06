@@ -43,6 +43,13 @@ $(document).ready(function () {
     $('.tasks:last').toggle();
   })
 
+  //Check completed tasks
+  $('.tasks').on("click", '.taskItem-checkboxWrapper', function (e) {    
+    e.stopPropagation()
+    // console.log($(this).find('form'))
+    $(this).find('form').submit()
+  });
+
   //Selected task    
   $('.tasks').one('click', '.taskItem', function () {      
     // if (!$(this).is('.taskItem.selected')) {
@@ -51,68 +58,7 @@ $(document).ready(function () {
     // }
     $(this).find('form').submit()
   });
-
-  //Double click task to display detail of task
-  // $('.tasks').on('dblclick', '.taskItem', function (e) {
-  //   $('#detail').show()
-    // const detail = $('#detail')
-    // const detail_date = detail.find('.detail-date .section-title')
-    
-    // let detail_date_el = $('#detail .detail-date')
-
-    // $('#detail .display-view:first-child').text()
-
-    // let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    // let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-    
-    // let detail_date = new Date(data['detail_date'])
-    // let day = days[detail_date.getDay()]
-    // let month = months[detail_date.getMonth()]
-    // let date = detail_date.getDate()
-
-    // if (data['detail_date'] !== null) {
-    //   $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date
-    //   detail_date_el.addClass("date")
-    // } else {
-    //   $('#detail .detail-date .section-title').contents().first()[0].textContent = "Set due date"
-    //   if (detail_date_el.hasClass("date")) {
-    //     detail_date_el.removeClass("date")
-    //     if(detail_date_el.hasClass("overdue")){
-    //       detail_date_el.removeClass("overdue")
-    //     }
-    //   }
-    // }
-
-    // if (detail_date.toDateString() < new Date().toDateString()) {
-    //   detail_date_el.addClass("overdue")
-    // }
-
-    // let detail_reminder_el = $('#detail .detail-reminder')
-    // let reminder_date = new Date(data['detail_reminder_date'])
-    // month = months[reminder_date.getMonth()]
-    // let hour = reminder_date.getHours()
-    // let minute = reminder_date.getMinutes()
-    // day = days[reminder_date.getDay()]
-    // date = reminder_date.getDate()
-    // if (data['detail_reminder_date'] !== null) {
-    //   $('#detail .detail-reminder .section-title').text("Remind me at " + hour + ":" + minute)
-    //   $('#detail .detail-reminder .section-description').text(day + ", " + month + " "  + date)
-    //   detail_reminder_el.addClass("date")
-    // } else {
-    //   $('#detail .detail-reminder .section-title').text("Remind me")
-    //   $('#detail .detail-reminder .section-description').text('')
-    //   if (detail_reminder_el.hasClass("date")) {
-    //     detail_reminder_el.removeClass("date")
-    //     if(detail_reminder_el.hasClass("overdue")){
-    //       detail_reminder_el.removeClass("overdue")
-    //     }
-    //   }
-    // }
-    // if (reminder_date.getTime() < new Date().getTime()) {
-    //   $('#detail .detail-reminder').addClass("overdue")
-    // }
-  // })
-
+  
   //Hide detail of task
   $('.detail-close').click(function (e) { 
     e.preventDefault()
@@ -162,18 +108,7 @@ $(document).ready(function () {
 
   });
 
-  //Check completed tasks
-  $('.tasks:first').on("click", '.taskItem-checkboxWrapper', function (e) {
-    e.preventDefault()
-    const taskItem = $(this).parents('.taskItem')    
-    taskItem.appendTo($('.tasks:last'))
-    taskItem.addClass("done")
-    taskItem.find('.taskItem-checkboxWrapper').remove()
-    $('.tasks:last .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
-
-    let id = taskItem.attr("rel")
-    $.post("tasks.php", {rel_id_done:id})
-  });  
+  
 
   $('.tasks:last').on("click", '.taskItem-checkboxWrapper', function (e) {
     e.stopPropagation()

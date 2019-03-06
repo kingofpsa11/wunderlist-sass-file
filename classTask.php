@@ -1,7 +1,6 @@
 <?php
 namespace TasksClass;
 
-
 class TasksClass
 {
     public $id;
@@ -22,20 +21,19 @@ class TasksClass
         
         $_SESSION['database'][$title] = ['title' => $title, 'duedate' => '', 'reminder_date' => ''];
     }
+    
 
-    public function detailTask($id)
-    {
-        $_SESSION['click'] = $_SESSION['database'][$id];
-    }
-
-    public function markComplete($id)
+    public function markComplete($id, $status)
     {   
-        include('connection.php');
-        $sql = "UPDATE tasks 
-                SET status='done'
-                WHERE id=" . $id;
-        $conn->query($sql);
-        $conn->close();
+        if ($status == '1' ) {
+            $value = $_SESSION['database'][$id]['status'];
+            $_SESSION['database'][$id]['status'] = 0;
+            var_dump($_SESSION);
+            $_SESSION['abc'] = 'abc';
+        } else {
+            $_SESSION['database'][$id]['status'] = 1;
+        }
+        
     }
 
     public function markNotComplete($id)
