@@ -20,11 +20,19 @@ if (isset($_GET['id'])) {
     header("Location:index.php?id=" . $_GET['id']);
 }
 
-if (isset($_POST['id'])) {
+if (isset($_POST['status'])) {
     $task = new TasksClass();
     $id = $_POST['id'];
     $status = $_POST['status'];
     $task->markComplete($id, $status);
     header("Location:index.php");
+}
+
+if (isset($_POST['duedate'])) {
+    $task = new TasksClass();
+    $duedate = $_POST['duedate'];
+    $id = $_POST['id'];
+    $task->duedate($id, $duedate);
+    header("Location:index.php?id=" . $_POST['id']);
 }
 ?>

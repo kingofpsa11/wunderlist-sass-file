@@ -1,1 +1,4 @@
-<?php echo ('display:' . isset($_SESSION['click']) ? 'block' : 'none') ; ?>
+<?php
+echo strtotime(time());
+echo time();
+?>

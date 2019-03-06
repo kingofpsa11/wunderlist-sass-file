@@ -46,6 +46,11 @@ class TasksClass
         $conn->close();
     }
 
+    public function duedate($id, $duedate)
+    {
+        $_SESSION['database'][$id]['duedate'] = $duedate;
+    }
+
     public function markStarred($id)
     {
 

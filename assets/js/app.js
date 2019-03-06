@@ -106,9 +106,7 @@ $(document).ready(function () {
   $('.context-menu').on('click', '.context-menu-item:first', function (e) { 
     e.preventDefault()
 
-  });
-
-  
+  }); 
 
   $('.tasks:last').on("click", '.taskItem-checkboxWrapper', function (e) {
     e.stopPropagation()
@@ -135,43 +133,58 @@ $(document).ready(function () {
     $('.detail-date-input').datepicker({
       showButtonPanel: true,
       onSelect: function () {
-        let detail_date = $(this).datepicker("getDate")
-        let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-        
-        let detail_date_el = $('#detail .detail-date')
-        let day = days[detail_date.getDay()]
-        let month = months[detail_date.getMonth()]
-        let date = detail_date.getDate()
-        
-        $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due on " + day + ", " + month + " " + date
-        detail_date_el.addClass("date")
-
-        let now = new Date()
-        if (detail_date.getFullYear() < now.getFullYear()) {
-          detail_date_el.addClass("overdue")
-        } else if (detail_date.getFullYear() == now.getFullYear()) {
-          if (detail_date.getMonth() < now.getMonth()) {
-            detail_date_el.addClass("overdue")
-          } else if (detail_date.getMonth() == now.getMonth()) {
-            if (detail_date.getDate() < now.getDate()) {
-              detail_date_el.addClass("overdue")
-            } else {
-              detail_date_el.removeClass("overdue")
-              if (detail_date.getDate() == now.getDate()) {
-                $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due Today"
-              }
-            }
-          } else {
-            detail_date_el.removeClass("overdue")
-          }
-        } else {
-          detail_date_el.removeClass("overdue")
-        }
-        
-       }
-    });
-    $('.detail-date-input').show().focus().hide();
+        let detail_date = $(this).datepicker("getDate").getTime()/1000
+        $('input[name="duedate"]').attr("value",detail_date)
+        $('form[name="frmDueDate"').submit()
+      }
+    })
+    $('.detail-date-input').show().focus().hide()
   });
 
+  function convertDate(timestamp) {
+    timestamp = new Date(timestamp*1000)
+    let dateString
+    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+    
+    let day = days[timestamp.getDay()]
+    let month = months[timestamp.getMonth()]
+    let date = timestamp.getDate()
+
+    dateString = day + ', ' + month + ' ' + date
+    return dateString;
+  }
+
+  let detail_date = $('#detail .detail-date .section-title').text()
+  let dateString = convertDate(detail_date)  
+  $('#detail .detail-date .section-title').text("Due on " + dateString)
+
+  // if (detail_date.getFullYear() < now.getFullYear()) {
+  //   detail_date_el.addClass("overdue")
+  // } else if (detail_date.getFullYear() == now.getFullYear()) {
+  //   if (detail_date.getMonth() < now.getMonth()) {
+  //     detail_date_el.addClass("overdue")
+  //   } else if (detail_date.getMonth() == now.getMonth()) {
+  //     if (detail_date.getDate() < now.getDate()) {
+  //       detail_date_el.addClass("overdue")
+  //     } else {
+  //       detail_date_el.removeClass("overdue")
+  //       if (detail_date.getDate() == now.getDate()) {
+  //         $('#detail .detail-date .section-title').contents().first()[0].textContent = "Due Today"
+  //       }
+  //     }
+  //   } else {
+  //     detail_date_el.removeClass("overdue")
+  //   }
+  // } else {
+  //   detail_date_el.removeClass("overdue")
+  // }
+  
+  
+  //Click to logout
+  $('.logout').on('click', function (e) {
+    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.href = "http://localhost/wunderlist-sass-file/login.php"
+  })
 });
