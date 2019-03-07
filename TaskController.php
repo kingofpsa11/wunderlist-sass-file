@@ -1,38 +1,72 @@
 <?php
-include 'classTask.php';
+namespace Controller;
 
-session_start();
+include 'Task.php';
 
-use TasksClass\TasksClass;
+use Model\Task;
 
-//add Title for task
+class TaskController
+{     
+    public $id;
+    public $title;
+    public $duedate;
+    public $reminder_date;
+    public $subtasks;
+    public $note;
+    public $file;
 
-if (isset($_POST['addTask'])) {
-    $task = new TasksClass();
-    $title = $_POST['addTask'];
-    $task->addTasks($title);
-    header("Location:index.php");
+    public function addTask()
+    {
+       
+    }
+    
+    public function changeStatus($id)
+    {   
+        $task = new Task();
+        $task = $task->getTaskById($id);
+
+    }
+
+    // Save duedate to SESSION
+    public function duedate($id, $duedate)
+    {
+        $_SESSION['database'][$id]['duedate'] = $duedate;
+    }
+
+    public function markStarred($id)
+    {
+
+    }
+    
+    public function dueToday($id)
+    {
+
+    }
+
+    public function dueTomorrow($id)
+    {
+        
+    }
+
+    public function removeDueDate($id)
+    {
+
+    }
+
+    public function moveTodoTo($id, $list_id)
+    {
+
+    }
+
+    public function copyTodo($id)
+    {
+
+    }
+
+    public function pasteTodo($id)
+    {
+
+    }
 }
 
-if (isset($_GET['id'])) {
-    $task = new TasksClass();
-    $title = $_GET['id'];    
-    header("Location:index.php?id=" . $_GET['id']);
-}
-
-if (isset($_POST['status'])) {
-    $task = new TasksClass();
-    $id = $_POST['id'];
-    $status = $_POST['status'];
-    $task->markComplete($id, $status);
-    header("Location:index.php");
-}
-
-if (isset($_POST['duedate'])) {
-    $task = new TasksClass();
-    $duedate = $_POST['duedate'];
-    $id = $_POST['id'];
-    $task->duedate($id, $duedate);
-    header("Location:index.php?id=" . $_POST['id']);
-}
 ?>

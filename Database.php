@@ -1,64 +1,45 @@
 <?php
-namespace DatabaseClass;
+namespace Database;
 
-class DatabaseClass
-{    
-    public function addTasks($title)
+class Database
+{
+    public $tasks;
+    public $lists;
+
+    public function __construct()
     {
-        $id = count($_SESSION['database']) + 1;
-        $_SESSION['database'][$id] = ['id' => $id, 'title' => $title, 'duedate' => '', 'reminder_date' => '', 'status' => 1];
-    }
-    
-    public function markComplete($id, $status)
-    {   
-        if ($status == '1' ) {
-            $value = $_SESSION['database'][$id]['status'];
-            $_SESSION['database'][$id]['status'] = 0;
-        } else {
-            $_SESSION['database'][$id]['status'] = 1;
+        if (isset($_SESSION['database']['tasks'])) {
+            $this->tasks = $_SESSION['database']['tasks'];    
         }
-    }
-
-    // Save duedate to SESSION
-    public function duedate($id, $duedate)
-    {
-        $_SESSION['database'][$id]['duedate'] = $duedate;
-    }
-
-    public function markStarred($id)
-    {
-
+        if (isset($_SESSION['database']['lists'])) {
+            $this->lists = $_SESSION['database']['lists'];    
+        }        
     }
     
-    public function dueToday($id)
+    public function addTask($title)
     {
-
+        $tasks = $this->tasks;
+        $count = count($tasks);
+        $id = $count + 1;
+        $task['id'] = strval($id);
+        $task['title'] = $title;
+        $task['duedate'] = '';
+        $task['reminder_date'] = '';
+        $task['status'] = 1;
+        $_SESSION['database']['tasks'][$id] = $task;
     }
 
-    public function dueTomorrow($id)
+    public function getTask($id)
     {
-        
+        $task = $this->tasks[$id];
+        return $task;
     }
 
-    public function removeDueDate($id)
+    public function saveTask($task)
     {
-
+        $_SESSION['database']['tasks'][$task['id']] = $task;
     }
 
-    public function moveTodoTo($id, $list_id)
-    {
-
-    }
-
-    public function copyTodo($id)
-    {
-
-    }
-
-    public function pasteTodo($id)
-    {
-
-    }
 }
 
 ?>

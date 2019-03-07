@@ -1,34 +1,37 @@
 <?php
 session_start();
-// $_SESSION['database']['1'] = [
+
+include 'Request.php';
+
+// $_SESSION['database']['tasks']['1'] = [
 //     'id' => '1',
 //     'title' => 'Task1',
 //     'duedate' => '2019-02-26',
 //     'reminder_date' => '2019-02-26 12:10:00',
 //     'status' => 1
 // ];
-// $_SESSION['database']['2'] = [
+// $_SESSION['database']['tasks']['2'] = [
 //     'id' => '2',
 //     'title' => 'Task2',
 //     'duedate' => '2019-02-20',
 //     'reminder_date' => '2019-02-20 11:10:00',
 //     'status' => 1
 // ];
-// $_SESSION['database']['3'] = [
+// $_SESSION['database']['tasks']['3'] = [
 //     'id' => '3',
 //     'title' => 'Task3',
 //     'duedate' => '2019-02-27',
 //     'reminder_date' => '2019-02-27 09:10:00',
 //     'status' => 1
 // ];
-// $_SESSION['database']['4'] = [
+// $_SESSION['database']['tasks']['4'] = [
 //     'id' => '4',
 //     'title' => 'Task4',
 //     'duedate' => '2019-02-28',
 //     'reminder_date' => '2019-02-28 08:10:00',
 //     'status' => 0
 // ];
-// $_SESSION['database']['5'] = [
+// $_SESSION['database']['tasks']['5'] = [
 //     'id' => '5',
 //     'title' => 'Task5',
 //     'duedate' => '2019-01-28',
@@ -37,7 +40,7 @@ session_start();
 // ];
 
 // session_destroy();
-    // var_dump($_SESSION);
+// var_dump($_SESSION['database']);
 // }
 if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
     header("Location:login.php");
@@ -588,8 +591,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                             </g>
                         </svg>
                     </a>
-                    <form action="tasks.php" method="post" name="frmTask">
-                        <input type="text" class="addTask-input chromeless" placeholder="Add a to-do..." name="addTask">
+                    <form action="index.php" method="post" name="frmTask">
+                        <input type="text" class="addTask-input chromeless" placeholder="Add a to-do..." name="addTask" >
                     </form>
                     <div class="nlp-feedback"></div>
                     <div class="positionHelper"></div>
@@ -602,8 +605,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                     </h2> -->
                     <ol class="tasks">
                         <?php
-                        if (isset($_SESSION['database'])) {
-                            foreach ($_SESSION['database'] as $value) {
+                        if (isset($_SESSION['database']['tasks'])) {
+                            foreach ($_SESSION['database']['tasks'] as $value) {
                                 if ($value['status'] == 1) {
                         ?>
                         <li class="taskItem 
@@ -631,7 +634,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
 
                                     </svg>
                                     </span>
-                                    <form action="tasks.php" method="post" name="<?php echo "frmDone" . $value['id'] ?>">
+                                    <form action="index.php" method="post" name="<?php echo "frmDone" . $value['id'] ?>">
                                         <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
                                         <input type="hidden" name="status" value="<?php echo $value['status'] ?>">
                                     </form>
@@ -659,8 +662,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                     </h2>
                     <ol class="tasks">
                         <?php
-                            if (isset($_SESSION['database'])) {
-                                foreach ($_SESSION['database'] as $value) {
+                            if (isset($_SESSION['database']['tasks'])) {
+                                foreach ($_SESSION['database']['tasks'] as $value) {
                                     if ($value['status'] == 0) {
                             ?>
                             <li class="taskItem done 
@@ -674,7 +677,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     <span>
                                         <svg class="task-checked" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"> <g> <path d="M9.5,14c-0.132,0 -0.259,-0.052 -0.354,-0.146c-1.485,-1.486 -3.134,-2.808 -4.904,-3.932c-0.232,-0.148 -0.302,-0.457 -0.153,-0.691c0.147,-0.231 0.456,-0.299 0.69,-0.153c1.652,1.049 3.202,2.266 4.618,3.621c2.964,-4.9 5.989,-8.792 9.749,-12.553c0.196,-0.195 0.512,-0.195 0.708,0c0.195,0.196 0.195,0.512 0,0.708c-3.838,3.837 -6.899,7.817 -9.924,12.902c-0.079,0.133 -0.215,0.221 -0.368,0.24c-0.021,0.003 -0.041,0.004 -0.062,0.004"></path> <path d="M15.5,18l-11,0c-1.379,0 -2.5,-1.121 -2.5,-2.5l0,-11c0,-1.379 1.121,-2.5 2.5,-2.5l10,0c0.276,0 0.5,0.224 0.5,0.5c0,0.276 -0.224,0.5 -0.5,0.5l-10,0c-0.827,0 -1.5,0.673 -1.5,1.5l0,11c0,0.827 0.673,1.5 1.5,1.5l11,0c0.827,0 1.5,-0.673 1.5,-1.5l0,-9.5c0,-0.276 0.224,-0.5 0.5,-0.5c0.276,0 0.5,0.224 0.5,0.5l0,9.5c0,1.379 -1.121,2.5 -2.5,2.5"></path> </g> </svg>
                                     </span>
-                                    <form action="tasks.php" method="post" name="<?php echo "frmDone" . $value['id'] ?>">
+                                    <form action="index.php" method="post" name="<?php echo "frmDone" . $value['id'] ?>">
                                         <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
                                         <input type="hidden" name="status" value="<?php echo $value['status'] ?>">
                                     </form>
@@ -702,7 +705,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
         </div>
         <?php 
             if (isset($_GET['id'])) {
-                foreach ($_SESSION['database'] as $value) {
+                foreach ($_SESSION['database']['tasks'] as $value) {
                     if ($_GET['id'] == $value['id']) {?>
         <div id="detail" class="animated" style="display:<?php echo (isset($_GET['id']) ? 'block' : 'none') ; ?>">           
             <div class="inner">
@@ -760,7 +763,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                 </div>
                 <div class="body">
                     <div class="section section-item detail-date editing">
-                        <form action="tasks.php" method="post" name="frmDueDate">
+                        <form action="index.php" method="post" name="frmDueDate">
                             <input type="hidden" name="duedate">
                             <input type="hidden" name='id' value="<?php echo $value['id']?>">
                         </form>

@@ -28,12 +28,6 @@ $(document).ready(function () {
   //Add more task
   $('.addTask-input.chromeless').on("keydown", function (e) {
       if (e.keyCode == 13) {
-        const child = $('.taskItem:first').clone()
-
-        child.removeClass('selected')
-        $('.tasks:first').prepend(child)
-        child.find('.taskItem-titleWrapper').text($(this).val())
-        child.find('.taskItem-duedate').text('')        
         $('form[name="frmTask"]').submit()
       }
   });
@@ -46,7 +40,6 @@ $(document).ready(function () {
   //Check completed tasks
   $('.tasks').on("click", '.taskItem-checkboxWrapper', function (e) {    
     e.stopPropagation()
-    // console.log($(this).find('form'))
     $(this).find('form').submit()
   });
 
@@ -106,19 +99,7 @@ $(document).ready(function () {
   $('.context-menu').on('click', '.context-menu-item:first', function (e) { 
     e.preventDefault()
 
-  }); 
-
-  $('.tasks:last').on("click", '.taskItem-checkboxWrapper', function (e) {
-    e.stopPropagation()
-    const taskItem = $(this).parents('.taskItem')
-    taskItem.appendTo($('.tasks:first'))
-    taskItem.removeClass("done")
-    taskItem.find('.taskItem-checkboxWrapper').remove()
-    $('.tasks:first .taskItem-checkboxWrapper:first').clone().prependTo(taskItem.children('.taskItem-body'))
-
-    let id = taskItem.attr("rel")
-    $.post("tasks.php", {rel_id_doing:id});
-  })
+  });  
 
   //Click active sidebarItem
   $('.lists-scroll').on('click', '.sidebarItem',function () {
