@@ -17,6 +17,7 @@ if (isset($_GET['id'])) {
     $task->getTask();
 }
 
+//Change status of Task
 if (isset($_POST['status'])) {
     $task = new Task();
     $task->id = $_POST['id'];
@@ -30,5 +31,12 @@ if (isset($_POST['duedate'])) {
     $task->duedate = $_POST['duedate'];
     $task->id = $_POST['id'];
     $task->changeDuedate();
+}
+
+if (isset($_POST['subtask'])) {
+    $task = new Task();
+    $task->subtask = $_POST['subtask'];
+    $task->id = $_POST['id'];
+    $task->addSubtask();
 }
 ?>

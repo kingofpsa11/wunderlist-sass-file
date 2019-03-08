@@ -6,35 +6,35 @@ include 'Request.php';
 // $_SESSION['database']['tasks']['1'] = [
 //     'id' => '1',
 //     'title' => 'Task1',
-//     'duedate' => '2019-02-26',
+//     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-26 12:10:00',
 //     'status' => 1
 // ];
 // $_SESSION['database']['tasks']['2'] = [
 //     'id' => '2',
 //     'title' => 'Task2',
-//     'duedate' => '2019-02-20',
+//     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-20 11:10:00',
 //     'status' => 1
 // ];
 // $_SESSION['database']['tasks']['3'] = [
 //     'id' => '3',
 //     'title' => 'Task3',
-//     'duedate' => '2019-02-27',
+//     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-27 09:10:00',
 //     'status' => 1
 // ];
 // $_SESSION['database']['tasks']['4'] = [
 //     'id' => '4',
 //     'title' => 'Task4',
-//     'duedate' => '2019-02-28',
+//     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-28 08:10:00',
 //     'status' => 0
 // ];
 // $_SESSION['database']['tasks']['5'] = [
 //     'id' => '5',
 //     'title' => 'Task5',
-//     'duedate' => '2019-01-28',
+//     'duedate' => 1553014800,
 //     'reminder_date' => '2019-01-28 07:10:00',
 //     'status' => 0
 // ];
@@ -807,17 +807,56 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     </g>
                                 </svg>
                         </a>
-                
                     </div>
                     <div class="section subtasks">
-                        <ul></ul>
+                        <ul>
+                            <?php
+                            if (isset($value['subtasks'])) {
+                                $subtasks = $value['subtasks'];
+                            ?>
+                            <li class="section-item subtask">
+                                <div class="section-icon">
+                                    <a class="subtask-checkbox checkBox">
+                                        <svg class="task-check" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.41421;"> <g> <path d="M17.5,4.5c0,-0.53 -0.211,-1.039 -0.586,-1.414c-0.375,-0.375 -0.884,-0.586 -1.414,-0.586c-2.871,0 -8.129,0 -11,0c-0.53,0 -1.039,0.211 -1.414,0.586c-0.375,0.375 -0.586,0.884 -0.586,1.414c0,2.871 0,8.129 0,11c0,0.53 0.211,1.039 0.586,1.414c0.375,0.375 0.884,0.586 1.414,0.586c2.871,0 8.129,0 11,0c0.53,0 1.039,-0.211 1.414,-0.586c0.375,-0.375 0.586,-0.884 0.586,-1.414c0,-2.871 0,-8.129 0,-11Z" style="fill:none;stroke-width:1px"></path> </g> </svg>
+                                        <svg class="task-checked" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"> <g> <path d="M9.5,14c-0.132,0 -0.259,-0.052 -0.354,-0.146c-1.485,-1.486 -3.134,-2.808 -4.904,-3.932c-0.232,-0.148 -0.302,-0.457 -0.153,-0.691c0.147,-0.231 0.456,-0.299 0.69,-0.153c1.652,1.049 3.202,2.266 4.618,3.621c2.964,-4.9 5.989,-8.792 9.749,-12.553c0.196,-0.195 0.512,-0.195 0.708,0c0.195,0.196 0.195,0.512 0,0.708c-3.838,3.837 -6.899,7.817 -9.924,12.902c-0.079,0.133 -0.215,0.221 -0.368,0.24c-0.021,0.003 -0.041,0.004 -0.062,0.004"></path> <path d="M15.5,18l-11,0c-1.379,0 -2.5,-1.121 -2.5,-2.5l0,-11c0,-1.379 1.121,-2.5 2.5,-2.5l10,0c0.276,0 0.5,0.224 0.5,0.5c0,0.276 -0.224,0.5 -0.5,0.5l-10,0c-0.827,0 -1.5,0.673 -1.5,1.5l0,11c0,0.827 0.673,1.5 1.5,1.5l11,0c0.827,0 1.5,-0.673 1.5,-1.5l0,-9.5c0,-0.276 0.224,-0.5 0.5,-0.5c0.276,0 0.5,0.224 0.5,0.5l0,9.5c0,1.379 -1.121,2.5 -2.5,2.5"></path> </g> </svg>
+                                    </a>
+                                </div>
+                                <div class="section-content">
+                                    <div class="section-title">
+                                        <div class="content-fakable">
+                                            <div class="display-view hidden">
+                                                <span></span>
+                                            </div>
+                                            <div class="edit-view hidden">
+                                                <div class="expandingArea">
+                                                    <pre style="line-height:20px;font-size:15px;"></pre>
+                                                    <textarea style="line-height:20px;font-size:15px;"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <?php
+                            }
+                            ?>
+                        </ul>
                         <div class="section-item subtask-add">
                             <div class="section-icon">
                                 <svg class="plus-small" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"> <g> <path d="M10,10l0,6.5c-0.003,0.053 -0.008,0.103 -0.024,0.155c-0.038,0.116 -0.12,0.217 -0.226,0.278c-0.047,0.027 -0.094,0.042 -0.146,0.056c-0.052,0.008 -0.051,0.008 -0.104,0.011c-0.053,-0.003 -0.103,-0.008 -0.155,-0.024c-0.15,-0.05 -0.271,-0.171 -0.321,-0.321c-0.016,-0.052 -0.021,-0.102 -0.024,-0.155l0,-6.5l-6.5,0c-0.046,-0.002 -0.058,-0.001 -0.104,-0.011c-0.103,-0.022 -0.197,-0.076 -0.268,-0.154c-0.169,-0.188 -0.169,-0.482 0,-0.67c0.035,-0.038 0.077,-0.072 0.122,-0.098c0.078,-0.045 0.161,-0.062 0.25,-0.067l6.5,0l0,-6.5c0.005,-0.089 0.022,-0.172 0.067,-0.25c0.126,-0.219 0.406,-0.31 0.636,-0.207c0.048,0.022 0.093,0.05 0.132,0.085c0.078,0.071 0.132,0.165 0.154,0.268c0.01,0.046 0.009,0.058 0.011,0.104l0,6.5l6.5,0c0.046,0.002 0.058,0.001 0.104,0.011c0.103,0.022 0.197,0.076 0.268,0.154c0.169,0.188 0.169,0.482 0,0.67c-0.035,0.038 -0.077,0.072 -0.122,0.098c-0.078,0.045 -0.161,0.062 -0.25,0.067l-6.5,0Z"></path> </g> </svg>
                             </div>
                             <div class="section-content top">
                                 <div class="section-title">Add a subtask</div>
-                                <div class="section-edit hidden"></div>
+                                <div class="section-edit hidden">
+                                    <div class="expandingArea">
+                                        <pre style="line-height:20px;font-size:15px;">Add a subtask</pre>
+                                        <textarea style="line-height:20px;font-size:15px;" placeholder="Add a subtask"></textarea>
+                                        <form action="index.php" method="post">
+                                            <input type="hidden" name="subtask">
+                                            <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

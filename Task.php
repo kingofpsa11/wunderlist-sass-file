@@ -30,11 +30,9 @@ class Task
     public function changeDuedate()
     {
         $task = new Database();
-        $array = $this->getTask();
-        
-        $array['duedate'] = $this->duedate;
-
-        $task->saveTask($array);
+        $value = $this->getTask();        
+        $value['duedate'] = $this->duedate;
+        $task->saveTask($value);
     }
 
     public function changeStatus()
@@ -50,6 +48,14 @@ class Task
 
         $value['status'] = $this->status;
         $task->saveTask($value);
+    }
+
+    public function addSubtask()
+    {
+        $task = new Database();
+        $value = $this->getTask();
+        $subtasks = $value['subtasks'];
+        $subtasks['id']
     }
 }
 

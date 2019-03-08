@@ -44,11 +44,7 @@ $(document).ready(function () {
   });
 
   //Selected task    
-  $('.tasks').one('click', '.taskItem', function () {      
-    // if (!$(this).is('.taskItem.selected')) {
-    //   $('.taskItem.selected').removeClass('selected')
-    //   $(this).addClass('selected')
-    // }
+  $('.tasks').one('click', '.taskItem', function () {
     $(this).find('form').submit()
   });
   
@@ -153,8 +149,10 @@ $(document).ready(function () {
 
   $('.taskItem-duedate').each(function () {
     let date = $(this).text()
-    date = convertDateToVn(date)
-    $(this).text(date)
+    if (date != '') {
+      date = convertDateToVn(date)
+      $(this).text(date)  
+    }
   })
   
   // if (detail_date.getFullYear() < now.getFullYear()) {
@@ -178,11 +176,27 @@ $(document).ready(function () {
   //   detail_date_el.removeClass("overdue")
   // }
   
-  
+  //Add a subtask
+  $('.subtasks .section-content').on('click', function () {
+    $(this).children('.section-title').addClass('hidden');
+    $(this).children('.section-edit').removeClass('hidden');
+    $(this).find('textarea').focus();
+  })
+
+  $('.subtasks textarea').on("keypress", function (e) {
+    if (e.keyCode == 13) {
+      const form = $(this).parent().children('form')
+      form.children('input').value = $(this).value
+      form.submit()
+    }
+  })
+
   //Click to logout
   $('.logout').on('click', function (e) {
     document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     document.cookie = "password=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
     window.location.href = "http://localhost/wunderlist-sass-file/login.php"
   })
+
+
 });
