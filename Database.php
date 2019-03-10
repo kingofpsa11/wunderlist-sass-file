@@ -6,13 +6,13 @@ class Database
     public $tasks;
     public $lists;
 
-    public function __construct()
+    public function __construct($array)
     {
         if (isset($_SESSION['database']['tasks'])) {
             $this->tasks = $_SESSION['database']['tasks'];    
         }
         if (isset($_SESSION['database']['lists'])) {
-            $this->lists = $_SESSION['database']['lists'];    
+            $this->lists = $_SESSION['database']['lists'];
         }        
     }
     

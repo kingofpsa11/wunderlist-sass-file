@@ -34,9 +34,76 @@ if (isset($_POST['duedate'])) {
 }
 
 if (isset($_POST['subtask'])) {
-    $task = new Task();
+    
     $task->subtask = $_POST['subtask'];
     $task->id = $_POST['id'];
+
     $task->addSubtask();
 }
+
+TaskModel { // present SubTask
+    id;
+    title;
+}
+
+Task extends TaskModel { // Present Task
+    date;
+    arrayOfTaskModel;
+
+setTitle()
+
+setDate()
+
+getDate();
+
+
+    addSubTask(title) {
+        // add subtask into arrayOfTaskModel;
+    }
+
+    removeSubTask(id);
+
+    saveSubTask(TaskModel)
+
+    removeSubTask(id);
+}
+
+List {
+    arrayOfTask;
+
+    getTasks();
+
+    getTask(id);
+}
+
+Storage {
+    // Use session to store data
+
+    addTask(Task) {
+        // Save task into session
+    }
+
+    Task getTask(id) {
+        // get task information from session and return Task object;
+    }
+
+    save(Task) {
+        // save Task into session
+    }
+
+    ArrayOfTasks getAllTasks();
+
+    removeTask(id);
+
+    getAllLists();
+
+    List getList(id);
+
+}
+
+
+function getAllTasks() {
+
+}
+
 ?>
