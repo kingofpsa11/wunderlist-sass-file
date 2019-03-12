@@ -68,7 +68,7 @@ $(document).ready(function () {
   });
 
   //Change right click context  
-  $('.tasks').on('contextmenu', '.taskItem', function (e) {
+  $('.tasks').one('contextmenu', '.taskItem', function (e) {
     e.preventDefault()
     const contextmenu = $('.context-menu')
     contextmenu.css({"left":e.clientX,"top":e.clientY})

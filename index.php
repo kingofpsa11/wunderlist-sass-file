@@ -3,45 +3,63 @@ session_start();
 
 include 'Request.php';
 
-// $_SESSION['database']['tasks']['1'] = [
-//     'id' => '1',
+// $_SESSION['tasks'] = [[
+//     'id' => 1,
 //     'title' => 'Task1',
 //     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-26 12:10:00',
-//     'status' => 1
-// ];
-// $_SESSION['database']['tasks']['2'] = [
-//     'id' => '2',
+//     'status' => 1,
+//     'list_id' => 1,
+//     'subtasks' => []
+// ],
+// [
+//     'id' => 2,
 //     'title' => 'Task2',
 //     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-20 11:10:00',
-//     'status' => 1
-// ];
-// $_SESSION['database']['tasks']['3'] = [
-//     'id' => '3',
+//     'status' => 1,
+//     'list_id' => 2,
+//     'subtasks' => []
+// ],
+// [
+//     'id' => 3,
 //     'title' => 'Task3',
 //     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-27 09:10:00',
-//     'status' => 1
-// ];
-// $_SESSION['database']['tasks']['4'] = [
-//     'id' => '4',
+//     'status' => 1,
+//     'list_id' => 1,
+//     'subtasks' => []
+// ],
+// [
+//     'id' => 4,
 //     'title' => 'Task4',
 //     'duedate' => 1553014800,
 //     'reminder_date' => '2019-02-28 08:10:00',
-//     'status' => 0
-// ];
-// $_SESSION['database']['tasks']['5'] = [
-//     'id' => '5',
+//     'status' => 0,
+//     'list_id' => 1,
+//     'subtasks' => []
+// ],
+// [
+//     'id' => 5,
 //     'title' => 'Task5',
 //     'duedate' => 1553014800,
 //     'reminder_date' => '2019-01-28 07:10:00',
-//     'status' => 0
+//     'status' => 0,
+//     'list_id' => 0,
+//     'subtasks' => []
+// ]];
+// $_SESSION['lists'] = [
+//     [
+//         'id' => 1,
+//         'title' => 'inbox',
+//     ],
+//     [
+//         'id' => 2,
+//         'title' => 'list'
+//     ]
 // ];
+// print_r($_SESSION);
 
-// session_destroy();
-// var_dump($_SESSION['database']);
-// }
 if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
     header("Location:login.php");
 }
@@ -593,6 +611,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                     </a>
                     <form action="index.php" method="post" name="frmTask">
                         <input type="text" class="addTask-input chromeless" placeholder="Add a to-do..." name="addTask" >
+                        <input type="hidden" name="id" value="1">
                     </form>
                     <div class="nlp-feedback"></div>
                     <div class="positionHelper"></div>
@@ -605,8 +624,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                     </h2> -->
                     <ol class="tasks">
                         <?php
-                        if (isset($_SESSION['database']['tasks'])) {
-                            foreach ($_SESSION['database']['tasks'] as $value) {
+                        if (isset($_SESSION['tasks'])) {
+                            foreach ($_SESSION['tasks'] as $value) {
                                 if ($value['status'] == 1) {
                         ?>
                         <li class="taskItem 
@@ -662,8 +681,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                     </h2>
                     <ol class="tasks">
                         <?php
-                            if (isset($_SESSION['database']['tasks'])) {
-                                foreach ($_SESSION['database']['tasks'] as $value) {
+                            if (isset($_SESSION['tasks'])) {
+                                foreach ($_SESSION['tasks'] as $value) {
                                     if ($value['status'] == 0) {
                             ?>
                             <li class="taskItem done 
@@ -705,7 +724,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
         </div>
         <?php 
             if (isset($_GET['id'])) {
-                foreach ($_SESSION['database']['tasks'] as $value) {
+                foreach ($_SESSION['tasks'] as $value) {
                     if ($_GET['id'] == $value['id']) {?>
         <div id="detail" class="animated" style="display:<?php echo (isset($_GET['id']) ? 'block' : 'none') ; ?>">           
             <div class="inner">

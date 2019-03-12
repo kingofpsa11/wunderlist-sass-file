@@ -32,6 +32,7 @@ class Task extends TaskModel
     protected $_reminder_date;
     protected $_subtasks;
     protected $_list_id;
+    protected $_status;
 
     public function setDuedate($duedate)
     {
@@ -73,9 +74,28 @@ class Task extends TaskModel
         $this->_list_id = $list_id;
     }
 
+    public function getStatus()
+    {
+        return $this->_status;
+    }
+
+    public function setStatus($status)
+    {
+        $this->_status = $status;
+    }
+
     public function addSubtask($title)
     {
+        $this->_subtasks[] = $title;
+    }
 
+    public function changeStatus()
+    {
+        if ($this->_status == 1) {
+            $this->_status = 0;
+        } else {
+            $this->_status = 1;
+        }
     }
 }
 
@@ -83,17 +103,6 @@ class ListTask
 {
     protected $_id;
     protected $_list;
-    protected $_tasks;
-
-    public function getTasks()
-    {
-        return $this->_tasks;
-    }
-
-    public function setTasks($tasks)
-    {
-        $this->_tasks = $tasks;
-    }
 
     public function getId()
     {
@@ -126,14 +135,16 @@ class Storage
     
     public function addTask(Task $task)
     {
-        $lastTask = end($this->getAllTasks()) ;
+        $tasks = $this->getAllTasks() ;
+        $lastTask = end($tasks);
         $array = [];
         $array['id'] = $lastTask['id'] + 1;
         $array['title'] = $task->getTitle();
-        $array['duedate'] = '';
-        $array['reminder_date'] = '';
+        $array['duedate'] = null;
+        $array['reminder_date'] = null;
         $array['list_id'] = $task->getListId();
         $array['subtasks'] = [];
+        $array['status'] = 1;
         $_SESSION['tasks'][] = $array;
     }
 
@@ -143,12 +154,13 @@ class Storage
         $task = new Task();
         foreach ($tasks as $value) {
             if ($value['id'] == $id) {
-                $task->setId = $value['id'];
-                $task->setTitle = $value['title'];
-                $task->setDuedate = $value['duedate'];
-                $task->setReminderDate = $value['reminder_date'];
-                $task->setSubtasks = $value['subtasks'];
-                $task->setListId = $value['list_id'];
+                $task->setId($value['id']);
+                $task->setTitle($value['title']);
+                $task->setDuedate($value['duedate']);
+                $task->setReminderDate($value['reminder_date']);
+                $task->setSubtasks($value['subtasks']);
+                $task->setListId($value['list_id']);
+                $task->setStatus($value['status']);
             }
         }
         return $task;
@@ -157,15 +169,18 @@ class Storage
     public function saveTask(Task $task)
     {
         $tasks = $this->getAllTasks();
-        foreach ($tasks as $value) {
+        foreach ($tasks as $key => $value) {
             if ($value['id'] == $task->getId()) {
                 $value['title'] = $task->getTitle();
                 $value['duedate'] = $task->getDuedate();
                 $value['reminder_date'] = $task->getReminderDate();
                 $value['subtasks'] = $task->getSubtasks();
                 $value['list_id'] = $task->getListId();
+                $value['status'] = $task->getStatus();
+                $tasks[$key] = $value;
             }
         }
+        $_SESSION['tasks'] = $tasks;
     }
 
     public function addList(ListTask $list)
@@ -182,9 +197,9 @@ class Storage
         $lists = $this->getAllLists();
         $list = new ListTask();
         foreach ($lists as $value) {
-            if ($value['id'] == $id) {
-                $list->setId = $value['id'];
-                $list->setTitle = $value['title'];
+            if ($value['id'] == $list_id) {
+                $list->setId($value['id']);
+                $list->setTitle($value['title']);
             }
         }
         return $list;

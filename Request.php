@@ -1,103 +1,103 @@
 <?php
-include 'Task.php';
-
-use Model\Task;
+include 'TaskModel.php';
 
 //create new Task
 if (isset($_POST['addTask'])) {
-    $task = new Task();
-    $task->title = $_POST['addTask'];    
-    $task->addTask();
-}
+    $title = $_POST['addTask'];
+    $id = $_POST['id'];
 
-//get detail of Task
-if (isset($_GET['id'])) {
     $task = new Task();
-    $task->id = $_GET['id'];
-    $task->getTask();
+    $task->setTitle($title);
+    $task->setListId($id);
+
+    $storage = new Storage();
+    $storage->addTask($task);
 }
 
 //Change status of Task
 if (isset($_POST['status'])) {
-    $task = new Task();
-    $task->id = $_POST['id'];
-    $task->status = $_POST['status'];
-    $task->changeStatus();
+   $id = $_POST['id'];   
+
+   $task = new Task();
+   $storage = new Storage();
+   $task = $storage->getTask($id);
+   $task->changeStatus();
+   $storage->saveTask($task);
 }
 
 //Change duedate
 if (isset($_POST['duedate'])) {
+    $id = $_POST['id'];
+    $duedate = $_POST['duedate'];
     $task = new Task();
-    $task->duedate = $_POST['duedate'];
-    $task->id = $_POST['id'];
-    $task->changeDuedate();
+    $storage = new Storage();
+    $task = $storage->getTask($id);
+    $task->setDuedate($duedate);
+    $storage->saveTask($task);
 }
 
 if (isset($_POST['subtask'])) {
     
-    $task->subtask = $_POST['subtask'];
-    $task->id = $_POST['id'];
-
-    $task->addSubtask();
+   
 }
 
-TaskModel { // present SubTask
-    id;
-    title;
-}
+// TaskModel { // present SubTask
+//     id;
+//     title;
+// }
 
-Task extends TaskModel { // Present Task
-    date;
-    arrayOfTaskModel;
+// Task extends TaskModel { // Present Task
+//     date;
+//     arrayOfTaskModel;
 
-setTitle()
+// setTitle()
 
-setDate()
+// setDate()
 
-getDate();
+// getDate();
 
 
-    addSubTask(title) {
-        // add subtask into arrayOfTaskModel;
-    }
+//     addSubTask(title) {
+//         // add subtask into arrayOfTaskModel;
+//     }
 
-    removeSubTask(id);
+//     removeSubTask(id);
 
-    saveSubTask(TaskModel)
+//     saveSubTask(TaskModel)
 
-    removeSubTask(id);
-}
+//     removeSubTask(id);
+// }
 
-List {
-    arrayOfTask;
+// List {
+//     arrayOfTask;
 
-    getTasks();
+//     getTasks();
 
-    getTask(id);
-}
+//     getTask(id);
+// }
 
-Storage {
-    // Use session to store data
+// Storage {
+//     // Use session to store data
 
-    addTask(Task) {
-        // Save task into session
-    }
+//     addTask(Task) {
+//         // Save task into session
+//     }
 
-    Task getTask(id) {
-        // get task information from session and return Task object;
-    }
+//     Task getTask(id) {
+//         // get task information from session and return Task object;
+//     }
 
-    save(Task) {
-        // save Task into session
-    }
+//     save(Task) {
+//         // save Task into session
+//     }
 
-    ArrayOfTasks getAllTasks();
+//     ArrayOfTasks getAllTasks();
 
-    removeTask(id);
+//     removeTask(id);
 
-    getAllLists();
+//     getAllLists();
 
-    List getList(id);
+//     List getList(id);
 
-}
+// }
 ?>
