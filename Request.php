@@ -100,10 +100,4 @@ Storage {
     List getList(id);
 
 }
-
-
-function getAllTasks() {
-
-}
-
 ?>
