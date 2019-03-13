@@ -492,6 +492,7 @@
           .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem {
             height: 47px; }
             .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body {
+              position: relative;
               display: flex;
               height: 46px;
               border-radius: 3px;
@@ -517,6 +518,14 @@
                   color: #b3312d; }
               .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-star {
                 padding: 0 6px; }
+              .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem .taskItem-body .taskItem-progress-bar {
+                position: absolute;
+                background: rgba(102, 137, 100, 0.1);
+                border-color: rgba(102, 137, 100, 0.2);
+                border: none;
+                top: 0;
+                left: 0;
+                height: 100%; }
             .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem.selected .taskItem-body {
               background: #e1f2fe; }
             .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem.done {
@@ -612,10 +621,12 @@
           .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox .task-checked {
             fill: rgba(0, 0, 0, 0.35);
             display: none; }
-          .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-check {
-            display: none; }
-          .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-checked {
-            display: block; }
+          .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked {
+            text-decoration: overline; }
+            .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-check {
+              display: none; }
+            .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-checked {
+              display: block; }
           .background-06 .main-interface #detail .inner .body .subtasks .section-content {
             color: #262626; }
             .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea {

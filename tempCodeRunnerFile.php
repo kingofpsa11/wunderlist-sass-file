@@ -1,7 +1,4 @@
 <?php
-$array = [
-    ['id' => 3, 'name' => 'abc'],
-    ['id' => 1, 'name' => 'abc'],
-    ['id' => 2, 'name' => 'abc'],
-];
-print_r (end($array)['id']);
+$a=array(0 => ["Name","Peter"],1 => ["Age","41"],2 => ["Country","USA"]);
+        $a = array_column($a,'1');
+        var_dump($a);

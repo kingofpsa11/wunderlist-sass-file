@@ -36,11 +36,30 @@ if (isset($_POST['duedate'])) {
     $storage->saveTask($task);
 }
 
-if (isset($_POST['subtask'])) {
-    
-   
+if (isset($_POST['addSubtask'])) {
+    $id = $_POST['id'];
+    $title = $_POST['addSubtask'];
+
+    $task = new Task();
+    $storage = new Storage();
+
+    $task = $storage->getTask($id);
+    $task->addSubtask($title);
+    $storage->saveTask($task);
 }
 
+
+if (isset($_POST['statusSubtaskTitle'])) {
+    $id = $_POST['id'];
+    $title = $_POST['statusSubtaskTitle'];
+
+    $task = new Task();
+    $storage = new Storage();
+
+    $task = $storage->getTask($id);
+    $task->changeStatusSubtask($title);
+    $storage->saveTask($task);
+}
 // TaskModel { // present SubTask
 //     id;
 //     title;

@@ -86,7 +86,27 @@ class Task extends TaskModel
 
     public function addSubtask($title)
     {
-        $this->_subtasks[] = $title;
+        $this->_subtasks[] = [$title,1];
+    }
+
+    public function changeSubtask($oldTitle, $newTitle)
+    {
+        $subtasks = $this->_subtasks;
+        $key = array_search($oldTitle, array_column($subtasks, 1));
+        $subtasks[$key] = [$newTitle, $subtasks[$key][1]];
+        $this->_subtasks = $subtasks;
+    }
+
+    public function changeStatusSubtask($title)
+    {
+        $subtasks = $this->_subtasks;
+        $key = array_search($title, array_column($subtasks,'0'));
+        if ($subtasks[$key][1] == 1) {
+            $subtasks[$key][1] = 0;
+        } else {
+            $subtasks[$key][1] = 1;
+        }
+        $this->_subtasks = $subtasks;
     }
 
     public function changeStatus()

@@ -48,6 +48,13 @@ $(document).ready(function () {
     $(this).find('form').submit()
   });
   
+  if ($('.taskItem').hasClass("selected")) {
+    let count = $('.subtasks li').length
+    let countDone = $('.subtasks li').has('.checked').length
+    let width = countDone/count * 100 + "%"
+    $('.taskItem.selected').find('.taskItem-progress-bar').css("width", width)
+  }
+
   //Hide detail of task
   $('.detail-close').click(function (e) { 
     e.preventDefault()
@@ -177,19 +184,43 @@ $(document).ready(function () {
   // }
   
   //Add a subtask
-  $('.subtasks .section-content').on('click', function () {
+  $('.section-item.subtask-add .section-content').on("click", function () {
     $(this).children('.section-title').addClass('hidden');
     $(this).children('.section-edit').removeClass('hidden');
     $(this).find('textarea').focus();
   })
+  
+  //Edit a subtask
+  $('.subtasks ul').on('click', '.subtask .section-content',function () {
+    $(this).find('.display-view').addClass('hidden')
+    $(this).find('.edit-view').removeClass('hidden')
+    let value = $(this).find('.display-view span').text()
+    $(this).find('pre').text(value)
+    $(this).find('textarea').val(value)
+    $(this).find('textarea').focus()
+  })
 
+  $('.subtasks ul').on("focusout", "textarea", function () {
+    $(this).parents('.content-fakable').children('.display-view').removeClass('hidden')
+    $(this).parents('.content-fakable').children('.edit-view').addClass('hidden')
+  })  
+
+  //Save a subtask by press Enter
   $('.subtasks textarea').on("keypress", function (e) {
     if (e.keyCode == 13) {
-      const form = $(this).parent().children('form')
-      form.children('input').value = $(this).value
-      form.submit()
+      if ($(this).val() != '') {
+        $(this).parent().submit()  
+      } else {
+        $(this).val($(this).html())
+        $(this).trigger("focusout");
+      }
     }
   })
+
+  //Check complete subtask
+  $('.subtask').on("click", '.checkBox',function () {
+    $(this).children('form').submit();
+  });
 
   //Click to logout
   $('.logout').on('click', function (e) {
