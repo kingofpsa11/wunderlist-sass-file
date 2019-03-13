@@ -25,7 +25,7 @@ if (isset($_POST['status'])) {
    $storage->saveTask($task);
 }
 
-//Change duedate
+//Change due date
 if (isset($_POST['duedate'])) {
     $id = $_POST['id'];
     $duedate = $_POST['duedate'];
@@ -36,9 +36,9 @@ if (isset($_POST['duedate'])) {
     $storage->saveTask($task);
 }
 
-if (isset($_POST['addSubtask'])) {
+if (isset($_POST['addSubTask'])) {
     $id = $_POST['id'];
-    $title = $_POST['addSubtask'];
+    $title = $_POST['addSubTask'];
 
     $task = new Task();
     $storage = new Storage();
@@ -49,15 +49,27 @@ if (isset($_POST['addSubtask'])) {
 }
 
 
-if (isset($_POST['statusSubtaskTitle'])) {
+if (isset($_POST['statusSubTaskTitle'])) {
     $id = $_POST['id'];
-    $title = $_POST['statusSubtaskTitle'];
+    $title = $_POST['statusSubTaskTitle'];
 
     $task = new Task();
     $storage = new Storage();
 
     $task = $storage->getTask($id);
     $task->changeStatusSubtask($title);
+    $storage->saveTask($task);
+}
+
+if (isset($_POST['editSubtask'])) {
+    $id = $_POST['id'];
+    $newTitle = $_POST['editSubtask'];
+    $oldTitle = $_POST['oldTitle'];
+    $task = new Task();
+    $storage = new Storage();
+
+    $task = $storage->getTask($id);
+    $task->changeSubtask($oldTitle, $newTitle);
     $storage->saveTask($task);
 }
 // TaskModel { // present SubTask

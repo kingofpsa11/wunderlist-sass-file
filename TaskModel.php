@@ -28,20 +28,26 @@ class TaskModel
 
 class Task extends TaskModel
 {
-    protected $_duedate;
+    protected $_due_date;
     protected $_reminder_date;
-    protected $_subtasks;
+    protected $_sub_tasks;
     protected $_list_id;
     protected $_status;
 
-    public function setDuedate($duedate)
+    /**
+     * @param $due_date
+     */
+    public function setDueDate($due_date)
     {
-        $this->_duedate = $duedate;
+        $this->_due_date = $due_date;
     }
 
-    public function getDuedate()
+    /**
+     * @return mixed
+     */
+    public function getDueDate()
     {
-        return $this->_duedate;
+        return $this->_due_date;
     }
 
     public function setReminderDate($reminder_date)
@@ -54,14 +60,14 @@ class Task extends TaskModel
         return $this->_reminder_date;
     }
 
-    public function setSubtasks($subtasks)
+    public function setSubTasks($sub_tasks)
     {
-        $this->_subtasks = $subtasks;
+        $this->_sub_tasks = $sub_tasks;
     }
 
-    public function getSubtasks()
+    public function getSubTasks()
     {
-        return $this->_subtasks;
+        return $this->_sub_tasks;
     }
 
     public function getListId()
@@ -84,29 +90,33 @@ class Task extends TaskModel
         $this->_status = $status;
     }
 
-    public function addSubtask($title)
+
+    /**
+     * @param $title
+     */
+    public function addSubTask($title)
     {
-        $this->_subtasks[] = [$title,1];
+        $this->_sub_tasks[] = [$title,1];
     }
 
-    public function changeSubtask($oldTitle, $newTitle)
+    public function changeSubTask($oldTitle, $newTitle)
     {
-        $subtasks = $this->_subtasks;
-        $key = array_search($oldTitle, array_column($subtasks, 1));
-        $subtasks[$key] = [$newTitle, $subtasks[$key][1]];
-        $this->_subtasks = $subtasks;
+        $sub_tasks = $this->_sub_tasks;
+        $key = array_search($oldTitle, array_column($sub_tasks, '0'));
+        $sub_tasks[$key] = [$newTitle, $sub_tasks[$key][1]];
+        $this->_sub_tasks = $sub_tasks;
     }
 
-    public function changeStatusSubtask($title)
+    public function changeStatusSubTask($title)
     {
-        $subtasks = $this->_subtasks;
-        $key = array_search($title, array_column($subtasks,'0'));
-        if ($subtasks[$key][1] == 1) {
-            $subtasks[$key][1] = 0;
+        $sub_tasks = $this->_sub_tasks;
+        $key = array_search($title, array_column($sub_tasks,'0'));
+        if ($sub_tasks[$key][1] == 1) {
+            $sub_tasks[$key][1] = 0;
         } else {
-            $subtasks[$key][1] = 1;
+            $sub_tasks[$key][1] = 1;
         }
-        $this->_subtasks = $subtasks;
+        $this->_sub_tasks = $sub_tasks;
     }
 
     public function changeStatus()
@@ -126,7 +136,7 @@ class ListTask
 
     public function getId()
     {
-        return $this->_tasks;
+        return $this->_id;
     }
 
     public function setId($id)
@@ -136,18 +146,14 @@ class ListTask
 
     public function setTitle($title)
     {
-        $this->_title = $title;
+        $this->_list = $title;
     }
 
     public function getTitle()
     {
-        return $this->_title;
+        return $this->_list;
     }
 
-    public function getTask($id)
-    {
-        $tasks = new Storage();
-    }    
 }
 
 class Storage

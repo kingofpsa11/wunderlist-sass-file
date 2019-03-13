@@ -855,8 +855,9 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                             <div class="edit-view hidden">
                                                 <div class="expandingArea">
                                                     <pre style="line-height:20px;font-size:15px;"></pre>
-                                                    <form action="index.php" method="post" >
+                                                    <form action="index.php?id=<?php echo $value['id'] ?>" method="post" >
                                                         <textarea style="line-height:20px;font-size:15px;" name="editSubtask"></textarea>
+                                                        <input type="hidden" name="oldTitle" value="<?php echo $subtask[0] ?>">
                                                         <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
                                                     </form>
                                                 </div>
