@@ -28,11 +28,11 @@ class TaskModel
 
 class Task extends TaskModel
 {
-    protected $_due_date;
-    protected $_reminder_date;
-    protected $_sub_tasks;
-    protected $_list_id;
-    protected $_status;
+    private $_due_date;
+    private $_reminder_date;
+    private $_sub_tasks;
+    private $_list_id;
+    private $_status;
 
     /**
      * @param $due_date
@@ -90,7 +90,18 @@ class Task extends TaskModel
         $this->_status = $status;
     }
 
-
+    public function getTaskJson()
+    {
+        $value = get_object_vars($this);
+        $keys = array_keys($value);
+        foreach ($keys as $key) {
+            $newkey[] = substr($key, 1);
+        }
+        $value = array_values($value);
+        $value = array_combine($newkey ,$value);
+        $value = json_encode($value);
+        return $value;
+    }
     /**
      * @param $title
      */

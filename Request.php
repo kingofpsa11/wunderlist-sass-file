@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 include 'TaskModel.php';
 
 //create new Task
@@ -12,6 +15,19 @@ if (isset($_POST['addTask'])) {
 
     $storage = new Storage();
     $storage->addTask($task);
+}
+
+//Display detail of task
+
+if (isset($_GET['taskId'])) {
+    $id = $_GET['taskId'];
+
+    $task = new Task();
+    $storage = new Storage();
+    
+    $task = $storage->getTask($id);
+    $value = $task->getTaskJson();
+    echo $value;
 }
 
 //Change status of Task

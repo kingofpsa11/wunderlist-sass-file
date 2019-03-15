@@ -44,8 +44,16 @@ $(document).ready(function () {
   });
 
   //Selected task    
-  $('.tasks').one('click', '.taskItem', function () {
-    $(this).find('form').submit()
+  $('.tasks').on('click', '.taskItem', function () {
+    let id = $(this).attr('rel')
+    
+    $.get("Request.php", {taskId:id},
+      function (data, textStatus, jqXHR) {
+        $('.detail-date .section-title').text(data['due_date'])
+        $('.detail-reminder .section-title').text(data['reminder_date'])
+      },
+      "json"
+    );
   });
   
   if ($('.taskItem').hasClass("selected")) {
