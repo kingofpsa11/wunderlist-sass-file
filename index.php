@@ -10,7 +10,10 @@ session_start();
 //     'reminder_date' => '2019-02-26 12:10:00',
 //     'status' => 1,
 //     'list_id' => 1,
-//     'subtasks' => []
+//     'subtasks' => [
+//         ['Hom nay', 1],
+//         ['Hom qua', 0]
+//     ]
 // ],
 // [
 //     'id' => 2,
@@ -58,7 +61,7 @@ session_start();
 //         'title' => 'list'
 //     ]
 // ];
-var_dump($_SESSION['tasks'][0]['subtasks']);
+// var_dump($_SESSION['tasks'][0]['subtasks']);
 // session_destroy();
 
 if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {

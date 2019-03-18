@@ -32,7 +32,7 @@ $(document).ready(function () {
       }
   });
 
-  //Show hide finish tasks
+  //Show hide finished tasks
   $('.groupHeader:last').click(function (e) {
     $('.tasks:last').toggle();
   })
@@ -40,7 +40,7 @@ $(document).ready(function () {
   //Check completed tasks
   $('.tasks').on("click", '.taskItem-checkboxWrapper', function (e) {    
     e.stopPropagation()
-    $(this).find('form').submit()
+    // $(this).find('form').submit()
   });
 
   //Selected task    
@@ -63,11 +63,24 @@ $(document).ready(function () {
         //reminder date
         $('.detail-reminder .section-title').text(data['reminder_date'])
         
+        if (data['sub_tasks'].length > 0) {
+          let subtasks = data['sub_tasks']
+          for (let index = 0; index < subtasks.length; index++) {
+            const el = subtasks[index]
+            // $.get("Request.php", {li},
+            //   function (data, textStatus, jqXHR) {
+                
+            //   },
+            //   "text"
+            // );
+          }
+        }
       },
       "json"
     );
   });
   
+  //Display progress bar
   if ($('.taskItem').hasClass("selected")) {
     let count = $('.subtasks li').length
     let countDone = $('.subtasks li').has('.checked').length
@@ -239,7 +252,7 @@ $(document).ready(function () {
           function (data) {
             ul.append(data)
           },
-          "text"
+          "json"
         );
       } else {
         $(this).val($(this).html())
