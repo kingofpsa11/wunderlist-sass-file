@@ -621,12 +621,10 @@
           .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox .task-checked {
             fill: rgba(0, 0, 0, 0.35);
             display: none; }
-          .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked {
-            text-decoration: overline; }
-            .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-check {
-              display: none; }
-            .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-checked {
-              display: block; }
+          .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-check {
+            display: none; }
+          .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-checked {
+            display: block; }
           .background-06 .main-interface #detail .inner .body .subtasks .section-content {
             color: #262626; }
             .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea {

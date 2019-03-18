@@ -45,12 +45,24 @@ $(document).ready(function () {
 
   //Selected task    
   $('.tasks').on('click', '.taskItem', function () {
+
+    $('#detail').show()
+    if (!$(this).hasClass('selected')) {
+      $('.selected').removeClass('selected')
+      $(this).addClass('selected')
+    }
+    
     let id = $(this).attr('rel')
     
     $.get("Request.php", {taskId:id},
-      function (data, textStatus, jqXHR) {
-        $('.detail-date .section-title').text(data['due_date'])
+      function (data) {
+        
+        //duedate
+        convertDate(data['due_date'])
+
+        //reminder date
         $('.detail-reminder .section-title').text(data['reminder_date'])
+        
       },
       "json"
     );
@@ -109,7 +121,6 @@ $(document).ready(function () {
   //Click on context menu
   $('.context-menu').on('click', '.context-menu-item:first', function (e) { 
     e.preventDefault()
-
   });  
 
   //Click active sidebarItem
@@ -126,12 +137,24 @@ $(document).ready(function () {
       showButtonPanel: true,
       onSelect: function () {
         let detail_date = $(this).datepicker("getDate").getTime()/1000
-        $('input[name="duedate"]').attr("value",detail_date)
-        $('form[name="frmDueDate"').submit()
+        let taskItem_id = $('.selected').attr("rel")
+        $.post("Request.php", {detail_date_id: taskItem_id, detail_date: detail_date},
+          function () {
+            convertDate(detail_date)
+            $('.selected .taskItem-duedate').text(convertDateToVn(detail_date))
+          }
+        );
       }
     })
     $('.detail-date-input').show().focus().hide()
   });
+
+  //Display date in taskItem
+  $('.taskItem').each(function() {
+    let duedate = $(this).find('.taskItem-duedate').text()
+    duedate = convertDateToVn(duedate)
+    $(this).find('.taskItem-duedate').text(duedate)
+  })
 
   function convertDate(timestamp) {
     timestamp = new Date(timestamp*1000)
@@ -144,7 +167,7 @@ $(document).ready(function () {
     let date = timestamp.getDate()
 
     dateString = day + ', ' + month + ' ' + date
-    return dateString;
+    $('#detail .detail-date .section-title').text("Due on " + dateString)
   }
 
   let detail_date = $('#detail .detail-date .section-title').text()
@@ -159,16 +182,8 @@ $(document).ready(function () {
     let year = timestamp.getFullYear()
 
     dateString = ("0" + date).slice(-2)   + '.' + ("0" + month).slice(-2) + '.' + year
-    return dateString
+    return dateString;
   }
-
-  $('.taskItem-duedate').each(function () {
-    let date = $(this).text()
-    if (date != '') {
-      date = convertDateToVn(date)
-      $(this).text(date)  
-    }
-  })
   
   // if (detail_date.getFullYear() < now.getFullYear()) {
   //   detail_date_el.addClass("overdue")
@@ -216,8 +231,16 @@ $(document).ready(function () {
   //Save a subtask by press Enter
   $('.subtasks textarea').on("keypress", function (e) {
     if (e.keyCode == 13) {
+      let taskItem_id = $('.selected').attr('rel')
+      let subtaskTitle = $(this).val()
+      let ul = $(this).parents('.subtasks').children('ul')
       if ($(this).val() != '') {
-        $(this).parent().submit()  
+        $.post("Request.php", {id: taskItem_id, addSubTask: subtaskTitle},
+          function (data) {
+            ul.append(data)
+          },
+          "text"
+        );
       } else {
         $(this).val($(this).html())
         $(this).trigger("focusout");
