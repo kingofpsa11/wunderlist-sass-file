@@ -1,0 +1,8 @@
+{
+    "general" : "General",
+    "account" : "Account",
+    "shortcuts" : "Shortcuts",
+    "smart_lists" : "Smart Lists",
+    "notifications" : "Notifications",
+    "about" : "About"
+}

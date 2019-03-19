@@ -525,7 +525,11 @@
                 border: none;
                 top: 0;
                 left: 0;
-                height: 100%; }
+                height: 100%;
+                pointer-events: none;
+                border-right-style: solid;
+                border-right-width: 1px;
+                border-color: rgba(102, 137, 100, 0.2); }
             .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem.selected .taskItem-body {
               background: #e1f2fe; }
             .background-06 .main-interface #tasks .task-scroll .task-list .tasks .taskItem.done {
@@ -625,22 +629,25 @@
             display: none; }
           .background-06 .main-interface #detail .inner .body .subtasks .section-icon .checkBox.checked .task-checked {
             display: block; }
-          .background-06 .main-interface #detail .inner .body .subtasks .section-content {
+          .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea {
+            position: relative; }
+            .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea textarea, .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea pre {
+              border: none;
+              font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+              padding: 0; }
+            .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea textarea {
+              resize: none;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              box-sizing: border-box; }
+          .background-06 .main-interface #detail .inner .body .subtasks .display-view {
             color: #262626; }
-            .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea {
-              position: relative; }
-              .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea textarea, .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea pre {
-                border: none;
-                font-family: "Lato", "Geneva CY", "Lucida Grande", "Arial Unicode MS", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-                padding: 0; }
-              .background-06 .main-interface #detail .inner .body .subtasks .section-content .expandingArea textarea {
-                resize: none;
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                box-sizing: border-box; }
+          .background-06 .main-interface #detail .inner .body .subtasks .done .section-content .display-view {
+            text-decoration: line-through;
+            color: #9fa2a6; }
         .background-06 .main-interface #detail .inner .bottom {
           position: relative; }
           .background-06 .main-interface #detail .inner .bottom .detail-close {

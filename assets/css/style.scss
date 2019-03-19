@@ -694,6 +694,10 @@ $overdue-color: #b3312d;
                                     top: 0;
                                     left: 0;
                                     height: 100%;
+                                    pointer-events: none;
+                                    border-right-style: solid;
+                                    border-right-width: 1px;
+                                    border-color: rgba(102,137,100,0.2);
                                 }
                             }
                             &.selected .taskItem-body{
@@ -849,7 +853,6 @@ $overdue-color: #b3312d;
                             }
                         }
                         .section-content{
-                            color: #262626;
                             .expandingArea{
                                 position: relative;
                                 textarea,pre{
@@ -867,6 +870,13 @@ $overdue-color: #b3312d;
                                     box-sizing: border-box;
                                 }
                             }
+                        }
+                        .display-view{
+                            color: #262626;
+                        }
+                        & .done .section-content .display-view{
+                            text-decoration: line-through;
+                            color: #9fa2a6;
                         }
                     }
                 }

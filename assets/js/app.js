@@ -28,7 +28,23 @@ $(document).ready(function () {
   //Add more task
   $('.addTask-input.chromeless').on("keydown", function (e) {
       if (e.keyCode == 13) {
-        $('form[name="frmTask"]').submit()
+        // $('form[name="frmTask"]').submit()
+        let listId = $('.sidebarItem.active').attr("rel")
+        let title = $(this).val()
+        let taskItem = $('ol.tasks:first .taskItem:first').clone();
+        $(this).val('')
+
+        $.post("Request.php", {addTask: title, listId: listId},
+          function (data) {
+            taskItem.find('.taskItem-titleWrapper').text(title)
+            taskItem.find('.taskItem-duedate').text('')
+            console.log(taskItem.find('.taskItem-duedate').text(''))
+            taskItem.attr("rel",data)
+            $('ol.tasks:first').append(taskItem)
+          },
+          "text"
+        )
+
       }
   });
 
@@ -38,22 +54,35 @@ $(document).ready(function () {
   })
 
   //Check completed tasks
-  $('.tasks').on("click", '.taskItem-checkboxWrapper', function (e) {    
+  $('.tasks').on("click", '.taskItem-checkboxWrapper', function (e) {
     e.stopPropagation()
-    // $(this).find('form').submit()
+    let taskItem = $(this).parents('.taskItem')
+    let id = taskItem.attr('rel')
+    let status = taskItem.hasClass('done') ? 0 : 1
+    $.post("Request.php", {checkTask: id, status: status},
+      function (data) {
+        if (taskItem.hasClass("done")) {
+          taskItem.removeClass("done")
+          taskItem.find('.taskItem-checkboxWrapper').replaceWith(data)
+          taskItem.appendTo($('ol:first'))
+        } else {
+          taskItem.addClass("done")
+          taskItem.find('.taskItem-checkboxWrapper').replaceWith(data)
+          taskItem.appendTo($('ol:last'))
+        }
+      },
+      "html"
+    );
   });
 
   //Selected task    
   $('.tasks').on('click', '.taskItem', function () {
+    let id = $(this).attr('rel')
 
-    $('#detail').show()
     if (!$(this).hasClass('selected')) {
       $('.selected').removeClass('selected')
       $(this).addClass('selected')
-    }
-    
-    let id = $(this).attr('rel')
-    
+
     $.get("Request.php", {taskId:id},
       function (data) {
         
@@ -63,21 +92,36 @@ $(document).ready(function () {
         //reminder date
         $('.detail-reminder .section-title').text(data['reminder_date'])
         
+        //subtasks
+        const ul = $('.subtasks ul')
+        ul.html('')
         if (data['sub_tasks'].length > 0) {
           let subtasks = data['sub_tasks']
-          for (let index = 0; index < subtasks.length; index++) {
-            const el = subtasks[index]
-            // $.get("Request.php", {li},
-            //   function (data, textStatus, jqXHR) {
-                
-            //   },
-            //   "text"
-            // );
-          }
+          $.get("Request.php", {li:''},
+            function (data) {
+              const liItem = $(data)
+              for (let index = 0; index < subtasks.length; index++) {
+                const subtask = subtasks[index]
+                let el = liItem.clone()
+                el.find('.display-view span').text(subtask[0])
+                if (subtask[1] == 0) {
+                  el.addClass("done")
+                  el.find('.checkBox').addClass('checked')
+                }
+                ul.append(el)
+              }
+            },
+            "text"
+          )
         }
       },
       "json"
     );
+    }
+  });
+
+  $('.tasks').on('dblclick', '.taskItem',function () {
+    $('#detail').show()
   });
   
   //Display progress bar
@@ -165,27 +209,36 @@ $(document).ready(function () {
   //Display date in taskItem
   $('.taskItem').each(function() {
     let duedate = $(this).find('.taskItem-duedate').text()
-    duedate = convertDateToVn(duedate)
-    $(this).find('.taskItem-duedate').text(duedate)
+    if (duedate != '') {
+      duedate = convertDateToVn(duedate)
+    $(this).find('.taskItem-duedate').text(duedate)  
+    }
   })
 
   function convertDate(timestamp) {
-    timestamp = new Date(timestamp*1000)
-    let dateString
-    let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
-    
-    let day = days[timestamp.getDay()]
-    let month = months[timestamp.getMonth()]
-    let date = timestamp.getDate()
+    if (timestamp != null) {
+      timestamp = new Date(timestamp*1000)
+      let dateString
+      let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+      let days = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]
+      
+      let day = days[timestamp.getDay()]
+      let month = months[timestamp.getMonth()]
+      let date = timestamp.getDate()
 
-    dateString = day + ', ' + month + ' ' + date
-    $('#detail .detail-date .section-title').text("Due on " + dateString)
+      dateString = day + ', ' + month + ' ' + date
+      $('#detail .detail-date .section-title').text("Due on " + dateString)
+    } else {
+      $('#detail .detail-date .section-title').text("Set due date")
+    }
   }
 
-  let detail_date = $('#detail .detail-date .section-title').text()
-  let dateString = convertDate(detail_date)  
-  $('#detail .detail-date .section-title').text("Due on " + dateString)
+  // let detail_date = $('#detail .detail-date .section-title').text()
+  // console.log(detail_date)
+  // if (detail_date != '') {
+  //   let dateString = convertDate(detail_date)
+  //   $('#detail .detail-date .section-title').text("Due on " + dateString) 
+  // }
 
   function convertDateToVn(timestamp) {
     timestamp = new Date(timestamp*1000)
@@ -198,6 +251,20 @@ $(document).ready(function () {
     return dateString;
   }
   
+  function changeLanguage(lang) {
+    $.post("Request.php", {lang:lang},
+      function (data) {
+        let setting = $('#settings .tabs ul')
+        setting.find("[rel='general'] .tab-label").text(data["general"])
+        setting.find("[rel='account'] .tab-label").text(data["account"])
+        setting.find("[rel='shortcuts'] .tab-label").text(data["shortcuts"])
+        setting.find("[rel='smart_lists'] .tab-label").text(data["smart_lists"])
+        setting.find("[rel='notification'] .tab-label").text(data["notification"])
+        setting.find("[rel='about'] .tab-label").text(data["about"])
+      },
+      "json"
+    );
+  }
   // if (detail_date.getFullYear() < now.getFullYear()) {
   //   detail_date_el.addClass("overdue")
   // } else if (detail_date.getFullYear() == now.getFullYear()) {
@@ -241,7 +308,7 @@ $(document).ready(function () {
     $(this).parents('.content-fakable').children('.edit-view').addClass('hidden')
   })  
 
-  //Save a subtask by press Enter
+  //addSubTask - Save a subtask by press Enter
   $('.subtasks textarea').on("keypress", function (e) {
     if (e.keyCode == 13) {
       let taskItem_id = $('.selected').attr('rel')
@@ -250,10 +317,13 @@ $(document).ready(function () {
       if ($(this).val() != '') {
         $.post("Request.php", {id: taskItem_id, addSubTask: subtaskTitle},
           function (data) {
+            data = $(data)
+            data.find('.display-view span').text(subtaskTitle)
             ul.append(data)
           },
-          "json"
+          "html"
         );
+        $(this).val('')
       } else {
         $(this).val($(this).html())
         $(this).trigger("focusout");
@@ -262,8 +332,16 @@ $(document).ready(function () {
   })
 
   //Check complete subtask
-  $('.subtask').on("click", '.checkBox',function () {
-    $(this).children('form').submit();
+  $('.subtasks').on("click", '.checkBox',function () {
+    let taskId = $('.selected').attr("rel")
+    let title = $(this).parent(".subtask").find("display-view").text()
+    let checkBox = $(this)
+    $.post("Request.php", {changeStatusSubtask: taskId, subtaskTitle: title},
+      function () {
+        checkBox.toggleClass("checked")
+        checkBox.parents('.subtask').toggleClass("done")
+      }
+    );
   });
 
   //Click to logout
@@ -273,5 +351,10 @@ $(document).ready(function () {
     window.location.href = "http://localhost/wunderlist-sass-file/login.php"
   })
 
+  //change language
+  $('#edit-language').on("change", function () {
+    changeLanguage($('#edit-language').val())
+  })
+  changeLanguage($('#edit-language').val())
 
 });

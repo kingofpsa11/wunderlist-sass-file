@@ -1,0 +1,8 @@
+{
+    "general" : "Geral",
+    "account" : "Conta",
+    "shortcuts" : "Atalhos",
+    "smart_lists" : "Listas Inteligentes",
+    "notifications" : "Notificações",
+    "about" : "Sobre"
+}
