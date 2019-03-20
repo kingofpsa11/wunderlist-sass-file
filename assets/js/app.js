@@ -297,9 +297,9 @@ $(document).ready(function () {
   $('.subtasks ul').on('click', '.subtask .section-content',function () {
     $(this).find('.display-view').addClass('hidden')
     $(this).find('.edit-view').removeClass('hidden')
-    let value = $(this).find('.display-view span').text()
-    $(this).find('pre').text(value)
-    $(this).find('textarea').val(value)
+    let valueOfSubtask = $(this).find('.display-view span').text()
+    $(this).find('pre').text(valueOfSubtask)
+    $(this).find('textarea').val(valueOfSubtask)
     $(this).find('textarea').focus()
   })
 
@@ -357,4 +357,14 @@ $(document).ready(function () {
   })
   changeLanguage($('#edit-language').val())
 
-});
+  //Uploadfile
+  $('.section-item.files-add')[0].addEventListener("click", function(e) {
+    // e.preventDefault()
+    e.stopPropagation()
+    // console.log(e.target)
+    // console.log($(this).find('input'))
+    $(this).find('input').trigger("click")
+  })
+
+  
+})

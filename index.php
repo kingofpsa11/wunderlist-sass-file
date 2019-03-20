@@ -3,68 +3,68 @@ session_start();
 
 // include 'file.php';
 
-// $_SESSION['tasks'] = [[
-//     'id' => 1,
-//     'title' => 'Task1',
-//     'duedate' => 1553014800,
-//     'reminder_date' => '2019-02-26 12:10:00',
-//     'status' => 1,
-//     'list_id' => 1,
-//     'subtasks' => [
-//         ['Hom nay', 1],
-//         ['Hom qua', 0]
-//     ]
-// ],
-// [
-//     'id' => 2,
-//     'title' => 'Task2',
-//     'duedate' => 1553014800,
-//     'reminder_date' => '2019-02-20 11:10:00',
-//     'status' => 1,
-//     'list_id' => 2,
-//     'subtasks' => []
-// ],
-// [
-//     'id' => 3,
-//     'title' => 'Task3',
-//     'duedate' => 1553014800,
-//     'reminder_date' => '2019-02-27 09:10:00',
-//     'status' => 1,
-//     'list_id' => 1,
-//     'subtasks' => []
-// ],
-// [
-//     'id' => 4,
-//     'title' => 'Task4',
-//     'duedate' => 1553014800,
-//     'reminder_date' => '2019-02-28 08:10:00',
-//     'status' => 0,
-//     'list_id' => 1,
-//     'subtasks' => []
-// ],
-// [
-//     'id' => 5,
-//     'title' => 'Task5',
-//     'duedate' => 1553014800,
-//     'reminder_date' => '2019-01-28 07:10:00',
-//     'status' => 0,
-//     'list_id' => 0,
-//     'subtasks' => []
-// ]];
-// $_SESSION['lists'] = [
-//     [
-//         'id' => "inbox",
-//         'title' => 'inbox',
-//     ],
-//     [
-//         'id' => "today",
-//         'title' => 'today'
-//     ],
-//     [
-//         'id' => "week",
-//         'title' => 'week'
-//     ]
-// ];
+$_SESSION['tasks'] = [[
+    'id' => 1,
+    'title' => 'Task1',
+    'duedate' => 1553014800,
+    'reminder_date' => '2019-02-26 12:10:00',
+    'status' => 1,
+    'list_id' => 1,
+    'subtasks' => [
+        ['Hom nay', 1],
+        ['Hom qua', 0]
+    ]
+],
+[
+    'id' => 2,
+    'title' => 'Task2',
+    'duedate' => 1553014800,
+    'reminder_date' => '2019-02-20 11:10:00',
+    'status' => 1,
+    'list_id' => 2,
+    'subtasks' => []
+],
+[
+    'id' => 3,
+    'title' => 'Task3',
+    'duedate' => 1553014800,
+    'reminder_date' => '2019-02-27 09:10:00',
+    'status' => 1,
+    'list_id' => 1,
+    'subtasks' => []
+],
+[
+    'id' => 4,
+    'title' => 'Task4',
+    'duedate' => 1553014800,
+    'reminder_date' => '2019-02-28 08:10:00',
+    'status' => 0,
+    'list_id' => 1,
+    'subtasks' => []
+],
+[
+    'id' => 5,
+    'title' => 'Task5',
+    'duedate' => 1553014800,
+    'reminder_date' => '2019-01-28 07:10:00',
+    'status' => 0,
+    'list_id' => 0,
+    'subtasks' => []
+]];
+$_SESSION['lists'] = [
+    [
+        'id' => "inbox",
+        'title' => 'inbox',
+    ],
+    [
+        'id' => "today",
+        'title' => 'today'
+    ],
+    [
+        'id' => "week",
+        'title' => 'week'
+    ]
+];
 // var_dump($_SESSION['tasks'][0]['subtasks']);
 // $_SESSION['lang'] = 'en';
 // var_dump($_SESSION['lang']);
@@ -892,6 +892,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                             </div>
                             <div class="section-content">
                                 <div class="section-title files-add-label">Add a file</div>
+                                <input type="file" name="file" style="display:none">
                             </div>
                             <div class="section-attachments">
                                 <span class="add-sound">
