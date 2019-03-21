@@ -113,6 +113,7 @@ $overdue-color: #b3312d;
     }
     button.cancel{
         opacity: 0.6;
+        pointer-events: none;
     }
     ul.context-menu{
         position: absolute;
@@ -321,6 +322,8 @@ $overdue-color: #b3312d;
                     }
                     .content-header{
                         padding: 14px 14px 0;
+                        border-radius: 4px 4px 0 0;
+                        border-bottom: 1px solid #ebebeb;
                         .center{
                             text-align: center;
                         }
@@ -364,41 +367,44 @@ $overdue-color: #b3312d;
                     .tab{
                         .content-inner{
                             padding: 0 14px;
-                            li{
-                                display: flex;
-                                .content-people-meta{
+                            .content-people{
+                                padding: 6px 0;
+                                li{
                                     display: flex;
-                                    flex-direction: column;
-                                    padding: 0 10px;
-                                    .content-people-name{
-                                        line-height: 16px;
+                                    .content-people-meta{
                                         display: flex;
-                                        .content-people-name-label{
-                                            font-weight: bold;
-                                        }
-                                        .content-people-name-badge{
-                                            margin: 0 5px;
-                                            .badge{
-                                                display: inline-block;
-                                                border-radius: 10px;
-                                                font-size: 8px;
-                                                line-height: 8px;
-                                                padding: 2px 7px;
-                                                vertical-align: middle;
-                                                text-transform: uppercase;
+                                        flex-direction: column;
+                                        padding: 0 10px;
+                                        .content-people-name{
+                                            line-height: 16px;
+                                            display: flex;
+                                            .content-people-name-label{
+                                                font-weight: bold;
                                             }
-                                            .blue{
-                                                border: solid 1px #328ad6;
-                                                color: #1f7bcc;
+                                            .content-people-name-badge{
+                                                margin: 0 5px;
+                                                .badge{
+                                                    display: inline-block;
+                                                    border-radius: 10px;
+                                                    font-size: 8px;
+                                                    line-height: 8px;
+                                                    padding: 2px 7px;
+                                                    vertical-align: middle;
+                                                    text-transform: uppercase;
+                                                }
+                                                .blue{
+                                                    border: solid 1px #328ad6;
+                                                    color: #1f7bcc;
+                                                }
                                             }
                                         }
-                                    }
-                                    .content-people-email{
-                                        color: #a3a3a2;
-                                        font-size: 12px;
+                                        .content-people-email{
+                                            color: #a3a3a2;
+                                            font-size: 12px;
+                                        }
                                     }
                                 }
-                            }
+                            }       
                         }
                     }
                     .content-footer{

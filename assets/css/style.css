@@ -93,7 +93,8 @@
     background: #2b8dec;
     color: #fff; }
   .background-06 button.cancel {
-    opacity: 0.6; }
+    opacity: 0.6;
+    pointer-events: none; }
   .background-06 ul.context-menu {
     position: absolute;
     background: #fff;
@@ -254,7 +255,9 @@
                       position: relative;
                       vertical-align: bottom; }
           .background-06 .main-interface #modal .dialog-wrapper .dialog .content-header {
-            padding: 14px 14px 0; }
+            padding: 14px 14px 0;
+            border-radius: 4px 4px 0 0;
+            border-bottom: 1px solid #ebebeb; }
             .background-06 .main-interface #modal .dialog-wrapper .dialog .content-header .center {
               text-align: center; }
             .background-06 .main-interface #modal .dialog-wrapper .dialog .content-header .seperator {
@@ -288,33 +291,35 @@
                     bottom: -6px; }
           .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner {
             padding: 0 14px; }
-            .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li {
-              display: flex; }
-              .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li .content-people-meta {
-                display: flex;
-                flex-direction: column;
-                padding: 0 10px; }
-                .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li .content-people-meta .content-people-name {
-                  line-height: 16px;
-                  display: flex; }
-                  .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li .content-people-meta .content-people-name .content-people-name-label {
-                    font-weight: bold; }
-                  .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li .content-people-meta .content-people-name .content-people-name-badge {
-                    margin: 0 5px; }
-                    .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li .content-people-meta .content-people-name .content-people-name-badge .badge {
-                      display: inline-block;
-                      border-radius: 10px;
-                      font-size: 8px;
-                      line-height: 8px;
-                      padding: 2px 7px;
-                      vertical-align: middle;
-                      text-transform: uppercase; }
-                    .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li .content-people-meta .content-people-name .content-people-name-badge .blue {
-                      border: solid 1px #328ad6;
-                      color: #1f7bcc; }
-                .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner li .content-people-meta .content-people-email {
-                  color: #a3a3a2;
-                  font-size: 12px; }
+            .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people {
+              padding: 6px 0; }
+              .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li {
+                display: flex; }
+                .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li .content-people-meta {
+                  display: flex;
+                  flex-direction: column;
+                  padding: 0 10px; }
+                  .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li .content-people-meta .content-people-name {
+                    line-height: 16px;
+                    display: flex; }
+                    .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li .content-people-meta .content-people-name .content-people-name-label {
+                      font-weight: bold; }
+                    .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li .content-people-meta .content-people-name .content-people-name-badge {
+                      margin: 0 5px; }
+                      .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li .content-people-meta .content-people-name .content-people-name-badge .badge {
+                        display: inline-block;
+                        border-radius: 10px;
+                        font-size: 8px;
+                        line-height: 8px;
+                        padding: 2px 7px;
+                        vertical-align: middle;
+                        text-transform: uppercase; }
+                      .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li .content-people-meta .content-people-name .content-people-name-badge .blue {
+                        border: solid 1px #328ad6;
+                        color: #1f7bcc; }
+                  .background-06 .main-interface #modal .dialog-wrapper .dialog .tab .content-inner .content-people li .content-people-meta .content-people-email {
+                    color: #a3a3a2;
+                    font-size: 12px; }
           .background-06 .main-interface #modal .dialog-wrapper .dialog .content-footer {
             border-top: 1px solid #e0e0df;
             padding: 12px;

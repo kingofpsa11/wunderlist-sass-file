@@ -25,8 +25,20 @@ $(document).ready(function () {
       $('#modal .active').removeClass('active')
       $(this).addClass('active')
     }
-    
   })
+
+  // Create List in modal list
+  // Change List Name
+  $('.seperator input:first').on("keyup", function() {
+    if($(this).val() != ''){
+      $(this).parents('.content').find('button.blue').removeClass("cancel")
+    } else {
+      $(this).parents('.content').find('button.blue').addClass("cancel")
+    }
+  })
+
+  // Save New Name of List
+  
 
   //Display more tab
   $('.tab.last-tab').click(function (e) { 
