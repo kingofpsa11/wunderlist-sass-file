@@ -19,6 +19,15 @@ $(document).ready(function () {
     $('#modal').hide();
   });
 
+  //Active tab in modal
+  $('#modal li').on("click", function() {
+    if (!$(this).hasClass("active")) {
+      $('#modal .active').removeClass('active')
+      $(this).addClass('active')
+    }
+    
+  })
+
   //Display more tab
   $('.tab.last-tab').click(function (e) { 
     e.preventDefault();        
