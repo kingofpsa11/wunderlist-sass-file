@@ -170,8 +170,9 @@ if (isset($_POST['addListName'])) {
 
 if (isset($_FILES["file"])) {
     
-    $file = $_FILES["file"]["tmp_name"];
-    move_uploaded_file($file, "uploads/" . $file);
+    $file = $_FILES["file"];
+    $tempFile = $file['tmp_name'];
+    move_uploaded_file($tempFile, "uploads/" . $file['name']);
     echo "upload file";
 }
 ?>

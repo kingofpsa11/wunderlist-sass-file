@@ -405,23 +405,25 @@ $(document).ready(function () {
   })
 
   $('.section-item.files-add input').on('change', function () {
-    
     if ($(this).prop('files').length > 0) {
       const file = $(this).prop('files')[0]
-      const formdata = new FormData()
-      formdata.append("file",file)
+      $('#uploadFile').submit()
+      $('#uploadFile').submit(function(e){
+        const formdata = new FormData()
+        formdata.append("file",file)
 
-      $.ajax({
-        type: "POST",
-        url: "Request.php",
-        data: formdata,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-          console.log(response)
-        }
-      });
+        $.ajax({
+          type: "POST",
+          url: "Request.php",
+          data: formdata,
+          processData: false,
+          cache: false,
+          contentType: false,
+          success: function (response) {
+            console.log(response)
+          }
+        });
+      })
     }
-    
   });
 })

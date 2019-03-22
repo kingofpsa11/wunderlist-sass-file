@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-// include 'file.php';
+// include 'Request.php';
 
 $_SESSION['tasks'] = [[
     'id' => 1,
@@ -51,29 +51,22 @@ $_SESSION['tasks'] = [[
     'list_id' => 0,
     'subtasks' => []
 ]];
-// $_SESSION['lists'] = [
-//     [
-//         'id' => "1",
-//         'title' => 'inbox',
-//     ],
-//     [
-//         'id' => "2",
-//         'title' => 'today'
-//     ],
-//     [
-//         'id' => "3",
-//         'title' => 'week'
-//     ]
-// ];
+$_SESSION['lists'] = [
+    [
+        'id' => 1,
+        'title' => 'inbox',
+    ],
+    [
+        'id' => 2,
+        'title' => 'list'
+    ]
+];
 // var_dump($_SESSION['tasks'][0]['subtasks']);
-// $_SESSION['lang'] = 'en';
-// var_dump($_SESSION['lists']);
 // session_destroy();
 
-if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
-    header("Location:login.php");
-}
-
+// if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
+//     header("Location:login.php");
+// }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,6 +81,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
     <script src="assets/js/jquery-3.3.1.min.js"></script>
     <script src="assets/js/jquery-ui.js"></script>    
     <script src="assets/js/app.js"></script>
+    
+
 </head> 
 <body class="wlapp-parent chrome animate platform-windows application-main background-06 focus-browser">
     <ul class="context-menu">
@@ -173,15 +168,15 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
         </li>        
     </ul>
     <div class="main-interface">
-        <div id="modal" style="display:none">
-            <!-- <ul class="reminders dialog-wrapper"></ul>
+        <div id="modal">
+            <!-- <ul class="reminders dialog-wrapper"></ul> -->
             <div class="dialog-wrapper">
                 <div id="settings" class="dialog preferences show">
                     <div class="content">
                         <div class="tabs">
                             <ul>
                                 <li>
-                                    <a rel="general">
+                                    <a>
                                         <span class="icon settings-general"></span>
                                         <span class="tab-label">
                                             General
@@ -189,7 +184,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a rel="account">
+                                    <a>
                                         <span class="icon settings-account"></span>
                                         <span class="tab-label">
                                             Account
@@ -197,7 +192,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a rel="shortcuts">
+                                    <a>
                                         <span class="icon settings-shortcuts"></span>
                                         <span class="tab-label">
                                             Shortcuts
@@ -205,7 +200,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a rel="smart_lists">
+                                    <a>
                                         <span class="icon settings-smart-lists"></span>
                                         <span class="tab-label">
                                             Smart Lists
@@ -213,7 +208,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a rel="notifications">
+                                    <a>
                                         <span class="icon settings-notification"></span>
                                         <span class="tab-label">
                                             Notification
@@ -221,7 +216,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     </a>
                                 </li>
                                 <li>
-                                    <a rel="about">
+                                    <a>
                                         <span class="icon settings-about"></span>
                                         <span class="tab-label">
                                             About
@@ -238,8 +233,8 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                         <div class="col-40">
                                             <span class="select">
                                                 <select id="edit-language" class="tabStart">
-                                                    <option value="en" <?php echo ($_SESSION['lang']=='en' ? "selected='selected'" : '')?>>English</option>
-                                                    <option value="po" <?php echo ($_SESSION['lang']=='po' ? "selected='selected'" : '')?>>Portugues(Brazil)</option>                                                    
+                                                    <option value="en">English</option>
+                                                    <option value="pt">Portugues(Brazil)</option>
                                                 </select>
                                             </span>
                                         </div>
@@ -390,77 +385,6 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                         </div>
                     </div>
                 </div>
-            </div> -->
-
-            <div class="dialog-wrapper">
-                <div class="dialog listOptions">
-                    <div class="content">
-                        <div class="content-header">
-                            <h3 class="center">
-                                Create New List
-                            </h3>
-                            <div class="seperator">
-                                <input type="text" placeholder="List Name" class="listOptions-title">
-                            </div>
-                            <div class="seperator">
-                                <ul class="content-tab">
-                                    <li>
-                                        <a class="active">
-                                            list members
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a >
-                                            list options
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="seperator">
-                                <div class="input-fake">
-                                    <input type="text" class="chromeless hasIcon" placeholder="Name or email address...">
-                                    <svg class="share rtl-flip" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g stroke="none" stroke-width="1" fill-rule="evenodd"> <g id="share"> <path d="M11.5025,12 C13.7825,12 15.5025,8.84 15.5025,6 C15.5025,3.8 13.7025,2 11.5025,2 C9.3025,2 7.5025,3.8 7.5025,6 C7.5025,8.5 9.0225,12 11.5025,12 L11.5025,12 Z M11.5025,3 C13.1625,3 14.5025,4.34 14.5025,6 C14.5025,8.26 13.1225,11 11.5025,11 C9.8425,11 8.5025,8.26 8.5025,6 C8.5025,4.34 9.8425,3 11.5025,3 L11.5025,3 Z M4.5025,10 L6.0025,10 C6.2825,10 6.5025,9.78 6.5025,9.5 C6.5025,9.22 6.2825,9 6.0025,9 L4.5025,9 L4.5025,7.5 C4.5025,7.22 4.2825,7 4.0025,7 C3.7225,7 3.5025,7.22 3.5025,7.5 L3.5025,9 L2.0025,9 C1.7225,9 1.5025,9.22 1.5025,9.5 C1.5025,9.78 1.7225,10 2.0025,10 L3.5025,10 L3.5025,11.5 C3.5025,11.78 3.7225,12 4.0025,12 C4.2825,12 4.5025,11.78 4.5025,11.5 L4.5025,10 Z M18.2625,14.88 C18.0625,14 17.4025,13.28 16.5225,13.04 L14.2225,12.36 C14.0825,12.32 13.9625,12.26 13.8625,12.14 C13.6625,11.96 13.3425,11.96 13.1625,12.16 C12.9625,12.34 12.9625,12.66 13.1625,12.86 C13.3825,13.08 13.6425,13.24 13.9425,13.32 L16.2425,14 C16.7625,14.14 17.1625,14.58 17.2825,15.1 L17.4425,15.8 C16.9025,16.16 15.2025,17 11.5025,17 C7.7825,17 6.1025,16.14 5.5625,15.8 L5.7225,15.04 C5.8425,14.5 6.2625,14.06 6.8025,13.92 L9.0425,13.32 C9.3425,13.24 9.6225,13.08 9.8625,12.86 C10.0425,12.66 10.0425,12.34 9.8625,12.14 C9.6625,11.96 9.3425,11.96 9.1425,12.14 C9.0425,12.24 8.9225,12.32 8.7825,12.36 L6.5425,12.96 C5.6425,13.2 4.9625,13.92 4.7425,14.82 L4.5225,15.9 C4.4825,16.06 4.5225,16.24 4.6425,16.36 C4.7225,16.42 6.3625,18 11.5025,18 C16.6425,18 18.2825,16.42 18.3625,16.36 C18.4825,16.24 18.5225,16.06 18.4825,15.9 L18.2625,14.88 Z" id="W"></path> </g> </g> </svg>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab members">
-                            <div class="content-inner members">
-                                <ul class="content-people">
-                                    <li>
-                                        <span>
-                                            <div class="avatar medium" title="Joey Tribbiani">
-                                                <img src="icons/user-icon.png">
-                                            </div>
-                                        </span>
-                                            
-                                        <div class="content-people-meta">
-                                            <div class="content-people-name">
-                                                <span class="content-people-name-label">Joey Tribbiani</span>
-                                                <div class="content-people-name-badge">
-                                                    <span class="badge blue">Owner</span>
-                                                </div>
-                                            </div>
-                                            <div class="content-people-email">
-                                                phammanhha305@gmail.com
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="content-footer">
-                            <div class="cols">
-                                <div class="col-40"></div>
-                                <div class="col-30">
-                                    <button class="full">Cancel</button>
-                                </div>
-                                <div class="col-30">
-                                    <button class="cancel full blue">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -536,27 +460,27 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                             </a>
                         </li>
                     </ul>
-                    
                     <ul class="lists-collection">
-                        <?php
-                            if (isset($_SESSION['lists'])) {
-                                $lists = $_SESSION['lists'];
-                                foreach ($lists as $list) {
-                        ?>
                         <li class="sidebarItem owner list draggable">
                             <a>
                                 <span class="list-icon">
                                     <svg class="list rtl-flip" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Web-svgs" stroke="none" stroke-width="1" fill-rule="evenodd"> <g id="list"> <path d="M3,7 C2.44,7 2,6.56 2,6 L2,5 C2,4.44 2.44,4 3,4 L4,4 C4.56,4 5,4.44 5,5 L5,6 C5,6.56 4.56,7 4,7 L3,7 Z M4,5 L3,5 L3,6 L4,6 L4,5 Z M7.5,6 C7.22,6 7,5.78 7,5.5 C7,5.22 7.22,5 7.5,5 L17.5,5 C17.78,5 18,5.22 18,5.5 C18,5.78 17.78,6 17.5,6 L7.5,6 Z M3,12 C2.44,12 2,11.56 2,11 L2,10 C2,9.44 2.44,9 3,9 L4,9 C4.56,9 5,9.44 5,10 L5,11 C5,11.56 4.56,12 4,12 L3,12 Z M4,10 L3,10 L3,11 L4,11 L4,10 Z M7.5,11 C7.22,11 7,10.78 7,10.5 C7,10.22 7.22,10 7.5,10 L17.5,10 C17.78,10 18,10.22 18,10.5 C18,10.78 17.78,11 17.5,11 L7.5,11 Z M3,17 C2.44,17 2,16.56 2,16 L2,15 C2,14.44 2.44,14 3,14 L4,14 C4.56,14 5,14.44 5,15 L5,16 C5,16.56 4.56,17 4,17 L3,17 Z M4,15 L3,15 L3,16 L4,16 L4,15 Z M7.5,16 C7.22,16 7,15.78 7,15.5 C7,15.22 7.22,15 7.5,15 L17.5,15 C17.78,15 18,15.22 18,15.5 C18,15.78 17.78,16 17.5,16 L7.5,16 Z" id="K"> </path> </g> </g> </svg>
                                 </span>
-                                <span class="title"><?php echo $list['title']?></span>
+                                <span class="title">Inbox</span>
                                 <span class="overdue-count"></span>
                                 <span class="count"></span>
                             </a>
                         </li>
-                        <?php
-                                }
-                            }
-                        ?>
+                        <li class="sidebarItem owner list draggable">
+                            <a>
+                                <span class="list-icon">
+                                   <svg class="list rtl-flip" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Web-svgs" stroke="none" stroke-width="1" fill-rule="evenodd"> <g id="list"> <path d="M3,7 C2.44,7 2,6.56 2,6 L2,5 C2,4.44 2.44,4 3,4 L4,4 C4.56,4 5,4.44 5,5 L5,6 C5,6.56 4.56,7 4,7 L3,7 Z M4,5 L3,5 L3,6 L4,6 L4,5 Z M7.5,6 C7.22,6 7,5.78 7,5.5 C7,5.22 7.22,5 7.5,5 L17.5,5 C17.78,5 18,5.22 18,5.5 C18,5.78 17.78,6 17.5,6 L7.5,6 Z M3,12 C2.44,12 2,11.56 2,11 L2,10 C2,9.44 2.44,9 3,9 L4,9 C4.56,9 5,9.44 5,10 L5,11 C5,11.56 4.56,12 4,12 L3,12 Z M4,10 L3,10 L3,11 L4,11 L4,10 Z M7.5,11 C7.22,11 7,10.78 7,10.5 C7,10.22 7.22,10 7.5,10 L17.5,10 C17.78,10 18,10.22 18,10.5 C18,10.78 17.78,11 17.5,11 L7.5,11 Z M3,17 C2.44,17 2,16.56 2,16 L2,15 C2,14.44 2.44,14 3,14 L4,14 C4.56,14 5,14.44 5,15 L5,16 C5,16.56 4.56,17 4,17 L3,17 Z M4,15 L3,15 L3,16 L4,16 L4,15 Z M7.5,16 C7.22,16 7,15.78 7,15.5 C7,15.22 7.22,15 7.5,15 L17.5,15 C17.78,15 18,15.22 18,15.5 C18,15.78 17.78,16 17.5,16 L7.5,16 Z" id="K"> </path> </g> </g> </svg>
+                                </span>
+                                <span class="title">Work</span>
+                                <span class="overdue-count"></span>
+                                <span class="count"></span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -689,13 +613,16 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                             </g>
                         </svg>
                     </a>
-                    <input type="text" class="addTask-input chromeless" placeholder="Add a to-do..." name="addTask" >
+                    <form action="index.php" method="post" name="frmTask">
+                        <input type="text" class="addTask-input chromeless" placeholder="Add a to-do..." name="addTask" >
+                        <input type="hidden" name="id" value="1">
+                    </form>
                     <div class="nlp-feedback"></div>
                     <div class="positionHelper"></div>
                     <div class="end-positionHelper-target"></div>
                     <a class="speech-wrapper hidden"></a>
                 </div>
-                <div class="task-list">
+                <div class="task-list inbox">
                     <!-- <h2 class="heading normal">
                         <a class="groupHeader">Inbox</a>
                     </h2> -->
@@ -733,21 +660,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                         <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve"> <g> <path d="M3.74,18 C3.64,18 3.54,17.96 3.46,17.9 C3.28,17.76 3.2,17.54 3.28,17.34 L5.16,11.5 L0.2,7.9 C0.04,7.78 -0.04,7.56 0.02,7.34 C0.1,7.14 0.28,7 0.5,7 L6.64,7 L8.52,1.16 C8.66,0.76 9.34,0.76 9.48,1.16 L11.38,7 L17.5,7 C17.72,7 17.9,7.14 17.98,7.34 C18.04,7.56 17.96,7.78 17.8,7.9 L12.84,11.5 L14.72,17.34 C14.8,17.54 14.72,17.76 14.54,17.9 C14.38,18.02 14.14,18.02 13.96,17.9 L9,14.3 L4.04,17.9 C3.96,17.96 3.84,18 3.74,18 L3.74,18 Z M9,13.18 C9.1,13.18 9.2,13.2 9.3,13.28 L13.3,16.18 L11.78,11.46 C11.7,11.26 11.78,11.04 11.96,10.92 L15.96,8 L11,8 C10.8,8 10.6,7.86 10.54,7.66 L9,2.94 L7.46,7.66 C7.4,7.86 7.22,8 7,8 L2.04,8 L6.04,10.92 C6.22,11.04 6.3,11.26 6.22,11.46 L4.7,16.18 L8.7,13.28 C8.8,13.2 8.9,13.18 9,13.18 L9,13.18 Z"></path> </g> </svg>
                                     </span>
                                 </a>
-                                <div class="taskItem-progress-bar" style="
-                                <?php
-                                    $numberOfSubtasks = count($value['subtasks']);
-                                    $countCheckedSubtasks=0;
-                                    for ($i=0; $i < $numberOfSubtasks; $i++) {
-                                        if ($value['subtasks'][$i][1] == 1) {
-                                            $countCheckedSubtasks++;
-                                        }
-                                    }
-                                    if ($countCheckedSubtasks > 0) {
-                                        $width = $countCheckedSubtasks / $numberOfSubtasks * 100;
-                                        echo "width:" . $width . "%";
-                                    }
-                                ?>">
-                                </div>
+                                <div class="taskItem-progress-bar"></div>
                             </div>
                         </li>
                         <?php
@@ -771,6 +684,10 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                     <span>
                                         <svg class="task-checked" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;"> <g> <path d="M9.5,14c-0.132,0 -0.259,-0.052 -0.354,-0.146c-1.485,-1.486 -3.134,-2.808 -4.904,-3.932c-0.232,-0.148 -0.302,-0.457 -0.153,-0.691c0.147,-0.231 0.456,-0.299 0.69,-0.153c1.652,1.049 3.202,2.266 4.618,3.621c2.964,-4.9 5.989,-8.792 9.749,-12.553c0.196,-0.195 0.512,-0.195 0.708,0c0.195,0.196 0.195,0.512 0,0.708c-3.838,3.837 -6.899,7.817 -9.924,12.902c-0.079,0.133 -0.215,0.221 -0.368,0.24c-0.021,0.003 -0.041,0.004 -0.062,0.004"></path> <path d="M15.5,18l-11,0c-1.379,0 -2.5,-1.121 -2.5,-2.5l0,-11c0,-1.379 1.121,-2.5 2.5,-2.5l10,0c0.276,0 0.5,0.224 0.5,0.5c0,0.276 -0.224,0.5 -0.5,0.5l-10,0c-0.827,0 -1.5,0.673 -1.5,1.5l0,11c0,0.827 0.673,1.5 1.5,1.5l11,0c0.827,0 1.5,-0.673 1.5,-1.5l0,-9.5c0,-0.276 0.224,-0.5 0.5,-0.5c0.276,0 0.5,0.224 0.5,0.5l0,9.5c0,1.379 -1.121,2.5 -2.5,2.5"></path> </g> </svg>
                                     </span>
+                                    <form action="index.php" method="post" name="<?php echo "frmDone" . $value['id'] ?>">
+                                        <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
+                                        <input type="hidden" name="status" value="<?php echo $value['status'] ?>">
+                                    </form>
                                 </a>
                                 <div class="taskItem-titleWrapper"><?php echo $value['title']?></div>
                                 <span class="taskItem-duedate overdue"><?php echo $value['duedate'] ?></span>
@@ -934,7 +851,10 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                 <div class="section-edit hidden">
                                     <div class="expandingArea">
                                         <pre style="line-height:20px;font-size:15px;">Add a subtask</pre>
-                                        <textarea style="line-height:20px;font-size:15px;" placeholder="Add a subtask" name="addSubtask"></textarea>
+                                        <form action="index.php" method="post">
+                                            <textarea style="line-height:20px;font-size:15px;" placeholder="Add a subtask" name="addSubtask"></textarea>
+                                            <input type="hidden" name="id" value="<?php echo $value['id'] ?>">
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -961,9 +881,6 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                             </div>
                             <div class="section-content">
                                 <div class="section-title files-add-label">Add a file</div>
-                                <form action="Request.php" id="uploadFile" method="POST" enctype="multipart/form-data">
-                                    <input type="file" name="file" style="display:none">
-                                </form>
                             </div>
                             <div class="section-attachments">
                                 <span class="add-sound">
@@ -1036,6 +953,42 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
         </div>
     </div>
     
-</body>
+<!-- Code injected by live-server -->
+<script type="text/javascript">
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					head.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					head.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script></body>
 <script></script>
 </html>
