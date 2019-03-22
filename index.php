@@ -53,21 +53,21 @@ session_start();
 // ]];
 // $_SESSION['lists'] = [
 //     [
-//         'id' => "inbox",
+//         'id' => "1",
 //         'title' => 'inbox',
 //     ],
 //     [
-//         'id' => "today",
+//         'id' => "2",
 //         'title' => 'today'
 //     ],
 //     [
-//         'id' => "week",
+//         'id' => "3",
 //         'title' => 'week'
 //     ]
 // ];
 // var_dump($_SESSION['tasks'][0]['subtasks']);
 // $_SESSION['lang'] = 'en';
-// var_dump($_SESSION['lang']);
+// var_dump($_SESSION['lists']);
 // session_destroy();
 
 if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
@@ -88,8 +88,6 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
     <script src="assets/js/jquery-3.3.1.min.js"></script>
     <script src="assets/js/jquery-ui.js"></script>    
     <script src="assets/js/app.js"></script>
-    
-
 </head> 
 <body class="wlapp-parent chrome animate platform-windows application-main background-06 focus-browser">
     <ul class="context-menu">
@@ -175,7 +173,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
         </li>        
     </ul>
     <div class="main-interface">
-        <div id="modal" style="display:block">
+        <div id="modal" style="display:none">
             <!-- <ul class="reminders dialog-wrapper"></ul>
             <div class="dialog-wrapper">
                 <div id="settings" class="dialog preferences show">
@@ -402,7 +400,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                                 Create New List
                             </h3>
                             <div class="seperator">
-                                <input type="text" placeholder="List Name">
+                                <input type="text" placeholder="List Name" class="listOptions-title">
                             </div>
                             <div class="seperator">
                                 <ul class="content-tab">
@@ -538,27 +536,27 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                             </a>
                         </li>
                     </ul>
+                    
                     <ul class="lists-collection">
+                        <?php
+                            if (isset($_SESSION['lists'])) {
+                                $lists = $_SESSION['lists'];
+                                foreach ($lists as $list) {
+                        ?>
                         <li class="sidebarItem owner list draggable">
                             <a>
                                 <span class="list-icon">
                                     <svg class="list rtl-flip" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Web-svgs" stroke="none" stroke-width="1" fill-rule="evenodd"> <g id="list"> <path d="M3,7 C2.44,7 2,6.56 2,6 L2,5 C2,4.44 2.44,4 3,4 L4,4 C4.56,4 5,4.44 5,5 L5,6 C5,6.56 4.56,7 4,7 L3,7 Z M4,5 L3,5 L3,6 L4,6 L4,5 Z M7.5,6 C7.22,6 7,5.78 7,5.5 C7,5.22 7.22,5 7.5,5 L17.5,5 C17.78,5 18,5.22 18,5.5 C18,5.78 17.78,6 17.5,6 L7.5,6 Z M3,12 C2.44,12 2,11.56 2,11 L2,10 C2,9.44 2.44,9 3,9 L4,9 C4.56,9 5,9.44 5,10 L5,11 C5,11.56 4.56,12 4,12 L3,12 Z M4,10 L3,10 L3,11 L4,11 L4,10 Z M7.5,11 C7.22,11 7,10.78 7,10.5 C7,10.22 7.22,10 7.5,10 L17.5,10 C17.78,10 18,10.22 18,10.5 C18,10.78 17.78,11 17.5,11 L7.5,11 Z M3,17 C2.44,17 2,16.56 2,16 L2,15 C2,14.44 2.44,14 3,14 L4,14 C4.56,14 5,14.44 5,15 L5,16 C5,16.56 4.56,17 4,17 L3,17 Z M4,15 L3,15 L3,16 L4,16 L4,15 Z M7.5,16 C7.22,16 7,15.78 7,15.5 C7,15.22 7.22,15 7.5,15 L17.5,15 C17.78,15 18,15.22 18,15.5 C18,15.78 17.78,16 17.5,16 L7.5,16 Z" id="K"> </path> </g> </g> </svg>
                                 </span>
-                                <span class="title">Inbox</span>
+                                <span class="title"><?php echo $list['title']?></span>
                                 <span class="overdue-count"></span>
                                 <span class="count"></span>
                             </a>
                         </li>
-                        <li class="sidebarItem owner list draggable">
-                            <a>
-                                <span class="list-icon">
-                                   <svg class="list rtl-flip" width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Web-svgs" stroke="none" stroke-width="1" fill-rule="evenodd"> <g id="list"> <path d="M3,7 C2.44,7 2,6.56 2,6 L2,5 C2,4.44 2.44,4 3,4 L4,4 C4.56,4 5,4.44 5,5 L5,6 C5,6.56 4.56,7 4,7 L3,7 Z M4,5 L3,5 L3,6 L4,6 L4,5 Z M7.5,6 C7.22,6 7,5.78 7,5.5 C7,5.22 7.22,5 7.5,5 L17.5,5 C17.78,5 18,5.22 18,5.5 C18,5.78 17.78,6 17.5,6 L7.5,6 Z M3,12 C2.44,12 2,11.56 2,11 L2,10 C2,9.44 2.44,9 3,9 L4,9 C4.56,9 5,9.44 5,10 L5,11 C5,11.56 4.56,12 4,12 L3,12 Z M4,10 L3,10 L3,11 L4,11 L4,10 Z M7.5,11 C7.22,11 7,10.78 7,10.5 C7,10.22 7.22,10 7.5,10 L17.5,10 C17.78,10 18,10.22 18,10.5 C18,10.78 17.78,11 17.5,11 L7.5,11 Z M3,17 C2.44,17 2,16.56 2,16 L2,15 C2,14.44 2.44,14 3,14 L4,14 C4.56,14 5,14.44 5,15 L5,16 C5,16.56 4.56,17 4,17 L3,17 Z M4,15 L3,15 L3,16 L4,16 L4,15 Z M7.5,16 C7.22,16 7,15.78 7,15.5 C7,15.22 7.22,15 7.5,15 L17.5,15 C17.78,15 18,15.22 18,15.5 C18,15.78 17.78,16 17.5,16 L7.5,16 Z" id="K"> </path> </g> </g> </svg>
-                                </span>
-                                <span class="title">Work</span>
-                                <span class="overdue-count"></span>
-                                <span class="count"></span>
-                            </a>
-                        </li>
+                        <?php
+                                }
+                            }
+                        ?>
                     </ul>
                 </div>
 
@@ -697,7 +695,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                     <div class="end-positionHelper-target"></div>
                     <a class="speech-wrapper hidden"></a>
                 </div>
-                <div class="task-list inbox">
+                <div class="task-list">
                     <!-- <h2 class="heading normal">
                         <a class="groupHeader">Inbox</a>
                     </h2> -->

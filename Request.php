@@ -156,4 +156,22 @@ if (isset($_POST['lang'])) {
     fclose($file);
     echo $content;
 }
+
+// Create List Name
+if (isset($_POST['addListName'])) {
+    $listName = $_POST['addListName'];
+
+    $list = new ListTask();
+    $storage = new Storage();
+
+    $list->setTitle($listName);
+    $storage->addList($list);
+}
+
+if (isset($_FILES["file"])) {
+    
+    $file = $_FILES["file"]["tmp_name"];
+    move_uploaded_file($file, "uploads/" . $file);
+    echo "upload file";
+}
 ?>

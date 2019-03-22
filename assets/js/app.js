@@ -15,8 +15,20 @@ $(document).ready(function () {
 
   //Click button Done hide modal
   $('button.full').click(function (e) { 
-    e.preventDefault();
-    $('#modal').hide();
+    e.preventDefault()
+    $('#modal').hide()
+
+    if ($('.listOptions-title')) {
+      let listName = $('.listOptions-title').val()
+      if (listName != '') {
+        $.post("Request.php", {addListName: listName},
+        function () {
+          $('.lists-collection').load( 'index.php .lists-collection')
+        }
+      );
+      }
+      
+    }
   });
 
   //Active tab in modal
@@ -207,6 +219,14 @@ $(document).ready(function () {
       $('.sidebarItem.active').removeClass('active')
       $(this).addClass('active')
     }
+
+    let title = $(this).find('.title').text()
+    $('#list-toolbar').children('h1.title').text(title)
+    let taskScroll = $('.task-scroll')
+    taskScroll.removeClass()
+    taskScroll.addClass('task-scroll ' + $(this).attr('rel') )
+
+
   });
 
   //Date picker detail_date
@@ -380,12 +400,28 @@ $(document).ready(function () {
 
   //Uploadfile
   $('.section-item.files-add')[0].addEventListener("click", function(e) {
-    // e.preventDefault()
     e.stopPropagation()
-    // console.log(e.target)
-    // console.log($(this).find('input'))
     $(this).find('input').trigger("click")
   })
 
-  
+  $('.section-item.files-add input').on('change', function () {
+    
+    if ($(this).prop('files').length > 0) {
+      const file = $(this).prop('files')[0]
+      const formdata = new FormData()
+      formdata.append("file",file)
+
+      $.ajax({
+        type: "POST",
+        url: "Request.php",
+        data: formdata,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+          console.log(response)
+        }
+      });
+    }
+    
+  });
 })

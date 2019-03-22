@@ -143,7 +143,7 @@ class Task extends TaskModel
 class ListTask
 {
     protected $_id;
-    protected $_list;
+    protected $_title;
 
     public function getId()
     {
@@ -157,12 +157,12 @@ class ListTask
 
     public function setTitle($title)
     {
-        $this->_list = $title;
+        $this->_title = $title;
     }
 
     public function getTitle()
     {
-        return $this->_list;
+        return $this->_title;
     }
 
 }
@@ -222,11 +222,12 @@ class Storage
 
     public function addList(ListTask $list)
     {
-        $lastList = end($this->getAllLists()) ;
+        $lists = $this->getAllLists();
+        $lastList = end($lists) ;
         $array = [];
         $array['id'] = $lastList['id'] + 1;
         $array['title'] = $list->getTitle();
-        $_SESSION['tasks'][] = $array;
+        $_SESSION['lists'][] = $array;
     }
 
     public function getList($list_id)
@@ -249,9 +250,9 @@ class Storage
 
     public function getAllLists()
     {
-        return $_SESSION['list'];
+        $lists = $_SESSION['lists'];
+        return $_SESSION['lists'];
     }
-
 }
 
 ?>
