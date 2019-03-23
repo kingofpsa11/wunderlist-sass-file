@@ -10,6 +10,7 @@ $(document).ready(function () {
   $('#account-settings').click(function (e) { 
     e.preventDefault();
     $('#modal').show();
+    $('#modal').find('.preferences').show()
     $('#user-popover').hide();
   });
 
@@ -50,7 +51,9 @@ $(document).ready(function () {
   })
 
   // Save New Name of List
-  
+  $('.sidebarActions-addList').on('click', function(e){
+
+  })
 
   //Display more tab
   $('.tab.last-tab').click(function (e) { 
@@ -71,7 +74,6 @@ $(document).ready(function () {
           function (data) {
             taskItem.find('.taskItem-titleWrapper').text(title)
             taskItem.find('.taskItem-duedate').text('')
-            console.log(taskItem.find('.taskItem-duedate').text(''))
             taskItem.attr("rel",data)
             $('ol.tasks:first').append(taskItem)
           },
@@ -108,7 +110,7 @@ $(document).ready(function () {
     );
   });
 
-  //Selected task    
+  //Selected task
   $('.tasks').on('click', '.taskItem', function () {
     let id = $(this).attr('rel')
 
@@ -406,24 +408,24 @@ $(document).ready(function () {
 
   $('.section-item.files-add input').on('change', function () {
     if ($(this).prop('files').length > 0) {
-      const file = $(this).prop('files')[0]
       $('#uploadFile').submit()
-      $('#uploadFile').submit(function(e){
-        const formdata = new FormData()
-        formdata.append("file",file)
-
-        $.ajax({
-          type: "POST",
-          url: "Request.php",
-          data: formdata,
-          processData: false,
-          cache: false,
-          contentType: false,
-          success: function (response) {
-            console.log(response)
-          }
-        });
-      })
     }
   });
+
+  $('#uploadFile').submit(function(e){
+    e.preventDefault()
+    const file = $('.section-item.files-add input').prop('files')[0]
+    const formdata = new FormData()
+    formdata.append("file",file)
+
+    $.ajax({  
+      type: "POST",
+      url: "Request.php",
+      data: formdata,
+      processData: false,
+      cache: false,
+      contentType: false,
+      
+    })
+  })
 })

@@ -174,9 +174,9 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
     </ul>
     <div class="main-interface">
         <div id="modal" style="display:none">
-            <!-- <ul class="reminders dialog-wrapper"></ul>
+            <ul class="reminders dialog-wrapper"></ul>
             <div class="dialog-wrapper">
-                <div id="settings" class="dialog preferences show">
+                <div id="settings" class="dialog preferences show" style="display:none">
                     <div class="content">
                         <div class="tabs">
                             <ul>
@@ -390,10 +390,7 @@ if (!isset($_COOKIE['email']) && !isset($_COOKIE['password'])) {
                         </div>
                     </div>
                 </div>
-            </div> -->
-
-            <div class="dialog-wrapper">
-                <div class="dialog listOptions">
+                <div class="dialog listOptions" style="display:none">
                     <div class="content">
                         <div class="content-header">
                             <h3 class="center">

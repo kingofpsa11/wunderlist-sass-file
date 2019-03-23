@@ -194,7 +194,7 @@ $overdue-color: #b3312d;
                     border-radius: 3px;
                     max-height: 100%;
                     position: relative;
-                    &#setting{
+                    &#settings{
                         width: 700px;
                         .content{
                             flex-direction: row;
@@ -203,6 +203,7 @@ $overdue-color: #b3312d;
                     .content{
                         display: flex;
                         flex-direction: column;
+                        overflow: hidden;
                         .tabs{
                             overflow-y: auto;
                             border-left: 1px solid #ebebeb;
